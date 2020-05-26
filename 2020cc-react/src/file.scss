@@ -1,0 +1,482 @@
+//Colors
+$bgColor : #eee;
+$materialPurple: #9c27b0;
+$orangeGradient: linear-gradient(60deg,#ffa726,#fb8c00);
+$greenGradient: linear-gradient(60deg,#66bb6a,#43a047);
+$redGradient: linear-gradient(60deg,#ef5350,#e53935);
+$blueGradient: linear-gradient(60deg,#26c6da,#00acc1);
+$whiteGradient: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,.8) 85%, rgba(237,237,237, .5) 100% );
+
+//Box shadows
+$defaultShadow: 0 4px 20px 0 rgba(0,0,0,.14),0 7px 10px -5px rgba(156,39,176,.4);
+
+///Screen Sizes
+$tablet: 990px;
+
+//bgImage
+$bgImage : 'https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-1.jpg';
+
+////Media query
+@mixin for-tablet-down-only {
+  @media (max-width: $tablet) { @content;   }
+}
+////End of variables
+
+html{
+  font-size: 62.5%;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+}
+
+.card{/**/
+  border-radius: 5px;
+  margin: 2rem 10rem 0rem 35rem;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.14);
+  background: white;
+  
+  &__header{
+    position: relative;
+    padding: 1rem;
+  }
+  
+  &__icon{
+    align-items: center;
+    display: flex;
+    box-shadow: $defaultShadow;
+    text-align: center;
+    border-radius: 3px;
+    margin-top: -4rem;
+    padding: 2rem;
+    float: left;
+    z-index: 1;
+    
+    &--orange{
+     background-image: $orangeGradient;
+    }
+    
+    &--green{
+      background-image:$greenGradient;
+    }
+    
+    &--red{
+      background-image:$redGradient;
+    }
+    
+    &--blue{
+      background-image: $blueGradient;
+    }
+    
+    i{
+      color: #fff;
+      font-size: 3.6rem;
+      width: 56px;
+      
+    }
+  }
+  
+  &__category{
+    display: block;
+    text-align: right;
+    font-size: 1.4rem;
+    color: #999;
+    top: 10px;
+    width: 96%;
+  }
+  
+  &__title{
+    font-size: 2.4rem;
+    font-weight: lighter;
+    text-align: right;
+    width: 96%;
+     
+    small{
+      font-weight: 600;
+    }
+  }
+  
+  &__body{
+    margin: 0 auto;
+    width: 90%;
+    h4 {
+      font-size: 2rem;
+      color: black;}
+    
+    h5 {
+      font-size: 1.6rem;
+      margin-block-start: 0.3em;
+      margin-block-end: 0.3em;
+    }
+    
+    p{
+       color: darken($bgColor, 40%);
+      font-size: 1.4rem;
+    }
+   
+  }
+  
+  &__footer{
+    display: flex;
+    border-top: 1px solid $bgColor;
+    font-size: 1.2rem;
+    margin: 0 auto;
+    padding: 1rem 1rem;
+    width: 90%;
+    
+    i{
+      color: darken($bgColor, 50%);
+      font-size: 1.4rem;
+    }
+    
+    a.write-material-icons{
+      color: darken($bgColor,100%);
+      text-decoration: none;
+      align-self: center;
+      margin-left: 116rem;
+      font-size: 1.7rem;
+    }
+
+    a.comment-material-icons{
+      color: darken($bgColor,100%);
+      text-decoration: none;
+      align-self: center;
+      margin-left: 100rem;
+      font-size: 1.7rem;
+    }
+
+    a{
+      color: darken($bgColor,100%);
+      text-decoration: none;
+      align-self: center;
+      margin-left: 2rem;
+      font-size: 1.5rem;
+    }
+  }
+}
+.download-card{/**/
+  border-radius: 5px;
+  margin: 2rem 11rem 0rem 45rem;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.14);
+  background: white;
+  
+  &__header{
+    position: relative;
+    padding: 1rem;
+  }
+  
+  &__icon{
+    align-items: center;
+    display: flex;
+    box-shadow: $defaultShadow;
+    text-align: center;
+    border-radius: 3px;
+    margin-top: -4rem;
+    padding: 2rem;
+    float: left;
+    z-index: 1;
+    
+    &--orange{
+     background-image: $orangeGradient;
+    }
+    
+    &--green{
+      background-image:$greenGradient;
+    }
+    
+    &--red{
+      background-image:$redGradient;
+    }
+    
+    &--blue{
+      background-image: $blueGradient;
+    }
+    
+    i{
+      color: #fff;
+      font-size: 3.6rem;
+      width: 56px;
+      
+    }
+  }
+  
+  &__category{
+    display: block;
+    text-align: right;
+    font-size: 1.4rem;
+    color: #999;
+    top: 10px;
+    width: 96%;
+  }
+  
+  &__title{
+    font-size: 2.4rem;
+    font-weight: lighter;
+    text-align: right;
+    width: 96%;
+     
+    small{
+      font-weight: 600;
+    }
+  }
+  
+  &__body{
+    margin: 0 auto;
+    width: 90%;
+    
+    h4 {
+      font-size: 2.2rem;
+
+    }
+    
+    p{
+       color: darken($bgColor, 40%);
+      font-size: 1.4rem;
+    }
+   
+  }
+  
+  &__footer{
+    display: flex;
+    border-top: 1px solid $bgColor;
+    font-size: 1.2rem;
+    margin: 0 auto;
+    padding: 1rem 1rem;
+    width: 90%;
+    
+    i{
+      color: darken($bgColor, 50%);
+      font-size: 1.4rem;
+    }
+    
+    a{
+      color: darken($bgColor, 40%);
+      text-decoration: none;
+      align-self: center;
+      margin-left: 2rem;
+      font-size: 1.3rem;
+    }
+  }
+}
+
+.upload-card{/**/
+    height: 830px;
+    border-radius: 5px;
+    margin: 2rem 5rem;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,.14);
+    background: white;
+    
+    &__header{
+      position: relative;
+      padding: 1rem;
+    }
+    
+    &__icon{
+      align-items: center;
+      display: flex;
+      box-shadow: $defaultShadow;
+      text-align: center;
+      border-radius: 3px;
+      margin-top: -4rem;
+      padding: 2rem;
+      float: left;
+      z-index: 1;
+      
+      &--orange{
+       background-image: $orangeGradient;
+      }
+      
+      &--green{
+        background-image:$greenGradient;
+      }
+      
+      &--red{
+        background-image:$redGradient;
+      }
+      
+      &--blue{
+        background-image: $blueGradient;
+      }
+      
+      i{
+        color: #fff;
+        font-size: 3.6rem;
+        width: 56px;
+        
+      }
+    }
+    
+    &__category{
+      display: block;
+      text-align: right;
+      font-size: 1.4rem;
+      color: #999;
+      top: 10px;
+      width: 96%;
+    }
+    
+    &__title{
+      font-size: 2.4rem;
+      font-weight: lighter;
+      text-align: right;
+      width: 96%;
+       
+      small{
+        font-weight: 600;
+      }
+    }
+    
+    &__body{
+      margin: 0 auto;
+      padding: .5rem 0 1rem 0;
+      width: 90%;
+      
+      h4 {
+        font-size: 2.2rem;
+        font-weight: lighter;
+      }
+      
+      p{
+         color: darken($bgColor, 40%);
+        font-size: 1.4rem;
+      }
+     
+    }
+    
+    &__footer{
+      display: flex;
+      border-top: 1px solid $bgColor;
+      font-size: 1.2rem;
+      margin: 0 auto;
+      padding: 1rem 1rem;
+      width: 90%;
+      
+      i{
+        color: darken($bgColor, 50%);
+        font-size: 1.4rem;
+      }
+      
+      a{
+        color: darken($bgColor, 40%);
+        text-decoration: none;
+        align-self: center;
+        margin-left: .5rem;
+        font-size: 1.3rem;
+      }
+    }
+  }
+
+  .profile-card{/**/
+    border-radius: 5px;
+    margin: 2rem 10rem 0rem 45rem;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,.14);
+    height: 400px;
+    background: white;
+    overflow : scroll;
+    
+    &__header{
+      position: relative;
+      padding: 1rem;
+    }
+    
+    &__icon{
+      align-items: center;
+      display: flex;
+      box-shadow: $defaultShadow;
+      text-align: center;
+      border-radius: 3px;
+      margin-top: -4rem;
+      padding: 2rem;
+      float: left;
+      z-index: 1;
+      
+      &--orange{
+       background-image: $orangeGradient;
+      }
+      
+      &--green{
+        background-image:$greenGradient;
+      }
+      
+      &--red{
+        background-image:$redGradient;
+      }
+      
+      &--blue{
+        background-image: $blueGradient;
+      }
+      
+      i{
+        color: #fff;
+        font-size: 3.6rem;
+        width: 56px;
+        
+      }
+    }
+    
+    &__category{
+      display: block;
+      text-align: right;
+      font-size: 1.4rem;
+      color: #999;
+      top: 10px;
+      width: 96%;
+    }
+    
+    &__title{
+      font-size: 2.4rem;
+      font-weight: lighter;
+      text-align: right;
+      width: 96%;
+       
+      small{
+        font-weight: 600;
+      }
+    }
+    
+    &__body{
+      margin: 0 auto;
+      padding: .5rem 0 1rem 0;
+      width: 90%;
+      
+      h4 {
+        font-size: 2.2rem;
+        font-weight: lighter;
+      }
+      
+      p{
+         color: darken($bgColor, 40%);
+        font-size: 1.4rem;
+      }
+     
+    }
+    
+    &__footer{
+      display: flex;
+      border-top: 1px solid $bgColor;
+      font-size: 1.2rem;
+      margin: 0 auto;
+      padding: 1rem 1rem;
+      width: 90%;
+      
+      i{
+        color: darken($bgColor, 50%);
+        font-size: 1.4rem;
+      }
+      
+      a{
+        color: darken($bgColor, 40%);
+        text-decoration: none;
+        align-self: center;
+        margin-left: .5rem;
+        font-size: 1.3rem;
+      }
+    }
+  }
+
+#lineB-ChartExample.ct-chart-line .ct-series-a .ct-point .ct-line{ /**/
+  stroke: #fff !important;
+  stroke-width: 10px;
+  stroke-linecap: round;
+}

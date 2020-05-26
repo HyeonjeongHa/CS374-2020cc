@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import {connect} from 'react-redux';
+import {Login, Register, Home, File, ViewDetail, Upload, App2, MyPage} from './routes';
+import {Menu} from './components';
+import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
+import reducers from './reducers';
+import { Provider } from 'react-redux';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const store = createStore(reducers, applyMiddleware(thunk));
+
+class App extends Component {
+  constructor (props) {
+    super(props);
+  } 
+  render() {
+    return (
+      <Provider store = {store}>
+        <Router>
+          <div>
+            <Route exact path="/" component={App2}/>
+            <Switch>
+              {/* <Route path = "/" component = {App} /> */}
+              <Route path ="/viewDetail/:filename" component = {ViewDetail}/>
+              <Route path="/Menu" component= {Menu}/>
+              <Route path="/upload" component= {Upload}/>
+              <Route path="/mypage" component= {MyPage}/>
+            </Switch>
+          </div>
+        </Router>
+      </Provider>
+      
+        
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  ...state
+})
+
+const mapDispatchToProps = dispatch => ({
+  ...dispatch
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App); //connect react binding from react-redux
