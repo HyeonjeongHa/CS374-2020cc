@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import {connect} from 'react-redux';
-import {Login, Register, Home, File, ViewDetail, Upload, App2, MyPage} from './routes';
+import {Login, Register, Home, App2} from './routes';
 import {Menu} from './components';
 import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import {createStore, applyMiddleware} from 'redux';
@@ -22,11 +22,7 @@ class App extends Component {
           <div>
             <Route exact path="/" component={App2}/>
             <Switch>
-              {/* <Route path = "/" component = {App} /> */}
-              <Route path ="/viewDetail/:filename" component = {ViewDetail}/>
               <Route path="/Menu" component= {Menu}/>
-              <Route path="/upload" component= {Upload}/>
-              <Route path="/mypage" component= {MyPage}/>
             </Switch>
           </div>
         </Router>
