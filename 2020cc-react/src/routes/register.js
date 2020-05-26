@@ -7,8 +7,8 @@ import $ from 'jquery';
 import '../style.css';  
 
 class Register extends Component {
-    handleRegister = (id, pw, name, department) => {
-        return this.props.registerRequest(id, pw, name, department).then(
+    handleRegister = (id, pw, name, teamName) => {
+        return this.props.registerRequest(id, pw, name, teamName).then(
             () => {
                 if(this.props.status === "SUCCESS") {
                     Materialize.toast('Success! Please log in.', 2000);
@@ -54,8 +54,8 @@ const mapStateToProps = (state) => {
  
 const mapDispatchToProps = (dispatch) => {
     return {
-        registerRequest: (id, pw, name, department) => {
-            return dispatch(registerRequest(id, pw, name, department));
+        registerRequest: (id, pw, name, teamName) => {
+            return dispatch(registerRequest(id, pw, name, teamName));
         }
     };
 };

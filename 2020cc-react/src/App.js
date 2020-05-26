@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import './App.css';
 import {connect} from 'react-redux';
 import {Login, Register, Home, App2} from './routes';

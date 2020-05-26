@@ -35,9 +35,9 @@ export default function authentication(state = initialState, action){
                 status: {
                     ...state.status,
                     isLoggedIn: true,
-                    currentUser: action.email,
+                    currentUser: action.id,
                     name : action.name,
-                    department : action.department
+                    teamName : action.teamName
                 }
             }
         case types.AUTH_LOGIN_FAILURE:

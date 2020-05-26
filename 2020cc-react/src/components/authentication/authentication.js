@@ -4,13 +4,24 @@ import { Link } from 'react-router-dom';
 import '../../login.css';
 import $ from 'jquery';
 import { connect } from 'react-redux';
-import '../../spinner.scss'
- 
+import '../../spinner.scss';
+import * as firebase from "firebase/app";
+import "firebase/database";
+import firebaseConfig from "../../firebaseConfig";
+
+if(!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+
+// firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
 class Authentication extends Component {
     state = {
-      email:"",
-      password:"",
+      id:"",
+      pw:"",
       name : "",
+      teamName : "",
       mode : true,
       btn2 : true
     }
@@ -49,38 +60,77 @@ class Authentication extends Component {
     }
  
     handleRegister = () => {
-        let id = this.state.email;
-        let pw = this.state.password;
+        let id = this.state.id;
+        let pw = this.state.pw;
         let name = this.state.name;
-        let department = this.state.department;
+        let teamName = this.state.teamName;
  
-        this.props.onRegister(id, pw, name, department).then(
-            (result) => {
-                if(!result) {
-                    this.setState({
-                        email: '',
-                        password: '',
-                        name : '',
-                        department : 'school of computing' //default
-                    });
-                }
-            }
-        );
+        // this.props.onRegister(id, pw, name, teamName).then(
+        //     (result) => {
+        //         if(!result) {
+        //             this.setState({
+        //                 id: '',
+        //                 pw: '',
+        //                 name : '',
+        //                 teamName : '2020cc' //default
+        //             });
+        //         }
+        //     }
+        // );
+        database.ref('authentication/' + id).set({
+            id :id,
+            pw : pw,
+            name : name,
+            teamName : teamName
+        }).then((response) => {
+            // console.log(response);
+            console.log('success');
+            // dispatch(getStatusSuccess(id)); //HTTP 틍신을 통해 username을 빋이옴
+        }).catch((error) => {
+            // dispatch(getStatusFailure());
+            this.setState({
+                id: '',
+                pw: '',
+                name : '',
+                teamName : '2020cc' //default
+            });
+        });
     }
- 
+  
     handleLogin = () => {
-        let id = this.state.email;
-        let pw = this.state.password;
+        let id = this.state.id;
+        let pw = this.state.pw;
  
-        this.props.onLogin(id, pw).then(
-            (success) => {
-                if(!success) {
-                    this.setState({
-                        password: ''
-                    });
-                }
+        // this.props.onLogin(id, pw).then(
+        //     (success) => {
+        //         if(!success) {
+        //             this.setState({
+        //                 pw: ''
+        //             });
+        //         }
+        //     }
+        // );
+        database.ref('authentication/' + id).once('value').then((snapshot) => {
+            let loginFlag = 0;
+            const res = snapshot.val();
+            const getId = res.id;
+            const getPw = res.pw;
+            const name = res.name;
+            const teamName = res.teamName;
+            if(getId == id && getPw == pw) {
+                //login success
+                loginFlag =1;
+                // dispatch(loginSuccess(id, pw, teamName));
+                console.log('login success');
+
+            } 
+            if(loginFlag == 0) {
+                //login Fail
+                // dispatch(loginFailure());
+                console.log('login fail');
             }
-        );
+            
+        })
     }
 
     handleKeyPress = (e) => {
@@ -112,7 +162,7 @@ class Authentication extends Component {
                     <h1 class="signup1">SIGN IN</h1>
                     <br></br><br></br>
                     <input
-                    name="email"
+                    name="id"
                     type="text"
                     className="login-username"
                     onChange={this.handleChange}
@@ -120,7 +170,7 @@ class Authentication extends Component {
                     onKeyPress={this.handleKeyPress}
                     placeholder="email*"/>
                     <input
-                    name="password"
+                    name="pw"
                     type="password"
                     className="login-username"
                     onChange={this.handleChange}
@@ -140,7 +190,7 @@ class Authentication extends Component {
                     <h1 class="signup1">SIGN UP</h1>
                     <br></br><br></br>
                     <input
-                    name="email"
+                    name="id"
                     type="text"
                     className="login-username"
                     onChange={this.handleChange}
@@ -148,7 +198,7 @@ class Authentication extends Component {
                     onKeyPress={this.handleKeyPress}
                     placeholder="email*"/>
                     <input
-                    name="password"
+                    name="pw"
                     type="password"
                     className="login-username"
                     onChange={this.handleChange}
@@ -224,7 +274,7 @@ Authentication.propTypes = {
  
 Authentication.defaultProps = {
     mode: true,
-    onRegister: (id, pw, name, department) => { console.error("register function is not defined"); },
+    onRegister: (id, pw, name, teamName) => { console.error("register function is not defined"); },
     onLogin: (id, pw) => { console.error("login function not defined"); }
 };
  
@@ -232,7 +282,7 @@ const mapStateToProps = (state) => {
     return {
         status: state.authentication.login.status,
         name : state.authentication.status.name,
-        department : state.authentication.status.department
+        teamName : state.authentication.status.teamName
     };
 };
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {Button} from 'semantic-ui-react'; 
-import {MyPage} from '../routes';
 import '../header.css';
 import $ from 'jquery';
 
@@ -18,7 +17,6 @@ class Header extends Component {
         fileonClick : false,
         mypageonClick : false
       })
-      $("#mypage").removeClass("active")
     }
 
     handleFileClick = () => {
@@ -27,7 +25,6 @@ class Header extends Component {
         fileonClick : true,
         mypageonClick : false
       })
-      $("#mypage").removeClass("active")
     }
 
     handleMyPageClick = () => {
@@ -36,7 +33,6 @@ class Header extends Component {
         fileonClick : false,
         mypageonClick : true
       })
-      $("#mypage").addClass("active")
     }
 
     render() {
@@ -51,9 +47,6 @@ class Header extends Component {
                       </u1>
                   </div>
               </nav>
-          </div>
-          <div>
-              {this.state.mypageonClick ? <MyPage /> : null}
           </div>
         </div>
         

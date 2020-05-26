@@ -1,5 +1,9 @@
 //액션 생성자 함수와 thunk를 정의
 import axios from 'axios';
+
+import * as firebase from "firebase/app";
+import "firebase/database";
+import firebaseConfig from "../firebaseConfig";
 import {
     AUTH_LOGIN,
     AUTH_LOGIN_SUCCESS,
@@ -12,24 +16,43 @@ import {
     AUTH_GET_STATUS_FAILURE
 } from './ActionTypes';
 
-export function loginRequest(email, password) {
+
+if(!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+
+// firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+
+export function loginRequest(id, pw) {
     return (dispatch) => {
         // Inform Login API is starting
         dispatch(login());
-   
+        
         // API REQUEST
-        return axios.post('/routes/account/login', { email, password }) //loginRequest가 실행되면 thunk함수의 인자를 post에 전송
-        .then((response) => {
-            // SUCCEED
-            const data = response.data.data[0];
-            const name = data.name;
-            const department = data.department;
-            
-            dispatch(loginSuccess(email, name, department));
-        }).catch((error) => {
-            // FAILED
-            dispatch(loginFailure());
-        });
+        // return axios.post('/routes/account/login', { email, password }) //loginRequest가 실행되면 thunk함수의 인자를 post에 전송
+        return database.ref('authentication/' + id).once('value').then((snapshot) => {
+            let loginFlag = 0;
+            snapshot.forEach(function(child) {
+                const res = child.val();
+                const getId = res.id;
+                const getPw = res.pw;
+                const name = res.name;
+                const teamName = res.teamName;
+                if(getId == id && getPw == pw) {
+                    //login success
+                    loginFlag+=1;
+                    dispatch(loginSuccess(id, pw, teamName));
+    
+                } 
+                
+            })
+            if(loginFlag == 0) {
+                //login Fail
+                dispatch(loginFailure());
+            }
+        })
     };
 }
    
@@ -39,12 +62,12 @@ export function login() {
     };
 }
 
-export function loginSuccess(email, name, department) {
+export function loginSuccess(id, name, teamName) {
     return {
         type: AUTH_LOGIN_SUCCESS,
-        email,
+        id,
         name,
-        department
+        teamName
     };
 }
 
@@ -55,18 +78,38 @@ export function loginFailure() {
 }
   
 /* REGISTER */
-export function registerRequest(email, password, name, department) { //thunk
+export function registerRequest(id, pw, name, teamName) { //thunk
+    console.log("request register");
     return (dispatch) => {
         // Inform Register API is starting
         dispatch(register()); //action.type = AUTH_REGISTER 인 액션객체를 리듀서로 보내 회원가입 요청 시작
- 
-        return axios.post('/routes/account/signup', { email, password, name, department })
-            .then((response) => {
-                dispatch(registerSuccess());
-            }).catch((error) => {
-                dispatch(registerFailure(error.response.data.code));
+        // console.log("request register : " + id);
+        // return database.ref('authentication/' + id).push().set({
+        //     id :id,
+        //     pw : pw,
+        //     name : name,
+        //     teamName : teamName
+        // }).then((response) => {
+        //     console.log(response);
+        //     dispatch(getStatusSuccess(id)); //HTTP 틍신을 통해 username을 빋이옴
+        // }).catch((error) => {
+        //     dispatch(getStatusFailure());
+        // });
+
+        let key = firebase.database().ref(`/authentication/${id}`).push();
+        return key.set({
+            id :id,
+            pw : pw,
+            name : name,
+            teamName : teamName
+        }).then(() => {
+            console.log('Save to Firebase was successful');
+          })
+          .catch((error) => {
+          console.log(error);
         });
     };
+        
 }
  
 export function register() {
