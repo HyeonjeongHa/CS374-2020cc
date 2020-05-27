@@ -170,7 +170,7 @@ class Authentication extends Component {
                     onChange={this.handleChange}
                     value={this.state.id}
                     onKeyPress={this.handleKeyPress}
-                    placeholder="email*"/>
+                    placeholder="ID*"/>
                     <input
                     name="pw"
                     type="password"
@@ -198,7 +198,7 @@ class Authentication extends Component {
                     onChange={this.handleChange}
                     value={this.state.id}
                     onKeyPress={this.handleKeyPress}
-                    placeholder="email*"/>
+                    placeholder="ID*"/>
                     <input
                     name="pw"
                     type="password"

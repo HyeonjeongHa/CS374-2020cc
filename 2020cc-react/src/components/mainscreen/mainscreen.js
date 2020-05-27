@@ -41,22 +41,22 @@ class Mainscreen extends Component {
 
 		const dailyScheduler = (
             <div>
-                <Scheduler currentTab="Daily"/>
+                <Scheduler currentTab="Daily" data={this.props.data}/>
             </div>
         );
         const weeklyScheduler = (
             <div>
-                <Scheduler currentTab="Weekly"/>
+                <Scheduler currentTab="Weekly" data={this.props.data}/>
             </div>
         );
         const eventScheduler = (
             <div>
-                <Scheduler currentTab="Event"/>
+                <Scheduler currentTab="Event" data={this.props.data}/>
             </div>
         );
         const recordScheduler = (
             <div>
-                <Scheduler currentTab="Record"/>
+                <Scheduler currentTab="Record" data={this.props.data}/>
             </div>
         );
 

@@ -4,10 +4,12 @@ import { Mainscreen } from '../components';
 class Odot extends Component {
 
   render() {
-  	// console.log('hello world!');
+
+  	console.log(this.props.location.state);
+
     return (
    		<div>
-    		<Mainscreen/>
+    		<Mainscreen data={this.props.location.state}/>
     	</div>  
     );
   }
