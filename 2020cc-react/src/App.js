@@ -1,7 +1,6 @@
 import React, { Component, useEffect } from 'react';
 import './App.css';
-import {connect} from 'react-redux';
-import {Login, Register, Home, App2} from './routes';
+import {App2} from './routes';
 import {Menu} from './components';
 import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import {createStore, applyMiddleware} from 'redux';
@@ -33,12 +32,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  ...state
-})
-
-const mapDispatchToProps = dispatch => ({
-  ...dispatch
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App); //connect react binding from react-redux
+export default App; //connect react binding from react-redux
