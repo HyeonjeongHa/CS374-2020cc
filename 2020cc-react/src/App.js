@@ -1,14 +1,11 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component} from 'react';
 import './App.css';
 import {App2} from './routes';
 import {Menu} from './components';
 import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
-import reducers from './reducers';
 import { Provider } from 'react-redux';
-
-const store = createStore(reducers, applyMiddleware(thunk));
 
 class App extends Component {
   constructor (props) {
@@ -16,7 +13,6 @@ class App extends Component {
   } 
   render() {
     return (
-      <Provider store = {store}>
         <Router>
           <div>
             <Route exact path="/" component={App2}/>
@@ -25,7 +21,6 @@ class App extends Component {
             </Switch>
           </div>
         </Router>
-      </Provider>
       
         
     );
