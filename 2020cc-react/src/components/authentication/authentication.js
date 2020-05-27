@@ -105,7 +105,7 @@ class Authentication extends Component {
                 loginFlag =1;
                 console.log('login success');
                 this.props.history.push({
-                    pathname : '/Menu',
+                    pathname : '/Odot',
                 }); 
 
             } 
