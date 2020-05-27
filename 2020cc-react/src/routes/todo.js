@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import TodoList from '../components/TodoList';
+import TodoList from '../components/mainscreen/todoList';
 
 import * as firebase from "firebase/app";
 import "firebase/database";
-import firebaseConfig from "../../firebaseConfig";
+import firebaseConfig from "../firebaseConfig";
+
+import moment from "moment";
 
 if(!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -12,28 +14,43 @@ if(!firebase.apps.length) {
 const database = firebase.database();
 
 class Todo extends Component{
+
     state={
         teamName : this.props.data.teamName,
-        TodoList:[] //initial list is empty
+        TodoList:{}, //initial list is empty
+        id : this.props.data.id
     };
 
 
     componentDidMount(){
-        this._getList();
+        this._getDailyList();
     }
 
-    _getList(){
+    _getDailyList(){
         const teamName = this.state.teamName;
-        database.ref('teamName/'+ teamName).once('value').then((snapshot) => {
+        const id = this.state.id;
+        const today = moment().format("YYYYMMDD");
+
+        database.ref('teamName/'+ teamName + '/' + id + '/' + today).set({
+            duetime : "afdf",
+            task : "sleep",
+            progress : "20"
+        });
+
+        database.ref('teamName/'+ teamName + '/' + id + '/'+ today).once('value').then((snapshot) => {
             const res = snapshot.val();
-            //성공하면 
-            // this.setState({
-            //     TodoList:res.todo~
-            // });
+            console.log(res);
+            // console.log(res.`${today}`);
+            //성공하면 ;
+            this.setState({
+                TodoList:res
+            });
+            console.log(this.state.TodoList);
         })
     }
 
     render(){ 
+        
         return(
             <div>
                 {Object.keys(this.state.TodoList).length > 0 ? 
