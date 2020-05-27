@@ -98,14 +98,19 @@ class Authentication extends Component {
             const res = snapshot.val();
             const getId = res.id;
             const getPw = res.pw;
-            const name = res.name;
-            const teamName = res.teamName;
+            const getName = res.name;
+            const getTeamName = res.teamName;
             if(getId == id && getPw == pw) {
                 //login success
                 loginFlag =1;
                 console.log('login success');
                 this.props.history.push({
                     pathname : '/Odot',
+                    state : {
+                        id: getId,
+                        name: getName,
+                        teamName: getTeamName
+                    }
                 }); 
 
             } 

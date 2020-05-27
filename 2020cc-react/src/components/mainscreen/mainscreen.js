@@ -1,27 +1,78 @@
 import React, { Component } from 'react';
 import { Scheduler } from '..';
 import '../../mainscreen.css';
+import { Button } from 'reactstrap';
 
 class Mainscreen extends Component {
+	state = {
+		id : "",
+		name : "",
+      	teamName : "",
+		currentTab : "Daily"
+    }
+
+	handleDaily = () => {
+		this.setState({
+			currentTab : "Daily"
+		})
+	}
+
+
+	handleWeekly = () => {
+		this.setState({
+			currentTab : "Weekly"
+		})	
+	}
+
+	handleEvent = () => {
+		this.setState({
+			currentTab : "Event"
+		})
+	}
+
+	handleRecord = () => {
+		this.setState({
+			currentTab : "Record"
+		})
+	}
 
 	render() {
+		// console.log(this.state.currentTab);
+
+		const dailyScheduler = (
+            <div>
+                <Scheduler currentTab="Daily"/>
+            </div>
+        );
+        const weeklyScheduler = (
+            <div>
+                <Scheduler currentTab="Weekly"/>
+            </div>
+        );
+        const eventScheduler = (
+            <div>
+                <Scheduler currentTab="Event"/>
+            </div>
+        );
+        const recordScheduler = (
+            <div>
+                <Scheduler currentTab="Record"/>
+            </div>
+        );
+
     return (
     	<div className="app">
 	     	<div className="sidebar">
-	         	<span
-	          		role="presentation">
-	            사이드바 접기
-	          	</span>
-	          	<ul>
-		            <li>Menu Item 1</li>
-		            <li>Menu Item 2</li>
-		            <li>Menu Item 3</li>
-		            <li>Menu Item 4</li>
-		            <li>Menu Item 5</li>
-	          	</ul>
+	     		<div><Button className='scheduleButton' onClick={this.handleDaily}>Daily</Button></div>
+	     		<div><Button className='scheduleButton' onClick={this.handleWeekly}>Weekly</Button></div>
+	     		<div><Button className='scheduleButton' onClick={this.handleEvent}>Event</Button></div>
+	     		<div><Button className='scheduleButton' onClick={this.handleRecord}>Record</Button></div>
+	     		<div><Button>Setting</Button></div>
 	        </div>
 	     	<div className="content">
-				<Scheduler/>
+				{this.state.currentTab === "Daily" ? dailyScheduler : 
+				(this.state.currentTab === "Weekly" ? weeklyScheduler :
+				(this.state.currentTab === "Event" ? eventScheduler : recordScheduler))}
 	        </div>
    		</div>
     );
