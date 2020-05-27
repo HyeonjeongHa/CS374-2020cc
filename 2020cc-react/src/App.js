@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import './App.css';
-import {App2} from './routes';
+import {connect} from 'react-redux';
+import {Login, Register, Home, App2, Odot} from './routes';
 import {Menu} from './components';
 import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import {createStore, applyMiddleware} from 'redux';
@@ -17,6 +18,7 @@ class App extends Component {
           <div>
             <Route exact path="/" component={App2}/>
             <Switch>
+              <Route path="/Odot" component= {Odot}/>
               <Route path="/Menu" component= {Menu}/>
             </Switch>
           </div>
@@ -27,4 +29,4 @@ class App extends Component {
   }
 }
 
-export default App; //connect react binding from react-redux
+export default App; 
