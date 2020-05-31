@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import TimePicker from 'react-time-picker';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-import Progress from 'react-progressbar';
+import { Progress, Segment } from 'semantic-ui-react';
 import { TextField } from '@material-ui/core';
+import 'semantic-ui-css/semantic.min.css';
 
 class ToDoForm extends Component {
   state = {
     duetime : "",
-    progress : "",
+    progress : "30",
     task : ""
   };
 
@@ -29,12 +28,17 @@ class ToDoForm extends Component {
 
   render() {
     const { text } = this.state;
+    const ProgressExampleAttached = () => (
+        <Segment>
+          {this.state.task}
+          <Progress percent={50} attached='bottom' color='blue'/>
+        </Segment>
+      )
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
           <input value={text} name="task" placeholder="Task" onChange={this.handleChange}></input>
           <input value={text} name="progress" placeholder="Progress" onChange={this.handleChange}></input>
-          {/* <input value={text} name="duetime" placeholder="Due Time" onChange={this.handleChange}></input> */}
           <form>
             <TextField
                 id="time"
@@ -48,8 +52,9 @@ class ToDoForm extends Component {
                 }}
             />
         </form>
-        {/* <ProgressBar striped variant="success" now={10} /> */}
-        <Progress completed={75} />
+        <div>
+        <ProgressExampleAttached/>
+        </div>
           <button type="submit">+</button>
         </form>
       </div>
