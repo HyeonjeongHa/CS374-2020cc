@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import TodoList from '../components/mainscreen/todoList';
+import ToDoForm from '../components/mainscreen/todoform';
 
 import * as firebase from "firebase/app";
 import "firebase/database";
@@ -7,6 +8,7 @@ import firebaseConfig from "../firebaseConfig";
 
 import moment from "moment";
 import update from 'react-addons-update';
+
 
 if(!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -73,6 +75,10 @@ class Todo extends Component{
         console.log("[todo.js] this.state.TodoList", this.state.TodoList);
         console.log("[todo.js] typeof(this.state.TodoList)", typeof(this.state.TodoList));
         return(
+            <Fragment>
+            <div>
+                <ToDoForm onCreate={this.handleCreate} />
+            </div>
             <div>
                 {this.state.flag ? 
                     // <TodoList list = {this.state.TodoList} />
@@ -88,6 +94,7 @@ class Todo extends Component{
                     </span> 
                  )}
             </div>
+            </Fragment>
         )
     }
 }

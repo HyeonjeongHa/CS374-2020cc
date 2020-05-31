@@ -38,6 +38,21 @@ class TodoList extends Component {
 
     render() {
 
+        const style = {
+ 
+            border: '1px solid black'
+        }
+
+        const btnStyle = {
+        color: "white",
+        background: "teal",
+        padding: ".375rem .75rem",
+        border: "1px solid teal",
+        borderRadius: ".25rem",
+        fontSize: "1rem",
+        lineHeight: 1.5,
+        }
+          
         // let list = [];
         console.log("[todoList.js] this.props.duetime", this.props.duetime);
         console.log("[todoList.js] this.props.task", this.props.task);
@@ -51,8 +66,11 @@ class TodoList extends Component {
         
 
         return(
-        <div>{this.state.duetime}
-        {this.state.task} {this.state.progress}</div>
+        <div style={style}>
+            {this.state.duetime}
+            {this.state.task}
+            {this.state.progress}
+        </div>
         )
     }
 }
