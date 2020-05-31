@@ -18,7 +18,7 @@ const database = firebase.database();
 
 class Todo extends Component{
 
-    state={
+    state = {
         teamName : this.props.data.teamName,
         TodoList: [], //initial list is empty
         id : this.props.data.id,
@@ -36,13 +36,13 @@ class Todo extends Component{
         const today = moment().format("YYYYMMDD");
 
         // database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({
-        //     duetime : "today",
+        //     duetime : "17:50",
         //     task : "sleep",
         //     progress : "20"
         // });
 
         // database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({
-        //     duetime : "tomorrow",
+        //     duetime : "10:30",
         //     task : "coding",
         //     progress : "50"
         // });
@@ -74,10 +74,11 @@ class Todo extends Component{
         
         console.log("[todo.js] this.state.TodoList", this.state.TodoList);
         console.log("[todo.js] typeof(this.state.TodoList)", typeof(this.state.TodoList));
+        console.log("[todo.js] flg", this.state.flag);
         return(
             <Fragment>
             <div>
-                <ToDoForm onCreate={this.handleCreate} />
+                <ToDoForm onCreate={this.handleCreate} duetime={null} progress={null} task={null}/>
             </div>
             <div>
                 {this.state.flag ? 
@@ -93,7 +94,9 @@ class Todo extends Component{
                         LOADING..
                     </span> 
                  )}
+                 
             </div>
+            <button type="add">+</button>
             </Fragment>
         )
     }

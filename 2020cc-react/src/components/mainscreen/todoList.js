@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import update from 'react-addons-update';
+import { TodoForm } from '..';
 
 class TodoList extends Component {
 
@@ -67,9 +68,7 @@ class TodoList extends Component {
 
         return(
         <div style={style}>
-            {this.state.duetime}
-            {this.state.task}
-            {this.state.progress}
+            <TodoForm duetime = {this.state.duetime} progress = {this.state.progress} task = {this.state.task}></TodoForm>
         </div>
         )
     }
