@@ -70,6 +70,16 @@ class Todo extends Component{
         })
     }
 
+    handleAdd = () => {
+        console.log("CLICK!!!!!!!!!!!!!!!!");
+        return (
+
+        <div>
+                <ToDoForm onCreate={this.handleCreate} duetime={null} progress={null} task={null}/>
+        </div>
+        )
+    };
+
     render(){
         
         console.log("[todo.js] this.state.TodoList", this.state.TodoList);
@@ -77,9 +87,6 @@ class Todo extends Component{
         console.log("[todo.js] flg", this.state.flag);
         return(
             <Fragment>
-            <div>
-                <ToDoForm onCreate={this.handleCreate} duetime={null} progress={null} task={null}/>
-            </div>
             <div>
                 {this.state.flag ? 
                     // <TodoList list = {this.state.TodoList} />
@@ -96,7 +103,7 @@ class Todo extends Component{
                  )}
                  
             </div>
-            <button type="add">+</button>
+            <button id="add" onClick={this.handleAdd}>+</button>
             </Fragment>
         )
     }
