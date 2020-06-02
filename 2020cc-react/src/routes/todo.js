@@ -89,7 +89,32 @@ class Todo extends Component{
         })
     }
 
+<<<<<<< HEAD
     render(){ 
+=======
+    handleAdd = () => {
+        console.log("CLICK!!!!!!!!!!!!!!!!");
+        this.setState({
+            TodoList : update(
+                this.state.TodoList, {
+                    $push : [{
+                        duetime : "00:00",
+                        task : "",
+                        progress : "0"
+                    }]
+                }),
+            flag: true
+        })
+        // return (
+
+        // <div>
+        //         <TodoList  duetime={null} progress={null} task={null}/>
+        // </div>
+        // )
+    };
+
+    render(){
+>>>>>>> feature-addButton
         
         return(
             <div>

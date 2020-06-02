@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Progress, Segment } from 'semantic-ui-react';
 import { Checkmark } from 'react-checkmark';
 import { TextField } from '@material-ui/core';
@@ -75,6 +76,7 @@ class ToDoForm extends Component {
     const TimeInput = (
         <form>
             <TextField
+            <TextField class = 'text_field'
                 id="time"
                 type="time"
                 value={this.state.duetime}
@@ -91,10 +93,19 @@ class ToDoForm extends Component {
     );
     const ProgressExampleAttached = (
         <Segment>
+        <Segment class >
           <form class="signin">
+<<<<<<< HEAD
           <input className="login-username" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
           {TimeInput}
           <button type="save" onclick = {this.handleSubmit}><IoIosCloud/></button>
+=======
+            <input className="login-username" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
+            {/*<span>&nbsp;</span><span>&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span>*/}
+            {TimeInput}
+            <span>&nbsp;</span><span>&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span>
+            <button type="save" class="time_save"><IoIosCloud/></button>
+>>>>>>> feature-addButton
           </form>
           <Progress percent={50} attached='bottom' color='blue'/>
         </Segment>
@@ -103,8 +114,10 @@ class ToDoForm extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
         <div>
+        <div class = "vertical_center">
         {ProgressExampleAttached}
         </div>
+        <br></br>
         </form>
       </div>
     );
