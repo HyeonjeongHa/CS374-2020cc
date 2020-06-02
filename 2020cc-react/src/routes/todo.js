@@ -11,7 +11,9 @@ import Switch from '@material-ui/core/Switch';
 
 import moment from "moment";
 import update from 'react-addons-update';
-
+import { Icon, Segment, Button } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
+import { animateScroll } from "react-scroll";
 
 if(!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -20,7 +22,6 @@ if(!firebase.apps.length) {
 const database = firebase.database();
 
 var maxIndex = 0;
-
 
 class Todo extends Component{
 
@@ -31,7 +32,18 @@ class Todo extends Component{
         flag : false,
         isAlarmOn: true
     };
-
+    
+    componentDidMount() {
+        this.scrollToBottom();
+    }
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
+    scrollToBottom() {
+        animateScroll.scrollToBottom({
+          containerId: ""
+        });
+    }
 
     componentDidMount(){
         this._getDailyList();
@@ -113,6 +125,7 @@ class Todo extends Component{
             isAlarmOn: event.target.checked 
         });
     };
+    
     render(){
         
         console.log("[todo.js] this.state.TodoList", this.state.TodoList);
@@ -142,6 +155,7 @@ class Todo extends Component{
                         <div className="human_icon"></div>
                     </div>
                 </div>
+                <div class = "button_ment"><button class = "add_button" id="add" onClick={this.handleAdd}><Icon name="add" /></button>&nbsp;&nbsp;&nbsp;<div class="add_task">Add task</div></div>
                 <div>
                     {this.state.flag ? 
                         // <TodoList list = {this.state.TodoList} />
@@ -161,7 +175,7 @@ class Todo extends Component{
                      )}
                      
                 </div>
-                <button id="add" onClick={this.handleAdd}>+</button>
+        
             </Fragment>
         )
     }
