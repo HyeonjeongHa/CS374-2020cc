@@ -15,7 +15,7 @@ class Odot extends Component {
     }
 
     return (
-   		<div>
+   		<div style={{backgroundColor:"white"}}>
     		<Mainscreen data={this.props.location.state}/>
     	</div>  
     );

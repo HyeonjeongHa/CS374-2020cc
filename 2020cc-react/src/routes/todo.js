@@ -2,9 +2,12 @@ import React, {Component, Fragment} from 'react';
 import TodoList from '../components/mainscreen/todoList';
 import ToDoForm from '../components/mainscreen/todoform';
 import '../mainscreen.css';
+import '../login.css';
 import * as firebase from "firebase/app";
 import "firebase/database";
 import firebaseConfig from "../firebaseConfig";
+
+import Switch from '@material-ui/core/Switch';
 
 import moment from "moment";
 import update from 'react-addons-update';
@@ -25,7 +28,8 @@ class Todo extends Component{
         teamName : this.props.data.teamName,
         TodoList: [], //initial list is empty
         id : this.props.data.id,
-        flag : false
+        flag : false,
+        isAlarmOn: true
     };
 
 
@@ -79,11 +83,15 @@ class Todo extends Component{
     }
 
     handleAdd = () => {
+<<<<<<< HEAD
         const teamName = this.state.teamName;
         const id = this.state.id;
         const today = moment().format("YYYYMMDD");
 
         console.log("[todo.js] CLICK!!!!!!!!!!!!!!!!");
+=======
+        //console.log("CLICK!!!!!!!!!!!!!!!!");
+>>>>>>> 8ca32d7ec50d1a5fb1d49df1efe006a417ef201e
         this.setState({
             TodoList : update(
                 this.state.TodoList, {
@@ -96,6 +104,7 @@ class Todo extends Component{
                 }),
             flag: true
         })
+<<<<<<< HEAD
         database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({
             duetime : "00:00",
             task : "",
@@ -103,8 +112,14 @@ class Todo extends Component{
             index : maxIndex
         });
         maxIndex++;
+=======
+>>>>>>> 8ca32d7ec50d1a5fb1d49df1efe006a417ef201e
     };
-
+    handleChange = (event) => {
+        this.setState({ 
+            isAlarmOn: event.target.checked 
+        });
+    };
     render(){
         
         console.log("[todo.js] this.state.TodoList", this.state.TodoList);
@@ -112,8 +127,28 @@ class Todo extends Component{
         console.log("[todo.js] flg", this.state.flag);
         return(
             <Fragment>
-                <div className="alarm_icon"></div>
-                <div className="human_icon"></div>
+                <div className="new_signin">
+                    <div>
+                        <div className="title">Today</div>
+                        <div className="new_signin">
+                            <div className="alarm_icon"></div>
+                            <div className="text2">Every 40 min</div>
+                            <Switch
+                                checked={this.state.isAlarmOn}
+                                onChange={this.handleChange}
+                                name="alarmOn"
+                                inputProps={{ 'aria-label': 'primary checkbox' }}
+                            />
+                        </div>
+                    </div>
+                    <div className="profile">
+                        <div className="center">
+                            <div className="text">Minji Lee</div>
+                            <div className="text">Developer</div>
+                        </div>
+                        <div className="human_icon"></div>
+                    </div>
+                </div>
                 <div>
                     {this.state.flag ? 
                         // <TodoList list = {this.state.TodoList} />

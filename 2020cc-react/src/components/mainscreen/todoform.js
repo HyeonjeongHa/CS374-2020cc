@@ -87,6 +87,7 @@ class ToDoForm extends Component {
     const ProgressExampleAttached = (
       <Fragment>
         <Segment class >
+        <Segment>
           <form class="new_signin">
             <input className="new_login-username" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
             <div class = "time_save">
@@ -102,12 +103,12 @@ class ToDoForm extends Component {
         </Fragment>
       );
     return (
-      <div>
+      <div class="todo" >
+        <br></br>
         <form onSubmit={this.handleSubmit}>
         <div class = "vertical_center">
         {ProgressExampleAttached}
         </div>
-        <br></br>
         </form>
       </div>
     );
