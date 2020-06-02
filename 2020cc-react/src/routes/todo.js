@@ -38,18 +38,21 @@ class Todo extends Component{
         // database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({
         //     duetime : "17:50",
         //     task : "sleep",
-        //     progress : "20"
+        //     progress : "20",
+        //     index : 0
         // });
 
         // database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({
         //     duetime : "10:30",
         //     task : "coding",
-        //     progress : "50"
+        //     progress : "50",
+        //     index : 1
         // });
 
         database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
             console.log("this outside of foreach", this);
             var tempThis = this;
+            var index = 0;
             snapshot.forEach(function(child) {
                 let res = child.val();
                 console.log("res.child", res);
@@ -60,11 +63,13 @@ class Todo extends Component{
                             $push : [{
                                 duetime : res.duetime,
                                 task : res.task,
-                                progress : res.progress
+                                progress : res.progress,
+                                index : index
                             }]
                         }),
                     flag: true
                 });
+                index++;
                 console.log(tempThis.state.TodoList);
             })  
         })
@@ -94,7 +99,10 @@ class Todo extends Component{
                         <TodoList 
                             duetime={data.duetime}
                             progress={data.progress}
-                            task={data.task} />
+                            task={data.task} 
+                            teamName={this.state.teamName}
+                            id={this.state.id}
+                            index={data.index}/>
                         ))
                 :(
                     <span>
