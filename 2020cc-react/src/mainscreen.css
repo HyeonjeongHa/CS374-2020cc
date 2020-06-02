@@ -31,3 +31,42 @@ body {
   width: 100%;
   padding: 0 20px 0;
 }
+
+.scheduleButton {
+  width: 160px;
+  height: 40px;
+  border: 1px solid skyblue; 
+  background-color: rgba(0,0,0,0);
+  color: black; 
+  padding: 5px;
+  margin-top: 7px;
+}
+
+.setting {
+  background-image: url('./setting_icon.png');
+  background-size: 50px 50px;
+  width: 50px;
+  height: 50px;
+  position:absolute; bottom:20px;
+}
+
+.logo {
+  background-image: url('./logo.PNG');
+  background-size: 180px 180px;
+  width: 180px;
+  height: 180px;
+}
+
+.alarm_icon{
+  background-image: url('./alarm-clock.png');
+  background-size: 180px 180px;
+  width: 180px;
+  height: 180px;
+}
+
+.human_icon{
+  background-image: url('./human.png');
+  background-size: 180px 180px;
+  width: 180px;
+  height: 180px;
+}
