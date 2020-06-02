@@ -1,22 +1,25 @@
 import React, {Component} from 'react';
 import update from 'react-addons-update';
+import { TodoForm } from '..';
 
 class TodoList extends Component {
 
     state = {
-        list : this.props.list, //routes/fileList/getSubject
-        TodoList : [],
-        length : this.props.list.length
+        // list : this.props.list, //routes/fileList/getSubject
+        // length : this.props.list.length
+        duetime : this.props.duetime,
+        progress : this.props.progress,
+        task : this.props.task
     }
     
     componentDidMount() {
-        this.getDetails(this.state.list);
+        // this.getDetails(this.state.list);
     }
 
     getDetails = (list) => {
         return list.map(todo=> {
             // const todoElem = todo.duetime...
-            const duetime = todo.dueTime;
+            const duetime = todo.duetime;
             const task = todo.task;
             const progress = todo.progress;
 
@@ -36,16 +39,37 @@ class TodoList extends Component {
 
     render() {
 
-        let list = [];
-
-        for(var i=0; i<Object.keys(this.state.TodoList).length; i++){
-            list.push(
-                    <div>{this.state.list + ""}</div>
-                );
+        const style = {
+ 
+            border: '1px solid black'
         }
 
+        const btnStyle = {
+        color: "white",
+        background: "teal",
+        padding: ".375rem .75rem",
+        border: "1px solid teal",
+        borderRadius: ".25rem",
+        fontSize: "1rem",
+        lineHeight: 1.5,
+        }
+          
+        // let list = [];
+        console.log("[todoList.js] this.props.duetime", this.props.duetime);
+        console.log("[todoList.js] this.props.task", this.props.task);
+        console.log("[todoList.js] this.props.progress", this.props.progress);
+
+        // for(var i=0; i<Object.keys(this.state.list).length; i++){
+        //     list.push(
+        //             <div>{this.state.list + ""}</div>
+        //         );
+        // }
+        
+
         return(
-            {list}
+        <div style={style}>
+            <TodoForm duetime = {this.state.duetime} progress = {this.state.progress} task = {this.state.task}></TodoForm>
+        </div>
         )
     }
 }
