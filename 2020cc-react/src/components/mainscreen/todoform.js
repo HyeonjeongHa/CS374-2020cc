@@ -86,7 +86,6 @@ class ToDoForm extends Component {
     );
     const ProgressExampleAttached = (
       <Fragment>
-        <Segment class >
         <Segment>
           <form class="new_signin">
             <input className="new_login-username" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>

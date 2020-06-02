@@ -83,15 +83,11 @@ class Todo extends Component{
     }
 
     handleAdd = () => {
-<<<<<<< HEAD
         const teamName = this.state.teamName;
         const id = this.state.id;
         const today = moment().format("YYYYMMDD");
 
         console.log("[todo.js] CLICK!!!!!!!!!!!!!!!!");
-=======
-        //console.log("CLICK!!!!!!!!!!!!!!!!");
->>>>>>> 8ca32d7ec50d1a5fb1d49df1efe006a417ef201e
         this.setState({
             TodoList : update(
                 this.state.TodoList, {
@@ -104,7 +100,6 @@ class Todo extends Component{
                 }),
             flag: true
         })
-<<<<<<< HEAD
         database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({
             duetime : "00:00",
             task : "",
@@ -112,8 +107,6 @@ class Todo extends Component{
             index : maxIndex
         });
         maxIndex++;
-=======
->>>>>>> 8ca32d7ec50d1a5fb1d49df1efe006a417ef201e
     };
     handleChange = (event) => {
         this.setState({ 
