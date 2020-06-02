@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react';
+import { Person } from '../components';
 import TodoList from '../components/mainscreen/todoList';
 import ToDoForm from '../components/mainscreen/todoform';
 import '../mainscreen.css';
@@ -134,12 +135,8 @@ class Todo extends Component{
                             />
                         </div>
                     </div>
-                    <div className="profile">
-                        <div className="center">
-                            <div className="text">Minji Lee</div>
-                            <div className="text">Developer</div>
-                        </div>
-                        <div className="human_icon"></div>
+                    <div className="myProfile">
+                        <Person isMine={true} name="Minji Lee" position="Developer" />
                     </div>
                 </div>
                 <div>

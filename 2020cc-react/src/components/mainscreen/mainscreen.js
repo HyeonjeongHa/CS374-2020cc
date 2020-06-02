@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Scheduler } from '..';
+import { Scheduler, Coworker } from '..';
 import '../../mainscreen.css';
 import { Button } from 'reactstrap';
 
@@ -81,6 +81,7 @@ class Mainscreen extends Component {
 				(this.state.currentTab === "Weekly" ? weeklyScheduler :
 				(this.state.currentTab === "Event" ? eventScheduler : recordScheduler))}
 	        </div>
+	        <Coworker/>
    		</div>
     );
   }
