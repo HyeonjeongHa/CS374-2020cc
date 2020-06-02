@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Progress, Segment, Button } from 'semantic-ui-react';
 import { Checkmark } from 'react-checkmark';
 import { TextField } from '@material-ui/core';
-import { IoIosCloud } from "react-icons/io"; 
+import { IoIosCloud, IoIosCloseCircle } from "react-icons/io"; 
 // import '../../input.css';
 import '../../login.css';
 import 'semantic-ui-css/semantic.min.css';
@@ -92,7 +92,8 @@ class ToDoForm extends Component {
             <div class = "time_save">
             <input className="new_login-username2" id="progressInput" value={this.state.progress} name="progress" placeholder="0" onChange={this.handleChange} type='text'></input>
             <span class="for_span">%</span>
-            {TimeInput2}&nbsp;&nbsp;&nbsp;<button type="save" onClick={this.handleSubmit}><IoIosCloud/></button>
+            {TimeInput2}&nbsp;&nbsp;&nbsp;<button type="save" onClick={this.handleSubmit}><IoIosCloud/></button> 
+            <button type="delete" onClick={this._handleRemove}><IoIosCloseCircle/></button>
             </div>
           </form>
         </Segment>

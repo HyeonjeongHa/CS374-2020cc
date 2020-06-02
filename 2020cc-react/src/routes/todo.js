@@ -19,7 +19,7 @@ if(!firebase.apps.length) {
 
 const database = firebase.database();
 
-var maxIndex = 0;
+// var maxIndex = 0;
 
 
 class Todo extends Component{
@@ -59,6 +59,7 @@ class Todo extends Component{
         database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
             console.log("this outside of foreach", this);
             var tempThis = this;
+            var maxIndex = 0;
             snapshot.forEach(function(child) {
                 let res = child.val();
                 console.log("res.child", res);
@@ -88,6 +89,27 @@ class Todo extends Component{
         const today = moment().format("YYYYMMDD");
 
         console.log("[todo.js] CLICK!!!!!!!!!!!!!!!!");
+        
+
+        var idx;
+        database.ref('teamName/'+ teamName + '/' + id).child(today).limitToLast(1).once("child_added", function(child) {
+            console.log("get index");
+            var newPost = child.val();
+            idx = newPost.index;
+            console.log("index : ", idx);
+            idx++;
+            database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({ 
+                duetime : "00:00",
+                task : "",
+                progress : "0",
+                index : idx
+            });
+
+        });
+        
+
+        
+
         this.setState({
             TodoList : update(
                 this.state.TodoList, {
@@ -95,19 +117,13 @@ class Todo extends Component{
                         duetime : "00:00",
                         task : "",
                         progress : "0",
-                        index : maxIndex
+                        index : idx
                     }]
                 }),
             flag: true
         })
-        database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({
-            duetime : "00:00",
-            task : "",
-            progress : "0",
-            index : maxIndex
-        });
-        maxIndex++;
     };
+
     handleChange = (event) => {
         this.setState({ 
             isAlarmOn: event.target.checked 
