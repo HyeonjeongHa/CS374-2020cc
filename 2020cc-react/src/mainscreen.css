@@ -56,3 +56,17 @@ body {
   width: 180px;
   height: 180px;
 }
+
+.alarm_icon{
+  background-image: url('./alarm-clock.png');
+  background-size: 180px 180px;
+  width: 180px;
+  height: 180px;
+}
+
+.human_icon{
+  background-image: url('./human.png');
+  background-size: 180px 180px;
+  width: 180px;
+  height: 180px;
+}

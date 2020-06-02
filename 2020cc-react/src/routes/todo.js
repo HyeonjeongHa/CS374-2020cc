@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import TodoList from '../components/mainscreen/todoList';
 import ToDoForm from '../components/mainscreen/todoform';
-
+import '../mainscreen.css';
 import * as firebase from "firebase/app";
 import "firebase/database";
 import firebaseConfig from "../firebaseConfig";
@@ -98,23 +98,25 @@ class Todo extends Component{
         console.log("[todo.js] flg", this.state.flag);
         return(
             <Fragment>
-            <div>
-                {this.state.flag ? 
-                    // <TodoList list = {this.state.TodoList} />
-                    this.state.TodoList.map(data => (
-                        <TodoList 
-                            duetime={data.duetime}
-                            progress={data.progress}
-                            task={data.task} />
-                        ))
-                :(
-                    <span>
-                        LOADING..
-                    </span> 
-                 )}
-                 
-            </div>
-            <button id="add" onClick={this.handleAdd}>+</button>
+                <div className="alarm_icon"></div>
+                <div className="human_icon"></div>
+                <div>
+                    {this.state.flag ? 
+                        // <TodoList list = {this.state.TodoList} />
+                        this.state.TodoList.map(data => (
+                            <TodoList 
+                                duetime={data.duetime}
+                                progress={data.progress}
+                                task={data.task} />
+                            ))
+                    :(
+                        <span>
+                            LOADING..
+                        </span> 
+                     )}
+                     
+                </div>
+                <button id="add" onClick={this.handleAdd}>+</button>
             </Fragment>
         )
     }
