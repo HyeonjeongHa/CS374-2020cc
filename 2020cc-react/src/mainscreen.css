@@ -48,7 +48,8 @@ body {
     background-color: rgba(0, 0, 0, 0);
     color: #0A27D9;
     padding: 10px;
-    font-size: 20px;
+    font-size: 24px;
+    font-weight: bold;
     margin-top: 7px;
 }
 
@@ -113,11 +114,13 @@ body {
 .text {
     font-size: 20px;
     text-align: center;
+    padding: 5px;
 }
 
 .text2{
   font-size: 15px;
   text-align: center;
+  color: black;
 }
 
 .coworker{

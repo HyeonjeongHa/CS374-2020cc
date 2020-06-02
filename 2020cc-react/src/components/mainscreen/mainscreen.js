@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Scheduler, Coworker } from '..';
 import '../../mainscreen.css';
 import { Button } from 'reactstrap';
+import Switch from '@material-ui/core/Switch';
 
 class Mainscreen extends Component {
 	state = {
@@ -74,6 +75,16 @@ class Mainscreen extends Component {
 	     		<div className={this.state.currentTab == "Weekly" ? 'clickedButton':'idleButton'}  onClick={this.handleWeekly}>Weekly</div>
 	     		<div className={this.state.currentTab == "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
 	     		<div className={this.state.currentTab == "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div>
+	     		<div className="alarm">
+                    <div className="alarm_icon"></div>
+                    <div className="text2">Every 40 min</div>
+                    <Switch
+                        checked={this.state.isAlarmOn}
+                        onChange={this.handleChange}
+                        name="alarmOn"
+                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                    />
+                </div>
 	     		<div className="setting" onClick={this.handleSetting}></div>
 	        </div>
 	     	<div className="content">

@@ -8,8 +8,6 @@ import * as firebase from "firebase/app";
 import "firebase/database";
 import firebaseConfig from "../firebaseConfig";
 
-import Switch from '@material-ui/core/Switch';
-
 import moment from "moment";
 import update from 'react-addons-update';
 import { Icon, Segment, Button } from 'semantic-ui-react';
@@ -135,19 +133,6 @@ class Todo extends Component{
         return(
             <Fragment>
                 <div className="new_signin">
-                    <div>
-                        <div className="title">Today</div>
-                        <div className="new_signin">
-                            <div className="alarm_icon"></div>
-                            <div className="text2">Every 40 min</div>
-                            <Switch
-                                checked={this.state.isAlarmOn}
-                                onChange={this.handleChange}
-                                name="alarmOn"
-                                inputProps={{ 'aria-label': 'primary checkbox' }}
-                            />
-                        </div>
-                    </div>
                     <div className="myProfile">
                         <Person isMine={true} name="Minji Lee" position="Developer" />
                     </div>
