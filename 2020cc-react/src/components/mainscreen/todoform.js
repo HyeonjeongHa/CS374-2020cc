@@ -6,6 +6,19 @@ import { IoIosCloud } from "react-icons/io";
 // import '../../input.css';
 import '../../login.css';
 import 'semantic-ui-css/semantic.min.css';
+import * as firebase from "firebase/app";
+import "firebase/database";
+import firebaseConfig from "../../firebaseConfig";
+import moment from "moment";
+import TimePicker from 'react-time-picker';
+
+const today = moment().format("YYYYMMDD");
+
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+
+const database = firebase.database();
 
 class ToDoForm extends Component {
     constructor(props) {
@@ -13,7 +26,8 @@ class ToDoForm extends Component {
         this.state = {
             duetime : this.props.duetime,
             progress : this.props.progress,
-            task : this.props.task
+            task : this.props.task,
+            index : this.props.index
           }
       };
   
@@ -24,14 +38,37 @@ class ToDoForm extends Component {
     this.setState(nextState);
   };
 
+  timeChange = time => this.setState({ duetime : time })
+
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.onCreate(this.state);
-    this.setState({
-        duetime : "",
-        progress : "",
-        task : ""
-    });
+    // this.props.onCreate(this.state);
+    // this.setState({
+    //     duetime : "",
+    //     progress : "",
+    //     task : ""
+    // });
+    database.ref('teamName/'+ this.props.teamName + '/' + this.props.id + '/' + today).once('value').then((snapshot) => {
+      var tempThis = this;
+      snapshot.forEach(function(child) {
+          let res = child.val();
+          if (res.index == tempThis.state.index) {
+            console.log("inside of the IF");
+            // child.key.update({
+            //   duetime : tempThis.state.duetime,
+            //   task : tempThis.state.task,
+            //   progress : tempThis.state.progress
+            // })
+            let childKey = child.key;
+            database.ref('teamName/'+ tempThis.props.teamName + '/' + tempThis.props.id).child(today).child(childKey).update({
+              duetime : tempThis.state.duetime,
+              task : tempThis.state.task,
+              progress : tempThis.state.progress
+          });
+          return;
+          }
+      })  
+    })
   };
 
   
@@ -39,28 +76,35 @@ class ToDoForm extends Component {
 
   render() {
     const { text } = this.state;
-    const TimeInput = (
-            <TextField class = 'text_field'
-                id="time"
-                type="time"
-                value={this.state.duetime}
-                defaultValue="07:30"
-                InputLabelProps={{
-                shrink: true,
-                }}
-                inputProps={{
-                step: 300, // 5 min
-                }}
-                onChange={this.handleChange}
-            />
-    );
+    // const TimeInput = (
+    //         <TextField class = 'text_field'
+    //             id="time"
+    //             type="time"
+    //             value={this.state.duetime}
+    //             defaultValue="07:30"
+    //             InputLabelProps={{
+    //             shrink: true,
+    //             }}
+    //             inputProps={{
+    //             step: 300, // 5 min
+    //             }}
+    //             onChange={this.handleChange}
+    //         />
+    // );
+    const TimeInput2 = (
+      <TimePicker
+          onChange={this.timeChange}
+          value={this.state.duetime}
+          name="duetime"
+        />
+    )
     const ProgressExampleAttached = (
         <Segment class >
           <form class="new_signin">
             <input className="new_login-username" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
-            {TimeInput}
+            {TimeInput2}
             <span>&nbsp;</span><span>&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span>
-            <button type="save" class="time_save"><IoIosCloud/></button>
+            <button type="save" class="time_save" onclick={this.handleSubmit}><IoIosCloud/></button>
           </form>
           <Progress percent={50} attached='bottom' color='blue'/>
         </Segment>

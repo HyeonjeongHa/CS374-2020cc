@@ -50,6 +50,7 @@ class Todo extends Component{
         database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
             console.log("this outside of foreach", this);
             var tempThis = this;
+            var index = 0;
             snapshot.forEach(function(child) {
                 let res = child.val();
                 console.log("res.child", res);
@@ -60,11 +61,14 @@ class Todo extends Component{
                             $push : [{
                                 duetime : res.duetime,
                                 task : res.task,
-                                progress : res.progress
+                                progress : res.progress,
+                                index : index
+
                             }]
                         }),
                     flag: true
                 });
+                index++;
                 console.log(tempThis.state.TodoList);
             })  
         })
@@ -105,7 +109,11 @@ class Todo extends Component{
                         <TodoList 
                             duetime={data.duetime}
                             progress={data.progress}
-                            task={data.task} />
+                            task={data.task}
+                            index={data.index}
+                            teamName={this.state.teamName}
+                            id={this.state.id}
+                             />
                         ))
                 :(
                     <span>
