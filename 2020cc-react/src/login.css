@@ -153,10 +153,13 @@ body {
     background: #F6F7F9;
     color: #34495e;
     font-size: 16px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .time_save {
     float: right;
+    clear: both;
 }
 
 .upload-username {
@@ -259,7 +262,10 @@ a {
 }
 
 .signin {
-    display: initial;
+    /*display: initial;
     margin-top: auto;
     margin-bottom: auto;
+    */
+    display: flex;
+    align-items: center;
 }
