@@ -288,3 +288,8 @@ a {
     display: flex;
     align-items: center;
 }
+
+.todo {
+    margin-left: 50px;
+    margin-right: 300px;
+}

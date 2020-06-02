@@ -70,10 +70,10 @@ class Mainscreen extends Component {
     	<div className="app">
 	     	<div className="sidebar">
 	     		<div className="logo"></div>
-	     		<div><Button className='scheduleButton' onClick={this.handleDaily}>Daily</Button></div>
-	     		<div><Button className='scheduleButton' onClick={this.handleWeekly}>Weekly</Button></div>
-	     		<div><Button className='scheduleButton' onClick={this.handleEvent}>Event</Button></div>
-	     		<div><Button className='scheduleButton' onClick={this.handleRecord}>Record</Button></div>
+	     		<div className={this.state.currentTab == "Daily" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Daily</div>
+	     		<div className={this.state.currentTab == "Weekly" ? 'clickedButton':'idleButton'}  onClick={this.handleWeekly}>Weekly</div>
+	     		<div className={this.state.currentTab == "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
+	     		<div className={this.state.currentTab == "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div>
 	     		<div className="setting" onClick={this.handleSetting}></div>
 	        </div>
 	     	<div className="content">

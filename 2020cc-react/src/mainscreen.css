@@ -16,7 +16,7 @@ body {
 .sidebar {
   width: 200px;
   padding: 17px 10px 0;
-  background: white;
+  background: #E7F6F8;
   color: white;
   display: flex;
   flex-direction: column;
@@ -32,13 +32,25 @@ body {
   padding: 0 20px 0;
 }
 
-.scheduleButton {
+.idleButton {
   width: 160px;
   height: 40px;
-  border: 1px solid skyblue; 
+  border: 0; 
   background-color: rgba(0,0,0,0);
   color: black; 
-  padding: 5px;
+  padding: 10px;
+  font-size: 20px;
+  margin-top: 7px;
+}
+
+.clickedButton {
+  width: 160px;
+  height: 40px;
+  border: 0; 
+  background-color: rgba(0,0,0,0);
+  color: #0A27D9; 
+  padding: 10px;
+  font-size: 20px;
   margin-top: 7px;
 }
 
@@ -59,14 +71,46 @@ body {
 
 .alarm_icon{
   background-image: url('./alarm-clock.png');
-  background-size: 180px 180px;
-  width: 180px;
-  height: 180px;
+  background-size: 50px 50px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  margin: 10px;
 }
 
 .human_icon{
   background-image: url('./human.png');
-  background-size: 180px 180px;
-  width: 180px;
-  height: 180px;
+  background-size: 100px 100px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+}
+
+.title{
+  padding: 30px;
+  font-size: 40px;
+  text-align: center;
+  width: 150px;
+  height: 50px;
+}
+
+.profile{
+  display: flex;
+  margin-left: auto;
+  margin-right: 300px;
+}
+
+.center{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.text{
+  font-size: 20px;
+  text-align: center;
+}
+
+.text2{
+  font-size: 20px;
+  text-align: center;
 }
