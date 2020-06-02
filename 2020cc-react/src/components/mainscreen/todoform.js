@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Progress, Segment } from 'semantic-ui-react';
+import { Progress, Segment, Button } from 'semantic-ui-react';
 import { Checkmark } from 'react-checkmark';
 import { TextField } from '@material-ui/core';
 import { IoIosCloud } from "react-icons/io"; 
@@ -12,7 +12,7 @@ import firebaseConfig from "../../firebaseConfig";
 import moment from "moment";
 import TimePicker from 'react-time-picker';
 
-const today = moment().format("YYYYMMDD");
+
 
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -42,6 +42,7 @@ class ToDoForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    var today = moment().format("YYYYMMDD");
     console.log("[todoform.js] handleSubmit");
     database.ref('teamName/'+ this.props.teamName + '/' + this.props.id + '/' + today).once('value').then((snapshot) => {
       var tempThis = this;
@@ -49,12 +50,8 @@ class ToDoForm extends Component {
           let res = child.val();
           if (res.index == tempThis.state.index) {
             console.log("[todoform.js] inside of the IF");
-            // child.key.update({
-            //   duetime : tempThis.state.duetime,
-            //   task : tempThis.state.task,
-            //   progress : tempThis.state.progress
-            // })
             let childKey = child.key;
+            console.log("tempThis.state.progress", tempThis.state.progress);
             database.ref('teamName/'+ tempThis.props.teamName + '/' + tempThis.props.id).child(today).child(childKey).update({
               duetime : tempThis.state.duetime,
               task : tempThis.state.task,
@@ -66,26 +63,20 @@ class ToDoForm extends Component {
     })
   };
 
+  increment = () =>
+    this.setState(prevState => ({
+      percent: prevState.percent >= 100 ? 0 : prevState.percent + 10
+    }));
+
+    decrement = () =>
+    this.setState(prevState => ({
+      percent: prevState.percent >= 100 ? 0 : prevState.percent - 10
+    }));
   
 
 
   render() {
     const { text } = this.state;
-    // const TimeInput = (
-    //         <TextField class = 'text_field'
-    //             id="time"
-    //             type="time"
-    //             value={this.state.duetime}
-    //             defaultValue="07:30"
-    //             InputLabelProps={{
-    //             shrink: true,
-    //             }}
-    //             inputProps={{
-    //             step: 300, // 5 min
-    //             }}
-    //             onChange={this.handleChange}
-    //         />
-    // );
     const TimeInput2 = (
       <TimePicker
           onChange={this.timeChange}
@@ -94,15 +85,21 @@ class ToDoForm extends Component {
         />
     );
     const ProgressExampleAttached = (
+      <Fragment>
         <Segment class >
           <form class="new_signin">
             <input className="new_login-username" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
             <div class = "time_save">
+            <input className="new_login-username2" id="progressInput" value={this.state.progress} name="progress" placeholder="0" onChange={this.handleChange} type='text'></input>
+            <span class="for_span">%</span>
             {TimeInput2}&nbsp;&nbsp;&nbsp;<button type="save" onClick={this.handleSubmit}><IoIosCloud/></button>
             </div>
           </form>
-          <Progress percent={50} attached='bottom' color='blue'/>
         </Segment>
+        <Progress percent={this.state.progress} size='small' color='blue' progress indicating/>
+        <Button onClick={this.increment}>+</Button>{" "}
+        <Button onClick={this.decrement}>-</Button>
+        </Fragment>
       );
     return (
       <div>

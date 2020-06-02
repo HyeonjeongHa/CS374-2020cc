@@ -171,8 +171,45 @@ body {
     margin-bottom: auto;
 }
 
+.new_login-username2 {
+    font-weight: bold;
+    text-align: right;
+    width: 50px;
+    /* margin: 0px 50px 0px 0px; */
+    float: right;
+    display: flex;
+    height: 35px;
+    padding: 6px 7px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background: #F6F7F9;
+    color: #34495e;
+    font-size: 16px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.for_span {
+    margin:  0px 50px 0px -12px; 
+    height: 35px;
+    padding: 6px 15px;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 16px;
+    font-weight: bold;
+}
+
 .time_save {
     margin-left: auto;
+    float: right;
+    clear: both;
+    display: flex;
+    height: 100%;
+}
+
+.time_save2 {
+    margin-right: auto;
     float: right;
     clear: both;
     display: flex;
