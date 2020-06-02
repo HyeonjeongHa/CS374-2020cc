@@ -41,7 +41,7 @@ class TodoList extends Component {
 
         const style = {
  
-            border: '1px solid black'
+            border: ''
         }
 
         const btnStyle = {

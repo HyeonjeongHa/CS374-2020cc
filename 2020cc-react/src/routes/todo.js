@@ -72,12 +72,23 @@ class Todo extends Component{
 
     handleAdd = () => {
         console.log("CLICK!!!!!!!!!!!!!!!!");
-        return (
+        this.setState({
+            TodoList : update(
+                this.state.TodoList, {
+                    $push : [{
+                        duetime : "00:00",
+                        task : "",
+                        progress : "0"
+                    }]
+                }),
+            flag: true
+        })
+        // return (
 
-        <div>
-                <ToDoForm onCreate={this.handleCreate} duetime={null} progress={null} task={null}/>
-        </div>
-        )
+        // <div>
+        //         <TodoList  duetime={null} progress={null} task={null}/>
+        // </div>
+        // )
     };
 
     render(){
