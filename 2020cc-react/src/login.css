@@ -172,8 +172,11 @@ body {
 }
 
 .time_save {
+    margin-left: auto;
     float: right;
     clear: both;
+    display: flex;
+    height: 100%;
 }
 
 .upload-username {

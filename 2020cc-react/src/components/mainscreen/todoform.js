@@ -40,7 +40,7 @@ class ToDoForm extends Component {
   render() {
     const { text } = this.state;
     const TimeInput = (
-            <TextField class = 'text_field'
+            <TextField class
                 id="time"
                 type="time"
                 value={this.state.duetime}
@@ -58,13 +58,14 @@ class ToDoForm extends Component {
         <Segment class >
           <form class="new_signin">
             <input className="new_login-username" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
-            {TimeInput}
-            <span>&nbsp;</span><span>&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span>
-            <button type="save" class="time_save"><IoIosCloud/></button>
+            <div class ="time_save">
+              {TimeInput}&nbsp;&nbsp;&nbsp;<button type="save"><IoIosCloud/></button>
+            </div>
           </form>
           <Progress percent={50} attached='bottom' color='blue'/>
         </Segment>
       );
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
