@@ -16,6 +16,9 @@ if(!firebase.apps.length) {
 
 const database = firebase.database();
 
+var maxIndex;
+
+
 class Todo extends Component{
 
     state = {
@@ -69,30 +72,37 @@ class Todo extends Component{
                     flag: true
                 });
                 index++;
+                maxIndex = index;
                 console.log(tempThis.state.TodoList);
             })  
         })
     }
 
     handleAdd = () => {
-        console.log("CLICK!!!!!!!!!!!!!!!!");
+        const teamName = this.state.teamName;
+        const id = this.state.id;
+        const today = moment().format("YYYYMMDD");
+        
+        console.log("[todo.js] CLICK!!!!!!!!!!!!!!!!");
         this.setState({
             TodoList : update(
                 this.state.TodoList, {
                     $push : [{
                         duetime : "00:00",
                         task : "",
-                        progress : "0"
+                        progress : "0",
+                        index : maxIndex
                     }]
                 }),
             flag: true
         })
-        // return (
-
-        // <div>
-        //         <TodoList  duetime={null} progress={null} task={null}/>
-        // </div>
-        // )
+        database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({
+            duetime : "00:00",
+            task : "",
+            progress : "0",
+            index : maxIndex
+        });
+        maxIndex++;
     };
 
     render(){
@@ -111,7 +121,10 @@ class Todo extends Component{
                             <TodoList 
                                 duetime={data.duetime}
                                 progress={data.progress}
-                                task={data.task} />
+                                task={data.task}
+                                teamName={this.state.teamName}
+                                id={this.state.id}
+                                index={data.index} />
                             ))
                     :(
                         <span>

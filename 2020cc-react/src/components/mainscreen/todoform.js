@@ -42,18 +42,13 @@ class ToDoForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // this.props.onCreate(this.state);
-    // this.setState({
-    //     duetime : "",
-    //     progress : "",
-    //     task : ""
-    // });
+    console.log("[todoform.js] handleSubmit");
     database.ref('teamName/'+ this.props.teamName + '/' + this.props.id + '/' + today).once('value').then((snapshot) => {
       var tempThis = this;
       snapshot.forEach(function(child) {
           let res = child.val();
           if (res.index == tempThis.state.index) {
-            console.log("inside of the IF");
+            console.log("[todoform.js] inside of the IF");
             // child.key.update({
             //   duetime : tempThis.state.duetime,
             //   task : tempThis.state.task,
@@ -103,7 +98,7 @@ class ToDoForm extends Component {
           <form class="new_signin">
             <input className="new_login-username" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
             <div class = "time_save">
-            {TimeInput2}&nbsp;&nbsp;&nbsp;<button type="save" onclick={this.handleSubmit}><IoIosCloud/></button>
+            {TimeInput2}&nbsp;&nbsp;&nbsp;<button type="save" onClick={this.handleSubmit}><IoIosCloud/></button>
             </div>
           </form>
           <Progress percent={50} attached='bottom' color='blue'/>
