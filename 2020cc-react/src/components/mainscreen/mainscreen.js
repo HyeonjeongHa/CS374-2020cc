@@ -36,6 +36,12 @@ class Mainscreen extends Component {
 		})
 	}
 
+	handleSetting = () => {
+		this.setState({
+			currentTab : "Setting"
+		})
+	}
+
 	render() {
 		// console.log(this.state.currentTab);
 
@@ -63,11 +69,12 @@ class Mainscreen extends Component {
     return (
     	<div className="app">
 	     	<div className="sidebar">
+	     		<div className="logo"></div>
 	     		<div><Button className='scheduleButton' onClick={this.handleDaily}>Daily</Button></div>
 	     		<div><Button className='scheduleButton' onClick={this.handleWeekly}>Weekly</Button></div>
 	     		<div><Button className='scheduleButton' onClick={this.handleEvent}>Event</Button></div>
 	     		<div><Button className='scheduleButton' onClick={this.handleRecord}>Record</Button></div>
-	     		<div><Button>Setting</Button></div>
+	     		<div className="setting" onClick={this.handleSetting}></div>
 	        </div>
 	     	<div className="content">
 				{this.state.currentTab === "Daily" ? dailyScheduler : 

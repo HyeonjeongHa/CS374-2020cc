@@ -16,7 +16,7 @@ body {
 .sidebar {
   width: 200px;
   padding: 17px 10px 0;
-  background: black;
+  background: white;
   color: white;
   display: flex;
   flex-direction: column;

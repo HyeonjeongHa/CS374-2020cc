@@ -97,14 +97,14 @@ class ToDoForm extends Component {
           value={this.state.duetime}
           name="duetime"
         />
-    )
+    );
     const ProgressExampleAttached = (
         <Segment class >
           <form class="new_signin">
             <input className="new_login-username" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
-            {TimeInput2}
-            <span>&nbsp;</span><span>&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span>
-            <button type="save" class="time_save" onclick={this.handleSubmit}><IoIosCloud/></button>
+            <div class = "time_save">
+            {TimeInput2}&nbsp;&nbsp;&nbsp;<button type="save" onclick={this.handleSubmit}><IoIosCloud/></button>
+            </div>
           </form>
           <Progress percent={50} attached='bottom' color='blue'/>
         </Segment>
