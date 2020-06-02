@@ -56,9 +56,8 @@ class ToDoForm extends Component {
     );
     const ProgressExampleAttached = (
         <Segment class >
-          <form class="signin">
-            <input className="login-username" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
-            {/*<span>&nbsp;</span><span>&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span>*/}
+          <form class="new_signin">
+            <input className="new_login-username" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
             {TimeInput}
             <span>&nbsp;</span><span>&nbsp;&nbsp;</span><span>&nbsp;&nbsp;</span>
             <button type="save" class="time_save"><IoIosCloud/></button>

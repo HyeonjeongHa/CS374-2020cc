@@ -153,6 +153,20 @@ body {
     background: #F6F7F9;
     color: #34495e;
     font-size: 16px;
+}
+
+.new_login-username {
+    font-weight: bold;
+    width: 200px;
+    margin: 0 35px 20px;
+    height: 35px;
+    padding: 6px 15px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background: #F6F7F9;
+    color: #34495e;
+    font-size: 16px;
     margin-top: auto;
     margin-bottom: auto;
 }
@@ -262,10 +276,12 @@ a {
 }
 
 .signin {
-    /*display: initial;
+    display: initial;
     margin-top: auto;
     margin-bottom: auto;
-    */
+}
+
+.new_signin {
     display: flex;
     align-items: center;
 }
