@@ -96,11 +96,13 @@ class ToDoForm extends Component {
             </div>
           </form>
         </Segment>
-        <Progress percent={this.state.progress} size='small' color='blue' progress indicating/>
-        <Button onClick={this.increment}>+</Button>{" "}
-        <Button onClick={this.decrement}>-</Button>
+        <Progress  percent={this.state.progress} size='small' color='blue' progress indicating/>
+        {/*<Button onClick={this.increment}>+</Button>{" "}
+        <Button onClick={this.decrement}>-</Button>*/}
         </Fragment>
       );
+
+
     return (
       <div class="todo" >
         <br></br>
