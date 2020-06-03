@@ -9,6 +9,10 @@ class Person extends Component {
         isMine: this.props.isMine
     }
 
+    handleClicked = () => {
+        console.log("clicked : " + this.state.name);
+    }
+    
 	render() {
 
 		const me = (
@@ -32,7 +36,7 @@ class Person extends Component {
 	    );
 
 	    return (
-	    	<div>{this.state.isMine ? me : other}</div>
+	    	<div onClick={this.handleClicked}>{this.state.isMine ? me : other}</div>
 	    );
   	}
 }

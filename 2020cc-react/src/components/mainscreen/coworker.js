@@ -52,6 +52,7 @@ class Coworker extends Component {
         })
     }
 
+
 	render() {
 	    return (
 			<div className="coworker">

@@ -5,7 +5,6 @@ class Odot extends Component {
 
   render() {
 
-    console.log(this.props.location.state);
     if (this.props.location.state == null) {
       this.props.location.state = {
         id: "template97",
