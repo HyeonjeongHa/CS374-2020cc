@@ -92,7 +92,7 @@ class Mainscreen extends Component {
 				(this.state.currentTab === "Weekly" ? weeklyScheduler :
 				(this.state.currentTab === "Event" ? eventScheduler : recordScheduler))}
 	        </div>
-	        <Coworker/>
+	        <Coworker data={this.props.data}/>
    		</div>
     );
   }

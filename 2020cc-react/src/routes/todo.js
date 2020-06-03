@@ -26,6 +26,7 @@ class Todo extends Component{
 
     state = {
         teamName : this.props.data.teamName,
+        name: this.props.data.name,
         TodoList: [], //initial list is empty
         id : this.props.data.id,
         flag : false,
@@ -68,7 +69,7 @@ class Todo extends Component{
         // });
 
         database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
-            console.log("this outside of foreach", this);
+            // console.log("this outside of foreach", this);
             var tempThis = this;
             snapshot.forEach(function(child) {
                 let res = child.val();
@@ -134,7 +135,7 @@ class Todo extends Component{
             <Fragment>
                 <div className="new_signin">
                     <div className="myProfile">
-                        <Person isMine={true} name="Minji Lee" position="Developer" />
+                        <Person isMine={true} name={this.state.name} position="Developer" />
                     </div>
                 </div>
                 <div class = "button_ment"><button class = "add_button" id="add" onClick={this.handleAdd}><Icon name="add" /></button>&nbsp;&nbsp;&nbsp;<div class="add_task">Add task</div></div>
@@ -152,7 +153,7 @@ class Todo extends Component{
                             ))
                     :(
                         <span>
-                            LOADING..
+                            Loading..
                         </span> 
                      )}
                      
