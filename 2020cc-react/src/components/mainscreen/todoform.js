@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Progress, Segment, Button } from 'semantic-ui-react';
-import { Checkmark } from 'react-checkmark';
-import { TextField } from '@material-ui/core';
+import { Progress, Segment } from 'semantic-ui-react';
 import { IoIosCloud } from "react-icons/io"; 
 // import '../../input.css';
 import '../../login.css';
@@ -48,7 +46,7 @@ class ToDoForm extends Component {
       var tempThis = this;
       snapshot.forEach(function(child) {
           let res = child.val();
-          if (res.index == tempThis.state.index) {
+          if (res.index === tempThis.state.index) {
             console.log("[todoform.js] inside of the IF");
             let childKey = child.key;
             console.log("tempThis.state.progress", tempThis.state.progress);
@@ -76,7 +74,6 @@ class ToDoForm extends Component {
 
 
   render() {
-    const { text } = this.state;
     const TimeInput2 = (
       <TimePicker
           onChange={this.timeChange}
@@ -87,11 +84,11 @@ class ToDoForm extends Component {
     const ProgressExampleAttached = (
       <Fragment>
         <Segment>
-          <form class="new_signin">
+          <form className="new_signin">
             <input className="new_login-username" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
-            <div class = "time_save">
+            <div className = "time_save">
             <input className="new_login-username2" id="progressInput" value={this.state.progress} name="progress" placeholder="0" onChange={this.handleChange} type='text'></input>
-            <span class="for_span">%</span>
+            <span className="for_span">%</span>
             {TimeInput2}&nbsp;&nbsp;&nbsp;<button type="save" onClick={this.handleSubmit}><IoIosCloud/></button>
             </div>
           </form>
@@ -104,10 +101,10 @@ class ToDoForm extends Component {
 
 
     return (
-      <div class="todo" >
+      <div className="todo" >
         <br></br>
         <form onSubmit={this.handleSubmit}>
-        <div class = "vertical_center">
+        <div className = "vertical_center">
         {ProgressExampleAttached}
         </div>
         </form>

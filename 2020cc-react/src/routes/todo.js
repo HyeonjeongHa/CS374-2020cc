@@ -1,7 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import { Person } from '../components';
 import TodoList from '../components/mainscreen/todoList';
-import ToDoForm from '../components/mainscreen/todoform';
 import '../mainscreen.css';
 import '../login.css';
 import * as firebase from "firebase/app";
@@ -10,7 +9,7 @@ import firebaseConfig from "../firebaseConfig";
 
 import moment from "moment";
 import update from 'react-addons-update';
-import { Icon, Segment, Button } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import { animateScroll } from "react-scroll";
 
@@ -78,7 +77,6 @@ class Todo extends Component{
         const id = this.state.id;
         const today = moment().format("YYYYMMDD");
 
-        console.log("[todo.js] CLICK!!!!!!!!!!!!!!!!");
         this.setState({
             TodoList : update(
                 this.state.TodoList, {
@@ -106,8 +104,7 @@ class Todo extends Component{
     };
     
     render(){
-        console.log("state " + this.state.id);
-        console.log("props " + this.props.data.id);
+        
         if(this.state.id !== this.props.data.id){
             this.state.id = this.props.data.id;
             this.state.name = this.props.data.name;
@@ -132,7 +129,7 @@ class Todo extends Component{
                         <Person isMine={true} name={this.state.name} position="Developer" />
                     </div>
                 </div>
-                <div class = "button_ment"><button class = "add_button" id="add" onClick={this.handleAdd}><Icon name="add" /></button>&nbsp;&nbsp;&nbsp;<div class="add_task">Add task</div></div>
+                <div className = "button_ment"><button className = "add_button" id="add" onClick={this.handleAdd}><Icon name="add" /></button>&nbsp;&nbsp;&nbsp;<div className="add_task">Add task</div></div>
                 <div>
                     {this.state.flag ? 
                         this.state.TodoList.map(data => (

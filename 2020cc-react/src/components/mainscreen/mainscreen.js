@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Scheduler, Coworker } from '..';
 import '../../mainscreen.css';
-import { Button } from 'reactstrap';
 import Switch from '@material-ui/core/Switch';
 
 class Mainscreen extends Component {
@@ -44,7 +43,7 @@ class Mainscreen extends Component {
 
 	render() {
 
-		if(this.props.data != this.state.data){
+		if(this.props.data !== this.state.data){
 			this.setState({
     			data: this.props.data
     		})
@@ -78,10 +77,10 @@ class Mainscreen extends Component {
     	<div className="app">
 	     	<div className="sidebar">
 	     		<div className="logo"></div>
-	     		<div className={this.state.currentTab == "Daily" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Daily</div>
-	     		<div className={this.state.currentTab == "Weekly" ? 'clickedButton':'idleButton'}  onClick={this.handleWeekly}>Weekly</div>
-	     		<div className={this.state.currentTab == "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
-	     		<div className={this.state.currentTab == "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div>
+	     		<div className={this.state.currentTab === "Daily" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Daily</div>
+	     		<div className={this.state.currentTab === "Weekly" ? 'clickedButton':'idleButton'}  onClick={this.handleWeekly}>Weekly</div>
+	     		<div className={this.state.currentTab === "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
+	     		<div className={this.state.currentTab === "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div>
 	     		<div className="alarm">
                     <div className="alarm_icon"></div>
                     <div className="text2">Every 40 min</div>
