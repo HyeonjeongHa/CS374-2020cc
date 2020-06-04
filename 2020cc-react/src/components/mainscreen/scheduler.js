@@ -3,11 +3,13 @@ import { Todo } from '../../routes';
 
 class Scheduler extends Component {
 
+
 	render() {
+		console.log(this.props.noti_time)
 		const dailyView = (
 			
 			<div>
-				<Todo data={this.props.data} />
+				<Todo data={this.props.data} noti_time ={this.props.noti_time} />
 			</div>
 			
 		);
