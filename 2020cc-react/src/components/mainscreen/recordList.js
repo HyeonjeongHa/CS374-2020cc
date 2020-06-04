@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
+import '../../mainscreen.css';
 
 class RecordList extends Component {
 
   state = {
-    question: this.question,
-    answer: this.answer
+    question: this.props.question,
+    answer: this.props.answer
   }
 
   render() {
     return (
-      <div>
+      <div className="recordBox">
      		<div>{this.state.question}</div>  
         <div>{this.state.answer}</div>  
       </div>

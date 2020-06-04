@@ -5,7 +5,8 @@ class Record extends Component {
 
 	state = {
 		data : this.props.data,
-		RecordList : []
+		RecordList : [],
+		flag : false
 	}
 
 	componentDidMount() {
@@ -38,6 +39,18 @@ class Record extends Component {
         //         });
         //     })  
         // })
+        this.setState({
+        	RecordList: [{
+        		question: "how old r u?",
+        		answer: "I am 24"
+        	},
+        	{
+        		question: "R u handsome?",
+        		answer: "Yes! I M"
+        	}],
+        	flag: true
+        });
+
     }
 	render() {
 		
