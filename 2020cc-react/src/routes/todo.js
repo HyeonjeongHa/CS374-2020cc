@@ -106,17 +106,13 @@ class Todo extends Component{
     render(){
         
         if(this.state.id !== this.props.data.id){
+            console.log("helo");
             this.state.id = this.props.data.id;
             this.state.name = this.props.data.name;
-
-            this.state = {
-                id : this.props.data.id,
-                name: this.props.data.name,
-                teamName : this.props.data.teamName,
-                TodoList: [], //initial list is empty
-                flag : false,
-                isAlarmOn: this.state.isAlarmOn
-            };
+            this.state.teamName = this.props.data.teamName;
+            this.state.TodoList = [];
+            this.state.flag = false;
+            
             maxIndex = 0;
             
             this._getDailyList();
