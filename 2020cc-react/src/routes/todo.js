@@ -88,41 +88,58 @@ class Todo extends Component{
         const id = this.state.id;
         const today = moment().format("YYYYMMDD");
 
-        // console.log("[todo.js] CLICK!!!!!!!!!!!!!!!!");
-        
-
+        console.log("[todo.js] CLICK!!!!!!!!!!!!!!!!");
         var idx;
-        database.ref('teamName/'+ teamName + '/' + id).child(today).limitToLast(1).once("child_added", function(child) {
-            console.log("get index");
-            var newPost = child.val();
-            idx = newPost.index;
-            console.log("index : ", idx);
-            idx++;
-            database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({ 
-                duetime : "00:00",
-                task : "",
-                progress : "0",
-                index : idx
-            });
-
-        });
-        
-        // this.setState({
-        //     TodoList : update(
-        //         this.state.TodoList, {
-        //             $push : [{
-        //                 duetime : "00:00",
-        //                 task : "",
-        //                 progress : "0",
-        //                 index : idx
-        //             }]
-        //         }),
-        //     flag: true
-        // });
-        this.setState({
-            TodoList : []
+    
+        database.ref('teamName/'+ teamName + '/' + id).child(today).once('value', function(snapshot) {
+            console.log(snapshot.numChildren());
+            if(snapshot.numChildren() > 0) {
+                console.log("child exist");
+                database.ref('teamName/'+ teamName + '/' + id).child(today).limitToLast(1).once("child_added", function(child) {
+                        
+                    console.log("get index");
+                    console.log("limit to last child", child.numChildren(), child);
+                    var newPost = child.val();
+                    idx = newPost.index;
+                    console.log("index : ", idx);
+                    idx++;
+                    
+                    database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({ 
+                        duetime : "00:00",
+                        task : "",
+                        progress : "0",
+                        index : idx
+                    });
+                });
+            } else {
+                console.log('child is empty');
+                idx = 0;
+                database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({ 
+                    duetime : "00:00",
+                    task : "",
+                    progress : "0",
+                    index : 0
+                });
+            }
         })
-        this._getDailyList();
+        
+    
+        this.setState({
+            TodoList : update(
+                this.state.TodoList, {
+                    $push : [{
+                        duetime : "00:00",
+                        task : "",
+                        progress : "0",
+                        index : idx
+                    }]
+                }),
+            flag: true
+        });
+        // this.setState({
+        //     TodoList : []
+        // })
+        // this._getDailyList();
     };
 
     handleChange = (event) => {

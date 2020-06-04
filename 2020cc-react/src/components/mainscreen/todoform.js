@@ -77,6 +77,7 @@ class ToDoForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     var today = moment().format("YYYYMMDD");
+    console.log("[submit]", this.state.TodoList);
     // console.log("[todoform.js] handleSubmit");
     database.ref('teamName/'+ this.props.teamName + '/' + this.props.id + '/' + today).once('value').then((snapshot) => {
       var tempThis = this;
@@ -101,6 +102,7 @@ class ToDoForm extends Component {
       TodoList : []
     })
     this._getDailyList();
+    console.log("[submit]", this.state.TodoList);
   };
 
   _handleRemove = () => {
@@ -145,6 +147,8 @@ class ToDoForm extends Component {
       })  
     });
 
+    console.log(this.props.TodoList);
+    console.log(this.props.TodoList[0]);
     console.log(this.props.TodoList.splice(i, 0));
     this.setState({
       TodoList : this.state.TodoList.splice(i, 1)
