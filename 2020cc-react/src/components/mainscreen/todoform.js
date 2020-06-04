@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Progress, Segment, Button } from 'semantic-ui-react';
-import { Checkmark } from 'react-checkmark';
-import { TextField } from '@material-ui/core';
+import { Progress, Segment  } from 'semantic-ui-react';
 import { IoIosCloud, IoIosCloseCircle } from "react-icons/io"; 
 // import '../../input.css';
 import '../../login.css';
@@ -84,8 +82,8 @@ class ToDoForm extends Component {
       console.log(tempThis.state.index);
       snapshot.forEach(function(child) {
           let res = child.val();
-          if (res.index == tempThis.state.index) {
-            // console.log("[todoform.js] inside of the IF");
+          if (res.index === tempThis.state.index) {
+            console.log("[todoform.js] inside of the IF");
             let childKey = child.key;
             // console.log("tempThis.state.progress", tempThis.state.progress);
             database.ref('teamName/'+ tempThis.props.teamName + '/' + tempThis.props.id).child(today).child(childKey).update({
@@ -169,7 +167,6 @@ class ToDoForm extends Component {
 
 
   render() {
-    const { text } = this.state;
     const TimeInput2 = (
       <TimePicker
           onChange={this.timeChange}
@@ -180,9 +177,9 @@ class ToDoForm extends Component {
     const ProgressExampleAttached = (
       <Fragment>
         <Segment>
-          <form class="new_signin">
+          <form className="new_signin">
             <input className="new_login-username" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
-            <div class = "time_save">
+            <div className = "time_save">
             <input className="new_login-username2" id="progressInput" value={this.state.progress} name="progress" placeholder="0" onChange={this.handleChange} type='text'></input>
             <span class="for_span">%</span>
             {TimeInput2}&nbsp;&nbsp;&nbsp;<button type="save" onClick={this.handleSubmit}><IoIosCloud/></button> 
@@ -190,13 +187,15 @@ class ToDoForm extends Component {
             </div>
           </form>
         </Segment>
-        <Progress percent={this.state.progress} size='small' color='blue' progress indicating/>
-        <Button onClick={this.increment}>+</Button>{" "}
-        <Button onClick={this.decrement}>-</Button>
+        <Progress  percent={this.state.progress} size='small' color='blue' progress indicating/>
+        {/*<Button onClick={this.increment}>+</Button>{" "}
+        <Button onClick={this.decrement}>-</Button>*/}
         </Fragment>
       );
+
+
     return (
-      <div class="todo" >
+      <div className="todo" >
         <br></br>
         <form>
         <div class = "vertical_center">

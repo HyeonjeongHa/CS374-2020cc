@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import {Button} from 'semantic-ui-react'; 
 import '../header.css';
-import $ from 'jquery';
 
 class Header extends Component {
     state = {

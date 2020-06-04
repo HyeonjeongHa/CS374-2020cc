@@ -100,7 +100,7 @@ class Authentication extends Component {
             const getPw = res.pw;
             const getName = res.name;
             const getTeamName = res.teamName;
-            if(getId == id && getPw == pw) {
+            if(getId === id && getPw === pw) {
                 //login success
                 loginFlag =1;
                 console.log('login success');
@@ -114,7 +114,7 @@ class Authentication extends Component {
                 }); 
 
             } 
-            if(loginFlag == 0) {
+            if(loginFlag === 0) {
                 //login Fail
                 console.log('login fail');
                 this.setState({

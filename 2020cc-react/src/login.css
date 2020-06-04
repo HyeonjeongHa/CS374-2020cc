@@ -191,7 +191,7 @@ body {
 }
 
 .for_span {
-    margin:  0px 50px 0px -12px; 
+    margin: 0px 50px 0px -12px;
     height: 35px;
     padding: 6px 15px;
     margin-top: auto;
@@ -326,7 +326,15 @@ a {
     align-items: center;
 }
 
+.alarm {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 50px;
+}
+
+
 .todo {
-    margin-left: 50px;
-    margin-right: 300px;
+    margin-left: 15px;
+    margin-right: 150px;
 }

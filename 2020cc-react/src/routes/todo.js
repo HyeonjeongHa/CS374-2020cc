@@ -1,17 +1,17 @@
 import React, {Component, Fragment} from 'react';
+import { Person } from '../components';
 import TodoList from '../components/mainscreen/todoList';
-import ToDoForm from '../components/mainscreen/todoform';
 import '../mainscreen.css';
 import '../login.css';
 import * as firebase from "firebase/app";
 import "firebase/database";
 import firebaseConfig from "../firebaseConfig";
 
-import Switch from '@material-ui/core/Switch';
-
 import moment from "moment";
 import update from 'react-addons-update';
-
+import { Icon } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
+import { animateScroll } from "react-scroll";
 
 if(!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -21,40 +21,34 @@ const database = firebase.database();
 
 // var maxIndex = 0;
 
-
 class Todo extends Component{
 
     state = {
         teamName : this.props.data.teamName,
+        name: this.props.data.name,
         TodoList: [], //initial list is empty
         id : this.props.data.id,
         flag : false,
         isAlarmOn: true
     };
-
-
-    componentDidMount(){
+    
+    componentDidMount() {
+        this.scrollToBottom();
         this._getDailyList();
     }
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
+    scrollToBottom() {
+        animateScroll.scrollToBottom({
+          containerId: ""
+        });
+    }  
 
     _getDailyList(){
         const teamName = this.state.teamName;
         const id = this.state.id;
         const today = moment().format("YYYYMMDD");
-
-        // database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({
-        //     duetime : "17:50",
-        //     task : "sleep",
-        //     progress : "20",
-        //     index : 0
-        // });
-
-        // database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({
-        //     duetime : "10:30",
-        //     task : "coding",
-        //     progress : "50",
-        //     index: 1
-        // });
 
         database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
             console.log("this outside of foreach", this);
@@ -62,8 +56,6 @@ class Todo extends Component{
             // var maxIndex = 0;
             snapshot.forEach(function(child) {
                 let res = child.val();
-                console.log("res.child", res);
-                console.log("this inside of foreach", this);
                 tempThis.setState({
                     TodoList : update(
                         tempThis.state.TodoList, {
@@ -147,38 +139,30 @@ class Todo extends Component{
             isAlarmOn: event.target.checked 
         });
     };
+    
     render(){
         
-        // console.log("[todo.js] this.state.TodoList", this.state.TodoList);
-        // console.log("[todo.js] typeof(this.state.TodoList)", typeof(this.state.TodoList));
-        // console.log("[todo.js] flg", this.state.flag);
+        if(this.state.id !== this.props.data.id){
+            console.log("helo");
+            this.state.id = this.props.data.id;
+            this.state.name = this.props.data.name;
+            this.state.teamName = this.props.data.teamName;
+            this.state.TodoList = [];
+            this.state.flag = false;
+
+            this._getDailyList();
+        }
+
         return(
             <Fragment>
                 <div className="new_signin">
-                    <div>
-                        <div className="title">Today</div>
-                        <div className="new_signin">
-                            <div className="alarm_icon"></div>
-                            <div className="text2">Every 40 min</div>
-                            <Switch
-                                checked={this.state.isAlarmOn}
-                                onChange={this.handleChange}
-                                name="alarmOn"
-                                inputProps={{ 'aria-label': 'primary checkbox' }}
-                            />
-                        </div>
-                    </div>
-                    <div className="profile">
-                        <div className="center">
-                            <div className="text">Minji Lee</div>
-                            <div className="text">Developer</div>
-                        </div>
-                        <div className="human_icon"></div>
+                    <div className="myProfile">
+                        <Person isMine={true} name={this.state.name} position="Developer" />
                     </div>
                 </div>
+                <div className = "button_ment"><button className = "add_button" id="add" onClick={this.handleAdd}><Icon name="add" /></button>&nbsp;&nbsp;&nbsp;<div className="add_task">Add task</div></div>
                 <div>
                     {this.state.flag ? 
-                        // <TodoList list = {this.state.TodoList} />
                         this.state.TodoList.map(data => (
                             <TodoList 
                                 duetime={data.duetime}
@@ -191,12 +175,12 @@ class Todo extends Component{
                             ))
                     :(
                         <span>
-                            LOADING..
+                            Loading..
                         </span> 
                      )}
                      
                 </div>
-                <button id="add" onClick={this.handleAdd}>+</button>
+        
             </Fragment>
         )
     }

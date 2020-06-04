@@ -3,9 +3,21 @@ import { Mainscreen } from '../components';
 
 class Odot extends Component {
 
+  state = {
+    isCoworker: false,
+    coworkerData: "",
+  }
+
+  handleShowCoworker = (_data) => {
+  
+    this.setState({
+      coworkerData: _data,
+      isCoworker: true
+    })
+  }
+
   render() {
 
-    console.log(this.props.location.state);
     if (this.props.location.state == null) {
       this.props.location.state = {
         id: "template97",
@@ -13,10 +25,13 @@ class Odot extends Component {
         teamName: "2020cc"
     }
     }
-
+    console.log("isCoworker:" + this.state.isCoworker, this.state.coworkerData);
     return (
    		<div style={{backgroundColor:"white"}}>
-    		<Mainscreen data={this.props.location.state}/>
+        {this.state.isCoworker ?
+          <Mainscreen coworkerHandler={this.handleShowCoworker} data={this.state.coworkerData}/>
+          : <Mainscreen coworkerHandler={this.handleShowCoworker} data={this.props.location.state}/>
+        }
     	</div>  
     );
   }
