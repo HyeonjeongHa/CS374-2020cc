@@ -10,7 +10,12 @@ class Person extends Component {
     }
 
     handleClicked = () => {
-        console.log("clicked : " + this.state.name);
+        const data = {
+            name: this.props.name,
+            teamName: this.props.teamName,
+            id: this.props.id
+        }
+        this.props.handler(data);
     }
     
 	render() {
@@ -18,8 +23,8 @@ class Person extends Component {
 		const me = (
 	    	<div className="profile">
                 <div className="center">
-                    <div className="text">{this.state.name}</div>
-                    <div className="text">{this.state.position}</div>
+                    <div className="text">{this.props.name}</div>
+                    <div className="text">{this.props.position}</div>
                 </div>
                 <div className="human_icon"></div>
             </div>

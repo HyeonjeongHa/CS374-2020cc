@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import { Todo } from '../../routes';
 
 class Scheduler extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			data: this.props.data
+		};
+	}
 
 	render() {
+
 		console.log(this.props.currentTab);
 		console.log(this.props.data);
 

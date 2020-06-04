@@ -56,10 +56,10 @@ class TodoList extends Component {
         }
           
         // let list = [];
-        console.log("[todoList.js] this.props.duetime", this.props.duetime);
-        console.log("[todoList.js] this.props.task", this.props.task);
-        console.log("[todoList.js] this.props.progress", this.props.progress);
-        console.log("[todoList.js] this.props.index", this.props.index);
+        // console.log("[todoList.js] this.props.duetime", this.props.duetime);
+        // console.log("[todoList.js] this.props.task", this.props.task);
+        // console.log("[todoList.js] this.props.progress", this.props.progress);
+        // console.log("[todoList.js] this.props.index", this.props.index);
 
         // for(var i=0; i<Object.keys(this.state.list).length; i++){
         //     list.push(

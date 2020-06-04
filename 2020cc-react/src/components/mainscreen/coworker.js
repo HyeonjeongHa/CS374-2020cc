@@ -27,26 +27,27 @@ class Coworker extends Component {
 
     _getCoworker(){
         database.ref('teamName/'+ this.state.teamName).once('value').then((snapshot) => {
-            // console.log("this outside of foreach", this);
             var tempThis = this;
             
             snapshot.forEach(function(child) {
                 database.ref('authentication/' + child.key).once('value').then((snapshot2) => {
                     const res = snapshot2.val();
 
-                    if(tempThis.state.name !== res.name){
-                        tempThis.setState({
-                            coworkerList : update(
-                                tempThis.state.coworkerList, {
-                                    $push : [{
-                                        name: res.name,
-                                        position: "developer"
-                                    }]
-                                }
-                            ),
-                            flag: true
-                        }); 
-                    }
+                    // if(tempThis.state.name !== res.name){
+                    tempThis.setState({
+                        coworkerList : update(
+                            tempThis.state.coworkerList, {
+                                $push : [{
+                                    id: res.id,
+                                    name: res.name,
+                                    position: "developer",
+                                    teamName: res.teamName
+                                }]
+                            }
+                        ),
+                        flag: true
+                    }); 
+                    //}
                 })
             })
         })
@@ -57,7 +58,7 @@ class Coworker extends Component {
 	    return (
 			<div className="coworker">
 				{this.state.flag 
-					? this.state.coworkerList.map(data => (<Person isMine={false} name={data.name} position={data.position} />))
+					? this.state.coworkerList.map(data => (<Person handler={this.props.handler} isMine={false} name={data.name} id={data.id} teamName={data.teamName} position={data.position} />))
                     : ( <div/>
                 )}
 	   		</div>

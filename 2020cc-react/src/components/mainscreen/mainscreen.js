@@ -6,9 +6,7 @@ import Switch from '@material-ui/core/Switch';
 
 class Mainscreen extends Component {
 	state = {
-		id : "",
-		name : "",
-      	teamName : "",
+		data : this.props.data,
 		currentTab : "Daily"
     }
 
@@ -43,27 +41,36 @@ class Mainscreen extends Component {
 		})
 	}
 
-	render() {
-		// console.log(this.state.currentTab);
 
-		const dailyScheduler = (
+	render() {
+
+		if(this.props.data != this.state.data){
+			this.setState({
+    			data: this.props.data
+    		})
+		}
+		
+		// console.log(this.props.data);
+		// console.log(this.state.data);
+
+		var dailyScheduler = (
             <div>
-                <Scheduler currentTab="Daily" data={this.props.data}/>
+                <Scheduler currentTab="Daily" data={this.state.data}/>
             </div>
         );
-        const weeklyScheduler = (
+        let weeklyScheduler = (
             <div>
-                <Scheduler currentTab="Weekly" data={this.props.data}/>
+                <Scheduler currentTab="Weekly" data={this.state.data}/>
             </div>
         );
-        const eventScheduler = (
+        let eventScheduler = (
             <div>
-                <Scheduler currentTab="Event" data={this.props.data}/>
+                <Scheduler currentTab="Event" data={this.state.data}/>
             </div>
         );
-        const recordScheduler = (
+        let recordScheduler = (
             <div>
-                <Scheduler currentTab="Record" data={this.props.data}/>
+                <Scheduler currentTab="Record" data={this.state.data}/>
             </div>
         );
 
@@ -92,7 +99,7 @@ class Mainscreen extends Component {
 				(this.state.currentTab === "Weekly" ? weeklyScheduler :
 				(this.state.currentTab === "Event" ? eventScheduler : recordScheduler))}
 	        </div>
-	        <Coworker data={this.props.data}/>
+	        <Coworker handler={this.props.coworkerHandler} data={this.state.data}/>
    		</div>
     );
   }

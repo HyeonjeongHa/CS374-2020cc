@@ -35,6 +35,7 @@ class Todo extends Component{
     
     componentDidMount() {
         this.scrollToBottom();
+        this._getDailyList();
     }
     componentDidUpdate() {
         this.scrollToBottom();
@@ -43,38 +44,17 @@ class Todo extends Component{
         animateScroll.scrollToBottom({
           containerId: ""
         });
-    }
-
-    componentDidMount(){
-        this._getDailyList();
-    }
+    }  
 
     _getDailyList(){
         const teamName = this.state.teamName;
         const id = this.state.id;
         const today = moment().format("YYYYMMDD");
 
-        // database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({
-        //     duetime : "17:50",
-        //     task : "sleep",
-        //     progress : "20",
-        //     index : 0
-        // });
-
-        // database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({
-        //     duetime : "10:30",
-        //     task : "coding",
-        //     progress : "50",
-        //     index: 1
-        // });
-
         database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
-            // console.log("this outside of foreach", this);
-            var tempThis = this;
+            let tempThis = this;
             snapshot.forEach(function(child) {
                 let res = child.val();
-                console.log("res.child", res);
-                console.log("this inside of foreach", this);
                 tempThis.setState({
                     TodoList : update(
                         tempThis.state.TodoList, {
@@ -89,7 +69,6 @@ class Todo extends Component{
                     flag: true
                 });
                 maxIndex++;
-                console.log(tempThis.state.TodoList);
             })  
         })
     }
@@ -127,10 +106,25 @@ class Todo extends Component{
     };
     
     render(){
-        
-        console.log("[todo.js] this.state.TodoList", this.state.TodoList);
-        console.log("[todo.js] typeof(this.state.TodoList)", typeof(this.state.TodoList));
-        console.log("[todo.js] flg", this.state.flag);
+        console.log("state " + this.state.id);
+        console.log("props " + this.props.data.id);
+        if(this.state.id !== this.props.data.id){
+            this.state.id = this.props.data.id;
+            this.state.name = this.props.data.name;
+
+            this.state = {
+                id : this.props.data.id,
+                name: this.props.data.name,
+                teamName : this.props.data.teamName,
+                TodoList: [], //initial list is empty
+                flag : false,
+                isAlarmOn: this.state.isAlarmOn
+            };
+            maxIndex = 0;
+            
+            this._getDailyList();
+        }
+
         return(
             <Fragment>
                 <div className="new_signin">
@@ -141,7 +135,6 @@ class Todo extends Component{
                 <div class = "button_ment"><button class = "add_button" id="add" onClick={this.handleAdd}><Icon name="add" /></button>&nbsp;&nbsp;&nbsp;<div class="add_task">Add task</div></div>
                 <div>
                     {this.state.flag ? 
-                        // <TodoList list = {this.state.TodoList} />
                         this.state.TodoList.map(data => (
                             <TodoList 
                                 duetime={data.duetime}
