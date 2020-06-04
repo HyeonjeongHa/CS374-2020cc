@@ -56,10 +56,10 @@ class TodoList extends Component {
         }
           
         // let list = [];
-        console.log("[todoList.js] this.props.duetime", this.props.duetime);
-        console.log("[todoList.js] this.props.task", this.props.task);
-        console.log("[todoList.js] this.props.progress", this.props.progress);
-        console.log("[todoList.js] this.props.index", this.props.index);
+        // console.log("[todoList.js] this.props.duetime", this.props.duetime);
+        // console.log("[todoList.js] this.props.task", this.props.task);
+        // console.log("[todoList.js] this.props.progress", this.props.progress);
+        // console.log("[todoList.js] this.props.index", this.props.index);
 
         // for(var i=0; i<Object.keys(this.state.list).length; i++){
         //     list.push(
@@ -76,7 +76,8 @@ class TodoList extends Component {
             task = {this.state.task}
             teamName = {this.props.teamName}
             id = {this.props.id}
-            index={this.props.index}>
+            index={this.props.index}
+            TodoList = {this.props.TodoList}>
             </TodoForm>
         </div>
         )

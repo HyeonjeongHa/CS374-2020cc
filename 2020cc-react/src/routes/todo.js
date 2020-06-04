@@ -59,7 +59,7 @@ class Todo extends Component{
         database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
             console.log("this outside of foreach", this);
             var tempThis = this;
-            var maxIndex = 0;
+            // var maxIndex = 0;
             snapshot.forEach(function(child) {
                 let res = child.val();
                 console.log("res.child", res);
@@ -71,13 +71,13 @@ class Todo extends Component{
                                 duetime : res.duetime,
                                 task : res.task,
                                 progress : res.progress,
-                                index : maxIndex
+                                index : res.index
 
                             }]
                         }),
                     flag: true
                 });
-                maxIndex++;
+                // maxIndex++;
                 console.log(tempThis.state.TodoList);
             })  
         })
@@ -88,7 +88,7 @@ class Todo extends Component{
         const id = this.state.id;
         const today = moment().format("YYYYMMDD");
 
-        console.log("[todo.js] CLICK!!!!!!!!!!!!!!!!");
+        // console.log("[todo.js] CLICK!!!!!!!!!!!!!!!!");
         
 
         var idx;
@@ -107,21 +107,22 @@ class Todo extends Component{
 
         });
         
-
-        
-
+        // this.setState({
+        //     TodoList : update(
+        //         this.state.TodoList, {
+        //             $push : [{
+        //                 duetime : "00:00",
+        //                 task : "",
+        //                 progress : "0",
+        //                 index : idx
+        //             }]
+        //         }),
+        //     flag: true
+        // });
         this.setState({
-            TodoList : update(
-                this.state.TodoList, {
-                    $push : [{
-                        duetime : "00:00",
-                        task : "",
-                        progress : "0",
-                        index : idx
-                    }]
-                }),
-            flag: true
+            TodoList : []
         })
+        this._getDailyList();
     };
 
     handleChange = (event) => {
@@ -131,9 +132,9 @@ class Todo extends Component{
     };
     render(){
         
-        console.log("[todo.js] this.state.TodoList", this.state.TodoList);
-        console.log("[todo.js] typeof(this.state.TodoList)", typeof(this.state.TodoList));
-        console.log("[todo.js] flg", this.state.flag);
+        // console.log("[todo.js] this.state.TodoList", this.state.TodoList);
+        // console.log("[todo.js] typeof(this.state.TodoList)", typeof(this.state.TodoList));
+        // console.log("[todo.js] flg", this.state.flag);
         return(
             <Fragment>
                 <div className="new_signin">
@@ -168,7 +169,8 @@ class Todo extends Component{
                                 task={data.task}
                                 teamName={this.state.teamName}
                                 id={this.state.id}
-                                index={data.index} />
+                                index={data.index}
+                                TodoList = {this.state.TodoList} />
                             ))
                     :(
                         <span>

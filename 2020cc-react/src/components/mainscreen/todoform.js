@@ -11,6 +11,8 @@ import "firebase/database";
 import firebaseConfig from "../../firebaseConfig";
 import moment from "moment";
 import TimePicker from 'react-time-picker';
+import { Todo } from '../../routes';
+import update from 'react-addons-update';
 
 
 
@@ -27,10 +29,42 @@ class ToDoForm extends Component {
             duetime : this.props.duetime,
             progress : this.props.progress,
             task : this.props.task,
-            index : this.props.index
+            index : this.props.index,
+            TodoList : this.props.TodoList
           }
       };
   
+    _getDailyList(){
+      const teamName = this.state.teamName;
+      const id = this.state.id;
+      const today = moment().format("YYYYMMDD");
+
+      database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
+          console.log("this outside of foreach", this);
+          var tempThis = this;
+          // var maxIndex = 0;
+          snapshot.forEach(function(child) {
+              let res = child.val();
+              console.log("res.child", res);
+              console.log("this inside of foreach", this);
+              tempThis.setState({
+                  TodoList : update(
+                      tempThis.state.TodoList, {
+                          $push : [{
+                              duetime : res.duetime,
+                              task : res.task,
+                              progress : res.progress,
+                              index : res.index
+
+                          }]
+                      }),
+                  flag: true
+              });
+              // maxIndex++;
+              console.log(tempThis.state.TodoList);
+          })  
+      })
+  }
 
   handleChange = (e) => {
     let nextState = {};
@@ -43,15 +77,16 @@ class ToDoForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     var today = moment().format("YYYYMMDD");
-    console.log("[todoform.js] handleSubmit");
+    // console.log("[todoform.js] handleSubmit");
     database.ref('teamName/'+ this.props.teamName + '/' + this.props.id + '/' + today).once('value').then((snapshot) => {
       var tempThis = this;
+      console.log(tempThis.state.index);
       snapshot.forEach(function(child) {
           let res = child.val();
           if (res.index == tempThis.state.index) {
-            console.log("[todoform.js] inside of the IF");
+            // console.log("[todoform.js] inside of the IF");
             let childKey = child.key;
-            console.log("tempThis.state.progress", tempThis.state.progress);
+            // console.log("tempThis.state.progress", tempThis.state.progress);
             database.ref('teamName/'+ tempThis.props.teamName + '/' + tempThis.props.id).child(today).child(childKey).update({
               duetime : tempThis.state.duetime,
               task : tempThis.state.task,
@@ -60,7 +95,61 @@ class ToDoForm extends Component {
           return;
           }
       })  
+    });
+
+    this.setState({
+      TodoList : []
     })
+    this._getDailyList();
+  };
+
+  _handleRemove = () => {
+    // console.log("[todoform.js] handle remove");
+    const task = this.props.task;
+    const teamName = this.props.teamName;
+    const id = this.props.id;
+    const today = moment().format("YYYYMMDD");
+    var idx;
+
+    // console.log('handle remove del database\n');
+    var i = 0;
+    // console.log(idx);
+    this.props.TodoList.map(data =>  {
+      console.log("handle remove data : ", data);
+      if(data.index === this.state.index) {
+        console.log('[todoform.js] data index', data.index)
+        return;
+      }
+      i++;
+    })
+
+    // console.log("splice i : ", i)
+    // console.log(this.props.TodoList);
+    // const todolist = this.props.TodoList;
+    // console.log(todolist.splice(i,));
+    // console.log(this.props.TodoList.splice(i, 1));
+    // console.log("after remove database");
+    
+    // this.state.TodoList.splice(i, 1);
+    console.log(this.props.TodoList);
+    database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
+      var tempThis = this;
+      snapshot.forEach(function(child) {
+          let res = child.val();
+          idx = tempThis.state.index;
+          if (res.index === tempThis.state.index) {
+            let childKey = child.key;
+            database.ref('teamName/'+ teamName + '/' + id + '/' + today).child(childKey).remove();
+            // return;
+          }
+      })  
+    });
+
+    console.log(this.props.TodoList.splice(i, 0));
+    this.setState({
+      TodoList : this.state.TodoList.splice(i, 1)
+    });
+    // this._getDailyList();
   };
 
   increment = () =>
@@ -105,7 +194,7 @@ class ToDoForm extends Component {
     return (
       <div class="todo" >
         <br></br>
-        <form onSubmit={this.handleSubmit}>
+        <form>
         <div class = "vertical_center">
         {ProgressExampleAttached}
         </div>
