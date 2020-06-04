@@ -7,3 +7,4 @@ export {default as TodoForm} from './mainscreen/todoform';
 export {default as Coworker} from './mainscreen/coworker';
 export {default as Person} from './mainscreen/person';
 export {default as Record} from './mainscreen/record';
+export {default as RecordList} from './mainscreen/recordList';
