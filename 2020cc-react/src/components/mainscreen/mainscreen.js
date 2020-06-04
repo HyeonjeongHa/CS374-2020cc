@@ -76,6 +76,7 @@ class Mainscreen extends Component {
 
     return (
     	<div className="app">
+    		<div>
 	     	<div className="sidebar">
 	     		<div className="logo"></div>
 	     		<div className={this.state.currentTab === "Daily" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Daily</div>
@@ -93,6 +94,7 @@ class Mainscreen extends Component {
                     />
                 </div>
 	     		<div className="setting" onClick={this.handleSetting}></div>
+	        </div>
 	        </div>
 	     	<div className="content">
 				{this.state.currentTab === "Daily" ? dailyScheduler : 

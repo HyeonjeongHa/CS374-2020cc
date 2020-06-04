@@ -13,13 +13,31 @@ body {
 
 .sidebar {
     width: 200px;
-    padding: 17px 10px 0;
+    height: 100vh;
+    padding: 10px;
     background: #E7F6F8;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: sticky;
+    top: 0px;
+    left: 0px;
 }
+
+.coworker{
+    border-radius: 20px;
+    border: 2px solid black;
+    background: white;
+
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px, rgba(0, 0, 0, 0.2) 0px 2px 24px;
+    position: sticky;
+
+    top: 10px;
+    right: 10px;
+    margin-bottom: auto;
+}  
+
 
 .collapsed {
     width: 60px;
@@ -55,12 +73,13 @@ body {
 
 .setting {
     background-image: url('./setting_icon.png');
-    background-size: 30px 30px;
-    width: 30px;
-    height: 30px;
+    background-size: 40px 40px;
+    width: 40px;
+    height: 40px;
+    
     position: absolute;
-    bottom: 20px;
-    left: 20px;
+    bottom: 10px;
+    left: 10px;
 }
 
 .logo {
@@ -72,11 +91,18 @@ body {
 
 .alarm_icon {
     background-image: url('./alarm-clock.png');
-    background-size: 50px 50px;
-    width: 50px;
-    height: 50px;
+    background-size: 40px 40px;
+    width: 40px;
+    height: 40px;
     display: flex;
-    margin: 10px;
+}
+
+.alarm {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 60px;
+    left: 10px;
 }
 
 .human_icon {
@@ -123,18 +149,6 @@ body {
   color: black;
 }
 
-.coworker{
-  border-radius: 20px;
-  border: 2px solid black;
-  background: white;
-
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px, rgba(0, 0, 0, 0.2) 0px 2px 24px;
-  position: absolute;
-  
-  top: 10px;
-  right: 10px;
-}  
-
 .button_ment {
     margin-left: 10px;
     display: flex;
@@ -174,7 +188,7 @@ body {
     background: #F6F7F9;
     color: #34495e;
     font-size: 20px;
-    
+
     margin-left: 10px;
     margin-top: 20px;
 }

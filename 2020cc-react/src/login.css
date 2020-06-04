@@ -326,12 +326,6 @@ a {
     align-items: center;
 }
 
-.alarm {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    bottom: 50px;
-}
 
 
 .todo {
