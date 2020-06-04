@@ -156,11 +156,17 @@ class Todo extends Component{
         return(
             <Fragment>
                 <div className="new_signin">
+                    <div className="title">Scheduler</div>
                     <div className="myProfile">
                         <Person isMine={true} name={this.state.name} position="Developer" />
                     </div>
                 </div>
-                <div className = "button_ment"><button className = "add_button" id="add" onClick={this.handleAdd}><Icon name="add" /></button>&nbsp;&nbsp;&nbsp;<div className="add_task">Add task</div></div>
+                <div className = "button_ment" onClick={this.handleAdd}>
+                    <button className = "add_button" id="add">
+                        <Icon name="add" />
+                    </button>&nbsp;&nbsp;&nbsp;
+                    <div className="add_task">Add task</div>
+                </div>
                 <div>
                     {this.state.flag ? 
                         this.state.TodoList.map(data => (

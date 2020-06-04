@@ -88,8 +88,8 @@ body {
 }
 
 .title {
-    padding: 30px;
-    font-size: 40px;
+    padding: 10px;
+    font-size: 50px;
     text-align: center;
     width: 150px;
     height: 50px;
@@ -136,18 +136,26 @@ body {
 }  
 
 .button_ment {
-    margin-left: 50px;
+    margin-left: 10px;
     display: flex;
     align-items: center;
+    border-radius: 5px;
+    border: 1px solid black;
+    width: 150px;
+    height: 30px;
+    background: #BDEDD2;
+    margin-top: -20px;
 }
 
 .add_button {
     border: none;
-    background: white;
-    color: #BDEDD2;
+    background: #BDEDD2;
+    color: black;
     outline: none;
+    margin-left:5px;
 }
 
 .add_task {
-    color: gray;
+    color: black;
+    font-size: 20px;
 }
