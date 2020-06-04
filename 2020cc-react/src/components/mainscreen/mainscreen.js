@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Scheduler, Coworker } from '..';
+import { Coworker } from '..';
 import '../../mainscreen.css';
+import { Todo } from '../../routes';
 import Switch from '@material-ui/core/Switch';
 
 class Mainscreen extends Component {
@@ -54,22 +55,22 @@ class Mainscreen extends Component {
 
 		var dailyScheduler = (
             <div>
-                <Scheduler currentTab="Daily" data={this.state.data}/>
+                <Todo currentTab="Daily" data={this.state.data}/>
             </div>
         );
         let weeklyScheduler = (
             <div>
-                <Scheduler currentTab="Weekly" data={this.state.data}/>
+                <Todo currentTab="Weekly" data={this.state.data}/>
             </div>
         );
         let eventScheduler = (
             <div>
-                <Scheduler currentTab="Event" data={this.state.data}/>
+                <Todo currentTab="Event" data={this.state.data}/>
             </div>
         );
         let recordScheduler = (
             <div>
-                <Scheduler currentTab="Record" data={this.state.data}/>
+                <Todo currentTab="Record" data={this.state.data}/>
             </div>
         );
 

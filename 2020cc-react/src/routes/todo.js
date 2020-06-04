@@ -156,7 +156,7 @@ class Todo extends Component{
         return(
             <Fragment>
                 <div className="new_signin">
-                    <div className="title">Scheduler</div>
+                    <div className="title">Todo</div>
                     <div className="myProfile">
                         <Person isMine={true} name={this.state.name} position="Developer" />
                     </div>
