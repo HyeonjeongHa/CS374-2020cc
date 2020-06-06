@@ -65,8 +65,8 @@ class TodoInfo extends Component {
     increment = () => {
         if(!this.props.isCoworker){
             const { data, onUpdate, onRemove } = this.props;
-            onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : newProgress, index : this.state.index});
             let newProgress = this.state.progress >= 100 ? 100 : this.state.progress + 10;
+            onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : newProgress, index : this.state.index});
             this.setState(prevState => ({
                 progress: newProgress
             }));
