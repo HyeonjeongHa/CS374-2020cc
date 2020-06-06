@@ -36,7 +36,7 @@ class Mainscreen extends Component {
 		console.log(value)
 		timerId = setInterval(() => {
             this.setState({
-                noti_flag : true,
+                noti_flag : false,
                 noti_title : "Mark the progress😀",
 				noti_page : 'http://localhost:3000/Odot/',
 				noti_time : value

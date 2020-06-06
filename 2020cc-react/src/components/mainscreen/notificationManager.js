@@ -3,7 +3,7 @@ import { Notification } from '..';
 import * as firebase from "firebase/app";
 import "firebase/database";
 import firebaseConfig from "../../firebaseConfig";
-
+import WebNotification from 'react-web-notification'
 import moment from "moment";
 import update from 'react-addons-update';
 
@@ -17,7 +17,9 @@ class NotificationManager extends Component {
 	state = {
         data : this.props.data,
         QuestionList : [],
-        currentTime: moment().format("HH:mm")
+        currentTime: moment().format("HH:mm"),
+        event_flag : false,
+        event_index : -1
 	}
 
 	componentDidMount() {
@@ -60,7 +62,7 @@ class NotificationManager extends Component {
         })
 
 
-        this._periodicTimeUpdate(10);
+        this._periodicTimeUpdate(60);
         
     }
 
@@ -68,39 +70,44 @@ class NotificationManager extends Component {
         console.log("periodic call!");
         setInterval(() => {
             this.setState({
-                currentTime: moment().format("HH:mm")
-            });
-            this._periodicTimeUpdate(sec);
-            
-            }, 1000*sec
-        );
+                currentTime: moment().format("HH:mm"),
+                event_flag : true,
+                event_index : this._findAskIndex()
+            })
+            this.setState({
+                event_flag : false
+            })
+            }, 1000*sec)
     }
 
     _findAskIndex(){
+        console.log("여기!!!!!!!!!!!!!")
         var result = -1;
         this.state.QuestionList.forEach(function(elem, index){
             console.log(elem, index, moment().format("HH:MM"));
             if(elem.time === moment().format("HH:mm"))
                 result = index;
         });
-
+        console.log("여기!!!!!!!"+result)
         return result;
+        
     }
 	render() {
-        let askIndex = this._findAskIndex();
-        console.log("askIndex", askIndex);
-        const noti = (
-            <div>
-            { askIndex === -1 ? 
-            <div>Nothing</div> : 
-            <Notification noti_title={this.state.QuestionList[askIndex]} noti_page="some page"/>
-        
-            }
-            </div>
-        );
-
+        console.log(this.state.event_index+"으악!!!!!!!!!!!!")
+        let i = this.state.event_index
         return (
-            <div>{noti}</div>
+            <div>    
+            { (i !== -1) && this.state.event_flag ?
+            
+            <WebNotification
+            title= {this.state.QuestionList[i].question}
+            timeout={5000 }
+            onClickFn={ () => window.open('http://localhost:3000/Odot/', '_blank') }
+            />
+           
+
+            :(null)}
+            </div>
         );
   }
 }
