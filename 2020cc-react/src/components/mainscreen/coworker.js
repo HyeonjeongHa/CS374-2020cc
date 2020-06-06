@@ -55,8 +55,12 @@ class Coworker extends Component {
 
 
 	render() {
+        const style = {
+            overflowY : "scroll",
+            overflowX : "hidden"
+        }
 	    return (
-			<div className="coworker">
+			<div className="coworker" style={style}>
 				{this.state.flag 
 					? this.state.coworkerList.map(data => (<Person handler={this.props.handler} isMine={false} name={data.name} id={data.id} teamName={data.teamName} position={data.position} />))
                     : ( <div/>

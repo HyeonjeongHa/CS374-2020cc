@@ -1,6 +1,6 @@
 .todo-task-input {
     font-weight: bold;
-    width: 500px;
+    width: 700px;
     height: 60px;
     border-radius: 5px;
     outline: none;
@@ -16,7 +16,7 @@
 
 .todo-task-text {
     font-weight: bold;
-    width: 500px;
+    width: 700px;
     height: 60px;    
     border-radius: 5px;
     outline: none;

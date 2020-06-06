@@ -39,16 +39,10 @@ class TodoInfo extends Component {
         // false -> true
         if (!toggle) {
             this.setState({
-                // task: data.task,
-                // duetime : data.duetime,
-                // progress : data.progress,
-                // index : data.index,
                 toggle: true,
             });
         } else {
         // true -> false
-            console.log(this.state.index);
-            console.log(this.props.data.index);
             onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index});
             this.setState({
                 toggle: false,
@@ -67,25 +61,33 @@ class TodoInfo extends Component {
     };
     
     increment = () => {
-        // onUpdate(data.index, { task: task, duetime : duetime, progress : progress + 10, index : index});
+        const { data, onUpdate, onRemove } = this.props;
+        let newProgress = this.state.progress >= 100 ? 100 : this.state.progress + 10;
+        onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : newProgress, index : this.state.index});
         this.setState(prevState => ({
-            progress: prevState.progress >= 100 ? 100 : prevState.progress + 10
+            progress: newProgress
         }));
     };
     incrementFull = () => {
-        // onUpdate(data.index, { task: task, duetime : duetime, progress : progress + 10, index : index});
+        const { data, onUpdate, onRemove } = this.props;
+        onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : 100, index : this.state.index});
         this.setState(prevState => ({
             progress: 100
         }));
     };
 
     decrement = () =>{
+        const { data, onUpdate, onRemove } = this.props;
+        let newProgress = this.state.progress - 10 <= 0 ? 0 : this.state.progress - 10
+        onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : newProgress, index : this.state.index});
         this.setState(prevState => ({
-            progress: prevState.progress <= 10 ? 0 : prevState.progress - 10
+            progress: newProgress
         }));
     };
 
     decrementFull = () => {
+        const { data, onUpdate, onRemove } = this.props;
+        onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : 0, index : this.state.index});
         this.setState(prevState => ({
             progress: 0
         }));
@@ -94,8 +96,6 @@ class TodoInfo extends Component {
   render() {
     const { data, onUpdate, onRemove } = this.props;
     const { toggle, task, duetime, progress } = this.state;
-
-    console.log("!!!!!!!!!!!" +this.props.data.task);
 
     const TimeInput = (
         <div className="progressBtn">
