@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Coworker, Record } from '..';
+import { Coworker, Record, Event } from '..';
 import '../../mainscreen.css';
 import { Todo } from '../../routes';
 import Switch from '@material-ui/core/Switch';
@@ -67,7 +67,7 @@ class Mainscreen extends Component {
         );
         let eventScheduler = (
             <div>
-                <Todo currentTab="Event" data={this.state.data} noti_time ={this.state.noti_time}/>
+                <Event currentTab="Event" data={this.state.data}/>
             </div>
         );
         let recordScheduler = (
