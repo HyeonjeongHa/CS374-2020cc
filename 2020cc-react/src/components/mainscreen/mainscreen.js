@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Coworker, Record, Event } from '..';
+import { Coworker, Record, Event, EventInputForm } from '..';
 import '../../mainscreen.css';
 import { Todo } from '../../routes';
 import Switch from '@material-ui/core/Switch';
@@ -31,6 +31,12 @@ class Mainscreen extends Component {
 	handleRecord = () => {
 		this.setState({
 			currentTab : "Record"
+		})
+	}
+
+	handleEventInput = () => {
+		this.setState({
+			currentTab : "EventInput"
 		})
 	}
 
@@ -75,6 +81,11 @@ class Mainscreen extends Component {
                 <Record currentTab="Record" data={this.state.data}/>
             </div>
 		);
+		let eventInput = (
+			<div>
+				<EventInputForm currentTab="EventInput"/>
+			</div>
+		)
 		
 
 
@@ -86,6 +97,7 @@ class Mainscreen extends Component {
 	     		<div className={this.state.currentTab === "Todo" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Todo</div>
 	     		<div className={this.state.currentTab === "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
 	     		<div className={this.state.currentTab === "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div>
+	     		<div className={this.state.currentTab === "EventInput" ? 'clickedButton':'idleButton'}  onClick={this.handleEventInput}>EventInput</div>
 	     		<div className="alarm">
                     <div className="alarm_icon"></div>
 					<div className="text2">Every <input style={{width: "40px"}} type="text" value={this.state.noti_time} onChange={this.notiChange}  /> min</div>
@@ -101,7 +113,8 @@ class Mainscreen extends Component {
 	        </div>
 	     	<div className="content">
 				{this.state.currentTab === "Todo" ? dailyScheduler : 
-				(this.state.currentTab === "Event" ? eventScheduler : recordScheduler)}
+				(this.state.currentTab === "Event" ? eventScheduler : 
+				(this.state.currentTab === "EventInput" ? eventInput : recordScheduler))}
 	        </div>
 	        <Coworker handler={this.props.coworkerHandler} data={this.state.data}/>
    		</div>
