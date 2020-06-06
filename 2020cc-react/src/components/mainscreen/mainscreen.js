@@ -7,20 +7,13 @@ import Switch from '@material-ui/core/Switch';
 class Mainscreen extends Component {
 	state = {
 		data : this.props.data,
-		currentTab : "Daily"
+		currentTab : "Todo"
     }
 
 	handleDaily = () => {
 		this.setState({
-			currentTab : "Daily"
+			currentTab : "Todo"
 		})
-	}
-
-
-	handleWeekly = () => {
-		this.setState({
-			currentTab : "Weekly"
-		})	
 	}
 
 	handleEvent = () => {
@@ -55,12 +48,7 @@ class Mainscreen extends Component {
 
 		var dailyScheduler = (
             <div>
-                <Todo currentTab="Daily" data={this.state.data}/>
-            </div>
-        );
-        let weeklyScheduler = (
-            <div>
-                <Todo currentTab="Weekly" data={this.state.data}/>
+                <Todo currentTab="Todo" data={this.state.data}/>
             </div>
         );
         let eventScheduler = (
@@ -79,8 +67,7 @@ class Mainscreen extends Component {
     		<div>
 	     	<div className="sidebar">
 	     		<div className="logo"></div>
-	     		<div className={this.state.currentTab === "Daily" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Daily</div>
-	     		<div className={this.state.currentTab === "Weekly" ? 'clickedButton':'idleButton'}  onClick={this.handleWeekly}>Weekly</div>
+	     		<div className={this.state.currentTab === "Todo" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Todo</div>
 	     		<div className={this.state.currentTab === "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
 	     		<div className={this.state.currentTab === "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div>
 	     		<div className="alarm">
@@ -97,9 +84,8 @@ class Mainscreen extends Component {
 	        </div>
 	        </div>
 	     	<div className="content">
-				{this.state.currentTab === "Daily" ? dailyScheduler : 
-				(this.state.currentTab === "Weekly" ? weeklyScheduler :
-				(this.state.currentTab === "Event" ? eventScheduler : recordScheduler))}
+				{this.state.currentTab === "Todo" ? dailyScheduler : 
+				(this.state.currentTab === "Event" ? eventScheduler : recordScheduler)}
 	        </div>
 	        <Coworker handler={this.props.coworkerHandler} data={this.state.data}/>
    		</div>
