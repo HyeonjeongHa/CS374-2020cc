@@ -29,8 +29,8 @@ class TodoInfo extends Component {
     };
 
     handleToggleChange = () => {
-        console.log("handle toggle change\n");
-        console.log(this.state.toggle);
+        //console.log("handle toggle change\n");
+        //console.log(this.state.toggle);
         const { toggle, task, duetime, progress, index, TodoList } = this.state;
         // console.log('[todoinfo.js]', task, duetime, progress, index);
         const { data, onUpdate } = this.props;
@@ -45,8 +45,8 @@ class TodoInfo extends Component {
             });
         } else {
         // true -> false
-            console.log(this.state.index);
-            console.log(this.props.data.index);
+            //console.log(this.state.index);
+            //console.log(this.props.data.index);
             onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index});
             this.setState({
                 toggle: false,
@@ -57,7 +57,7 @@ class TodoInfo extends Component {
 
     handleRemove = () => {
         const { data, onRemove } = this.props;
-        console.log(data);
+        //console.log(data);
         onRemove(data.index);
         this.setState({
             toggle: false,
@@ -99,14 +99,14 @@ class TodoInfo extends Component {
         </Fragment>
     );
 
-    console.log(this.props.data.duetime);
+    //console.log(this.props.data.duetime);
     const { data, onUpdate, onRemove } = this.props;
     const { toggle, task, duetime, progress } = this.state;
-    console.log(task);
-    console.log(progress);
-    console.log(duetime);
-    console.log(data.task);
-    console.log(data.progress);
+    //console.log(task);
+    //console.log(progress);
+    //console.log(duetime);
+    //console.log(data.task);
+    //console.log(data.progress);
     return (
         <div className = "todo">
             <div class = "vertical_center">

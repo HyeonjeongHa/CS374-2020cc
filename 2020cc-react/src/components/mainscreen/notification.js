@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import '../../mainscreen.css';
-import WebNotification from 'react-web-notifications'
+import WebNotification from 'react-web-notification'
 
 class Notification extends Component {
     constructor(props) {
@@ -20,7 +20,7 @@ class Notification extends Component {
         return(
             <WebNotification
                 title= {title}
-                timeout={3000}
+                timeout={5000 }
                 onClickFn={ () => window.open(this.state.noti_page, '_blank') }
             />
         )
