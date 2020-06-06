@@ -263,8 +263,8 @@ class Todo extends Component{
                         <Person isMine={true} name={this.state.name} position="Developer" />
                     </div>
                 </div>
-                <div className = "button_ment" onClick={this.handleAdd}>
-                    <button className = "add_button" id="add" onClick={this.handleCreate.bind(this)}>
+                <div className = "button_ment" onClick={this.handleCreate.bind(this)}>
+                    <button className = "add_button" id="add" >
                         <Icon name="add" />
                     </button>&nbsp;&nbsp;&nbsp;
                     <div className="add_task">Add task</div>

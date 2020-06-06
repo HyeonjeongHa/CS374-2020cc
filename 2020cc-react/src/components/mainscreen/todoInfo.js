@@ -1,8 +1,11 @@
 import React, { Component , Fragment} from 'react';
 import { Progress, Segment, Button  } from 'semantic-ui-react';
 import { IoIosCloud, IoIosCloseCircle } from "react-icons/io"; 
-// import '../../input.css';
-import '../../login.css';
+import { RiDeleteBin6Line } from "react-icons/ri"; 
+import { FiEdit, FiSave } from "react-icons/fi"; 
+import { TiPlus, TiMinus } from "react-icons/ti"; 
+
+import '../../todo.css';
 import 'semantic-ui-css/semantic.min.css';
 import * as firebase from "firebase/app";
 import "firebase/database";
@@ -81,63 +84,62 @@ class TodoInfo extends Component {
     }
 
   render() {
-    const TimeInput2 = (
-        <TimePicker
-            onChange={this.timeChange}
-            value={this.state.duetime}
-            name="duetime"
-          />
+    const { data, onUpdate, onRemove } = this.props;
+    const { toggle, task, duetime, progress } = this.state;
+
+    const TimeInput = (
+        <div className="progressBtn">
+            <TimePicker
+                onChange={this.timeChange}
+                value={this.state.duetime}
+                name="duetime"
+              />
+        </div>
+    );
+
+    const progressInput = (
+        <div className="progressBtn">
+            <TiMinus size="32" onClick={this.decrement}/>  
+            {this.state.toggle ? (
+                <input className="new_login-username2" id="progressInput" value={this.state.progress} name="progress" placeholder="0" onChange={this.handleChange} type='text'></input>
+            ) : <span className="new_login-username2">{this.state.progress}</span>}
+            <span class="for_span">%</span>
+            <TiPlus size="32" onClick={this.increment}/>  
+        </div>
     );
 
     const ProgressExampleAttached = (
-        <Fragment>
-            {/* // <Segment> */}
-                <form className="new_signin">
+        <Fragment >
+            <div>
+                <form className="mainBox">
                     {this.state.toggle ? (
-                        <input className="new_login-username" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
-                    ) : <span>{this.props.data.task}</span>}
-                    <div className = "time_save">
-                    <Button onClick={this.decrement}>-</Button>
-                    {/* <input className="new_login-username2" id="progressInput" value={this.state.progress} name="progress" placeholder="0" onChange={this.handleChange} type='text'></input> */}
-                    {this.state.toggle ? (
-                        <input className="new_login-username2" id="progressInput" value={this.state.progress} name="progress" placeholder="0" onChange={this.handleChange} type='text'></input>
-                    ) : <span>{this.state.progress}</span>}
-                    <Button onClick={this.increment}>+</Button>{" "}
-                    <span class="for_span">%</span>
+                        <input className="todo-task-input" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
+                    ) : <span className="todo-task-input">{this.props.data.task}</span>}
+                    <div className = "rightBox">
+                        {TimeInput}
+                        {progressInput}
+                    </div>
+                    <div className="btns">
+                        {toggle ? <FiSave size="32" onClick={this.handleToggleChange}/> : <FiEdit size="32" onClick={this.handleToggleChange}/>}
+                        <RiDeleteBin6Line size="32" onClick={this.handleRemove}/>
                     </div>
                 </form>
                 
-                {/* <Progress  percent={this.state.progress} size='small' color='blue' progress indicating/> */}
-               
-                
-            {/* </Segment> */}
+            </div>
             
         </Fragment>
     );
 
-    // console.log(this.props.data.duetime);
-    const { data, onUpdate, onRemove } = this.props;
-    const { toggle, task, duetime, progress } = this.state;
-    // console.log(task);
-    // console.log(progress);
-    // console.log(duetime);
-    // console.log(data.task);
-    // console.log(data.progress);
     return (
         <div className = "todo">
-            <div class = "vertical_center">
-                <Segment>   
+            <Segment>   
                 {ProgressExampleAttached}
-                {TimeInput2}&nbsp;&nbsp;&nbsp;<button onClick={this.handleToggleChange}>{toggle ? '적용' : '수정'}</button>
-                {/* {TimeInput2}&nbsp;&nbsp;&nbsp;<button type="save" onClick={this.handleToggleChange}><IoIosCloud/></button>  */}
-                <button type="delete" onClick={this.handleRemove}><IoIosCloseCircle/></button>
-                {this.state.toggle ? (
-                        <Progress  percent={this.state.progress} size='small' color='blue' progress indicating/>
-                    ) : <span><Progress  percent={this.state.progress} size='small' color='blue' progress indicating/></span>}
-                {/* <Progress  percent={this.state.progress} size='small' color='blue' progress indicating/> */}
-                </Segment>
-            </div>
-                
+                <div className="deleteMarginBottom">
+                    {this.state.toggle ? (
+                            <Progress percent={this.state.progress} size='small' color='blue' progress indicating/>
+                        ) : <span><Progress percent={this.state.progress} size='small' color='blue' progress indicating/></span>}
+                </div>
+            </Segment>    
             
       </div>
     );

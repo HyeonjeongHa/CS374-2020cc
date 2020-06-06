@@ -130,7 +130,6 @@ body {
 .myProfile{
   display: flex;
   margin-left: auto;
-  margin-right: 150px;
 }
 
 .center {
@@ -192,4 +191,23 @@ body {
 
     margin-left: 10px;
     margin-top: 20px;
+}
+
+.deleteMarginBottom{
+    margin-bottom: -30px;
+}
+
+.textButton{
+    width: 20px;
+    height: 40px;
+    
+
+}
+
+.plus{
+    font-size: 16px;
+    justify-content: center;
+}
+.minus{
+    font-size: 20px;
 }

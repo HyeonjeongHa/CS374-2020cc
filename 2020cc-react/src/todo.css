@@ -1,0 +1,77 @@
+.todo-task-input {
+    font-weight: bold;
+    width: 500px;
+    height: 60px;
+    text-align: center;
+    vertical-align: center;
+
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background: #F6F7F9;
+    color: #34495e;
+    margin-top: -10px;
+    font-size: 20px;
+}
+
+.mainBox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.rightBox {
+    width: 200px;
+}
+
+.progressBtn{
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.new_login-username2 {
+    font-weight: bold;
+    text-align: right;
+    width: 50px;
+    /* margin: 0px 50px 0px 0px; */
+    float: right;
+    display: flex;
+    height: 35px;
+    padding: 6px 7px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background: #F6F7F9;
+    color: #34495e;
+    font-size: 16px;
+    margin-top: auto;
+    margin-bottom: auto;
+    justify-content: center;
+}
+
+.for_span {
+    margin-right: -12px;
+    margin-left: -12px;
+    height: 35px;
+    padding: 6px 15px;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btns{
+    width: 30px;
+}
+
+
+.todo {
+    width: fit-content;
+    margin-left : auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    padding-right: 100px;
+}
