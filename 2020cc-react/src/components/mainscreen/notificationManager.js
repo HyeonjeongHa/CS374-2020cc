@@ -56,7 +56,7 @@ class NotificationManager extends Component {
             //     return a.time > b.time ? -1 : 1;
             // })
 
-            console.log("!!", this.state.QuestionList);
+            // console.log("!!", this.state.QuestionList);
         })
 
 
@@ -65,7 +65,7 @@ class NotificationManager extends Component {
     }
 
     _periodicTimeUpdate(sec){
-        console.log("periodic call!");
+        // console.log("periodic call!");
         setInterval(() => {
             this.setState({
                 currentTime: moment().format("HH:mm")
@@ -79,7 +79,7 @@ class NotificationManager extends Component {
     _findAskIndex(){
         var result = -1;
         this.state.QuestionList.forEach(function(elem, index){
-            console.log(elem, index, moment().format("HH:MM"));
+            // console.log(elem, index, moment().format("HH:MM"));
             if(elem.time === moment().format("HH:mm"))
                 result = index;
         });
@@ -88,7 +88,7 @@ class NotificationManager extends Component {
     }
 	render() {
         let askIndex = this._findAskIndex();
-        console.log("askIndex", askIndex);
+        // console.log("askIndex", askIndex);
         const noti = (
             <div>
             { askIndex === -1 ? 

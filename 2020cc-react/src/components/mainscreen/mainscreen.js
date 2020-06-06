@@ -36,7 +36,7 @@ class Mainscreen extends Component {
 		console.log(value)
 		timerId = setInterval(() => {
             this.setState({
-                noti_flag : true,
+                noti_flag : false,
                 noti_title : "Mark the progress😀",
 				noti_page : 'http://localhost:3000/Odot/',
 				noti_time : value
@@ -123,7 +123,7 @@ class Mainscreen extends Component {
 
 		var dailyScheduler = (
             <div>
-                <Todo currentTab="Todo" data={this.state.data} noti_time ={this.state.noti_time}/>
+                <Todo currentTab="Todo" data={this.state.data} noti_time ={this.state.noti_time} isCoworker={this.props.isCoworker}/>
             </div>
         );
         let eventScheduler = (

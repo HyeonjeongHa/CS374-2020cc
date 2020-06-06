@@ -63,36 +63,44 @@ class TodoInfo extends Component {
     };
     
     increment = () => {
-        const { data, onUpdate, onRemove } = this.props;
-        let newProgress = this.state.progress >= 100 ? 100 : this.state.progress + 10;
-        onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : newProgress, index : this.state.index});
-        this.setState(prevState => ({
-            progress: newProgress
-        }));
+        if(!this.props.isCoworker){
+            const { data, onUpdate, onRemove } = this.props;
+            onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : newProgress, index : this.state.index});
+            let newProgress = this.state.progress >= 100 ? 100 : this.state.progress + 10;
+            this.setState(prevState => ({
+                progress: newProgress
+            }));
+        }
     };
     incrementFull = () => {
-        const { data, onUpdate, onRemove } = this.props;
-        onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : 100, index : this.state.index});
-        this.setState(prevState => ({
-            progress: 100
-        }));
+        if(!this.props.isCoworker){
+            const { data, onUpdate, onRemove } = this.props;
+            onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : 100, index : this.state.index});
+            this.setState(prevState => ({
+                progress: 100
+            }));
+        }
     };
 
     decrement = () =>{
-        const { data, onUpdate, onRemove } = this.props;
-        let newProgress = this.state.progress - 10 <= 0 ? 0 : this.state.progress - 10
-        onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : newProgress, index : this.state.index});
-        this.setState(prevState => ({
-            progress: newProgress
-        }));
+        if(!this.props.isCoworker){
+            const { data, onUpdate, onRemove } = this.props;
+            let newProgress = this.state.progress - 10 <= 0 ? 0 : this.state.progress - 10
+            onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : newProgress, index : this.state.index});
+            this.setState(prevState => ({
+                progress: newProgress
+            }));
+        }
     };
 
     decrementFull = () => {
-        const { data, onUpdate, onRemove } = this.props;
-        onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : 0, index : this.state.index});
-        this.setState(prevState => ({
-            progress: 0
-        }));
+        if(!this.props.isCoworker){
+            const { data, onUpdate, onRemove } = this.props;
+            onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : 0, index : this.state.index});
+            this.setState(prevState => ({
+                progress: 0
+            }));
+        }
     };
 
   render() {
@@ -134,8 +142,16 @@ class TodoInfo extends Component {
                         {progressInput}
                     </div>
                     <div className="btns">
-                        {toggle ? <FiSave size="32" onClick={this.handleToggleChange}/> : <FiEdit size="32" onClick={this.handleToggleChange}/>}
-                        <RiDeleteBin6Line size="32" onClick={this.handleRemove}/>
+                        {this.props.isCoworker 
+                            ? null 
+                            : (<div>
+
+                                {toggle 
+                                    ? <FiSave size="32" onClick={this.handleToggleChange}/> 
+                                    : <FiEdit size="32" onClick={this.handleToggleChange}/>}
+                                <RiDeleteBin6Line size="32" onClick={this.handleRemove}/>
+                                </div>)
+                        }
                     </div>
                 </form>
                 

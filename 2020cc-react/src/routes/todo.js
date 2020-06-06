@@ -249,10 +249,12 @@ class Todo extends Component{
                     </div>
                 </div>
                 <div>
-                    <TodoList data = {this.state.TodoList} onUpdate = {this.handleUpdate} onRemove = {this.handleRemove} />
+                    <TodoList data = {this.state.TodoList} onUpdate = {this.handleUpdate} onRemove = {this.handleRemove} isCoworker={this.props.isCoworker}/>
                 </div>
                 <div className="add_task">
-                    <GrAddCircle size="48" color= "blue" title="Click to add a new task" onClick={this.handleCreate.bind(this)}/>
+                    {this.props.isCoworker ? null :
+                    (<GrAddCircle size="48" color= "blue" title="Click to add a new task" onClick={this.handleCreate.bind(this)}/>)
+                    }
                 </div>
             </Fragment>
         )

@@ -19,7 +19,7 @@ class TodoList extends Component {
             <div>
                 <ul>
                 {data.map(data  => (
-                    <TodoInfo TodoList = {this.props.data} data={data} onUpdate={onUpdate} onRemove={onRemove} />
+                    <TodoInfo TodoList = {this.props.data} data={data} onUpdate={onUpdate} onRemove={onRemove} isCoworker={this.props.isCoworker}/>
                 ))}
                 </ul>
             </div>
