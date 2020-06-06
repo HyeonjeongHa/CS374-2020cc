@@ -59,7 +59,7 @@ class TodoInfo extends Component {
 
     handleRemove = () => {
         const { data, onRemove } = this.props;
-        console.log(data);
+        console.log(data.index);
         onRemove(data.index);
         this.setState({
             toggle: false,
@@ -86,7 +86,6 @@ class TodoInfo extends Component {
     };
 
     decrementFull = () => {
-        
         this.setState(prevState => ({
             progress: 0
         }));
@@ -95,6 +94,8 @@ class TodoInfo extends Component {
   render() {
     const { data, onUpdate, onRemove } = this.props;
     const { toggle, task, duetime, progress } = this.state;
+
+    console.log("!!!!!!!!!!!" +this.props.data.task);
 
     const TimeInput = (
         <div className="progressBtn">
@@ -113,7 +114,7 @@ class TodoInfo extends Component {
             <FiChevronLeft className="forArrow" size="30" onClick={this.decrement}/>  
             {this.state.toggle ? (
                 <input className="progress-percent-input" id="progressInput" value={this.state.progress} name="progress" placeholder="0" onChange={this.handleChange} type='text'></input>
-            ) : <span className="progress-percent-text">{this.state.progress + "%"}</span>}
+            ) : <span className="progress-percent-text">{this.props.data.progress + "%"}</span>}
             <FiChevronRight className="forArrow" size="30" onClick={this.increment}/>  
             <FiChevronsRight className="forArrow" size="32" onClick={this.incrementFull}/>  
         </div>
@@ -125,7 +126,7 @@ class TodoInfo extends Component {
                 <form className="mainBox">
                     {this.state.toggle ? (
                         <input autoFocus className="todo-task-input" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
-                    ) : <span className="todo-task-text" onClick={this.handleToggleChange}>{this.state.task === "" ? "Task" : this.state.task}</span>}
+                    ) : <span className="todo-task-text" onClick={this.handleToggleChange}>{this.props.data.task === "" ? "Task" : this.props.data.task}</span>}
                     <div className = "rightBox">
                         {TimeInput}
                         {progressInput}
@@ -150,6 +151,7 @@ class TodoInfo extends Component {
                             <Progress percent={this.state.progress} size='small' color='blue' progress indicating/>
                         ) : <span><Progress percent={this.state.progress} size='small' color='blue' progress indicating/></span>}
                 </div>
+                
             </Segment>    
             
       </div>
