@@ -194,8 +194,6 @@ body {
 .textButton{
     width: 20px;
     height: 40px;
-    
-
 }
 
 .plus{
@@ -210,7 +208,7 @@ body {
     align-items: center;
 
     width: 800px;
-    height: 60px;
+    height: 40px;
     padding: 10px;
 
     border-radius: 5px;
@@ -219,7 +217,7 @@ body {
     background: #F6F7F9;
     color: #34495e;
     font-size: 15px;
-
+    
     /* margin-left: 3px; */
     margin-top: 20px;
 }
@@ -227,5 +225,10 @@ body {
 #question {
     font-weight: bold;
     color: #34495e;
-    font-size: 20px;
+    font-size: 20px;  
+    position : relative;  
+}
+
+.segment ::-webkit-scrollbar {
+    display: none;
 }
