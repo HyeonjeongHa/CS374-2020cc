@@ -21,8 +21,6 @@ if(!firebase.apps.length) {
 
 const database = firebase.database();
 
-// var maxIndex = 0;
-
 class Todo extends Component{
 
     state = {
@@ -99,22 +97,24 @@ class Todo extends Component{
         })
     }
 
-    handleAdd = () => {
+    async handleCreate (data) {
+        const { TodoList } = this.state;
+        console.log(data);
         const teamName = this.state.teamName;
         const id = this.state.id;
         const today = moment().format("YYYYMMDD");
 
-        console.log("[todo.js] CLICK!!!!!!!!!!!!!!!!");
+        // console.log("[todo.js] CLICK!!!!!!!!!!!!!!!!");
         var idx;
-    
-        database.ref('teamName/'+ teamName + '/' + id).child(today).once('value', function(snapshot) {
-            console.log(snapshot.numChildren());
+        const t_this = this;
+        await database.ref('teamName/'+ teamName + '/' + id).child(today).once('value', function(snapshot) {
+            // console.log(snapshot.numChildren());
             if(snapshot.numChildren() > 0) {
-                console.log("child exist");
+                // console.log("child exist");
                 database.ref('teamName/'+ teamName + '/' + id).child(today).limitToLast(1).once("child_added", function(child) {
                         
-                    console.log("get index");
-                    console.log("limit to last child", child.numChildren(), child);
+                    // console.log("get index");
+                    // console.log("limit to last child", child.numChildren(), child);
                     var newPost = child.val();
                     idx = newPost.index;
                     console.log("index : ", idx);
@@ -126,9 +126,19 @@ class Todo extends Component{
                         progress : "0",
                         index : idx
                     });
+
+                    t_this.setState({
+                        TodoList: TodoList.concat({
+                            index: idx,
+                            duetime : "00:00",
+                            task : "",
+                            progress : "0",
+                            // ...data,
+                      }),
+                    });
                 });
             } else {
-                console.log('child is empty');
+                // console.log('child is empty');
                 idx = 0;
                 database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({ 
                     duetime : "00:00",
@@ -136,33 +146,97 @@ class Todo extends Component{
                     progress : "0",
                     index : 0
                 });
-            }
-        })
-        
-    
-        this.setState({
-            TodoList : update(
-                this.state.TodoList, {
-                    $push : [{
+                t_this.setState({
+                    TodoList: TodoList.concat({
+                        index: 0,
                         duetime : "00:00",
                         task : "",
                         progress : "0",
-                        index : idx
-                    }]
-                }),
-            flag: true,
-            
-        });
-        // this.setState({
-        //     TodoList : []
-        // })
-        // this._getDailyList();
+                        // ...data,
+                  }),
+                });
+            }
+        })
     };
 
-    handleChange = (event) => {
-        this.setState({ 
-            isAlarmOn: event.target.checked 
+    handleUpdate = (index, data) => {
+        console.log(index);
+        // console.log(data);
+        const { TodoList } = this.state;
+        const teamName = this.state.teamName;
+        const id = this.state.id;
+        const today = moment().format("YYYYMMDD");
+
+        // console.log(index);
+
+        database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
+            // var tempThis = this;
+            // console.log(tempThis.state.index);
+            snapshot.forEach(function(child) {
+                let res = child.val();
+                if (res.index === index) {
+                    console.log("[todoform.js] inside of the IF");
+                    let childKey = child.key;
+                    // console.log("tempThis.state.progress", tempThis.state.progress);
+                    database.ref('teamName/'+ teamName + '/' + id).child(today).child(childKey).update({
+                        duetime : data.duetime,
+                        task : data.task,
+                        progress : data.progress
+                    });
+                return;
+                }
+            })  
         });
+
+        this.setState({
+          TodoList: TodoList.map((TodoList) => {
+            console.log(TodoList);
+            if (TodoList.index === index) {
+            //   console.log(TodoList.index + ' / ' + index);
+            //   console.log("[todo.js update] ", TodoList);
+              TodoList.duetime = data.duetime;
+              TodoList.progress = data.progress;
+              TodoList.task = data.task;
+            //   console.log("update after : ", TodoList);
+              return {
+                index,
+                ...data,
+                TodoList
+                
+              };
+            }
+            return TodoList;
+          }),
+        });
+    };
+
+    handleRemove = (index) => {
+        const teamName = this.state.teamName;
+        const id = this.state.id;
+        const today = moment().format("YYYYMMDD");
+
+        // console.log('handle remove id :', index);
+        const { TodoList } = this.state;
+        const t_this = this;
+        database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
+            snapshot.forEach(function(child) {
+                let res = child.val();
+                console.log(index);
+                if (res.index === index) {
+                    let childKey = child.key;
+                    // console.log("[remove]", index);
+                    database.ref('teamName/'+ teamName + '/' + id + '/' + today).child(childKey).remove();
+                    // return;
+                    t_this.setState({
+                        TodoList: TodoList.filter((data) => data.index !== index),
+                    }); 
+                }
+            })  
+        });
+
+        // this.setState({
+        //     TodoList: TodoList.filter((data) => data.index !== index),
+        // });        
     };
 
 
@@ -180,6 +254,7 @@ class Todo extends Component{
             this._getDailyList();
         }
 
+        console.log(this.state.TodoList);
         return(
             <Fragment>
                 <div className="new_signin">
@@ -189,7 +264,7 @@ class Todo extends Component{
                     </div>
                 </div>
                 <div className = "button_ment" onClick={this.handleAdd}>
-                    <button className = "add_button" id="add">
+                    <button className = "add_button" id="add" onClick={this.handleCreate.bind(this)}>
                         <Icon name="add" />
                     </button>&nbsp;&nbsp;&nbsp;
                     <div className="add_task">Add task</div>
@@ -203,23 +278,7 @@ class Todo extends Component{
                     )}
                 </div>
                 <div>
-                    {this.state.flag ? 
-                        this.state.TodoList.map(data => (
-                            <TodoList 
-                                duetime={data.duetime}
-                                progress={data.progress}
-                                task={data.task}
-                                teamName={this.state.teamName}
-                                id={this.state.id}
-                                index={data.index}
-                                TodoList = {this.state.TodoList} />
-                            ))
-                    :(
-                        <span>
-                            Loading..
-                        </span> 
-                     )}
-                     
+                    <TodoList data = {this.state.TodoList} onUpdate = {this.handleUpdate} onRemove = {this.handleRemove} />
                 </div>
         
             </Fragment>
