@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Coworker, Record, Event, EventInputForm } from '..';
+import { Coworker, Record, Event, EventInputForm, NotificationManager } from '..';
 import '../../mainscreen.css';
 import { Todo } from '../../routes';
 import Switch from '@material-ui/core/Switch';
@@ -115,6 +115,7 @@ class Mainscreen extends Component {
 				{this.state.currentTab === "Record" ? recordScheduler : 
 				(this.state.currentTab === "Event" ? eventScheduler : 
 				(this.state.currentTab === "EventInput" ? eventInput : dailyScheduler))}
+				<NotificationManager data={this.state.data}/>
 	        </div>
 	        <Coworker handler={this.props.coworkerHandler} data={this.state.data}/>
    		</div>

@@ -10,8 +10,6 @@ class Notification extends Component {
             noti_page : this.props.noti_page
         }
     }
-    
-
 
     render(){
         console.log("여기다!!!!!");

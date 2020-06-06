@@ -50,15 +50,15 @@ class Event extends Component {
             // console.log("this outside of foreach", this);
             var tempThis = this;
             // var maxIndex = 0;
-            console.log("outside foreach, snapshot.val()", snapshot.val());
+            // console.log("outside foreach, snapshot.val()", snapshot.val());
             // this.setState({
             //     EventList: [snapshot.val()]
             // })
             snapshot.forEach(function(child) {
                 let res = child.val();
                 let childKey = child.key;
-                console.log("in foreach, res", res);
-                console.log("in foreach, childKey", childKey);
+                // console.log("in foreach, res", res);
+                // console.log("in foreach, childKey", childKey);
 
                 // console.log("in foreach, snapshot", snapshot);
                 tempThis.setState({
@@ -75,7 +75,7 @@ class Event extends Component {
             
         })
 
-        console.log("[event.js] database check, this.state.EventList", this.state.EventList);
+        // console.log("[event.js] database check, this.state.EventList", this.state.EventList);
 
 
     }

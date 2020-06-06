@@ -12,3 +12,4 @@ export {default as RecordList} from './mainscreen/recordList';
 export {default as EventList} from './mainscreen/eventList';
 export {default as EventInputForm} from './mainscreen/eventInputForm';
 export {default as Notification} from './mainscreen/notification';
+export {default as NotificationManager} from './mainscreen/notificationManager';
