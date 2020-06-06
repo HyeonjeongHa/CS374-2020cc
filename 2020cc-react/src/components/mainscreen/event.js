@@ -4,7 +4,7 @@ import { Segment } from 'semantic-ui-react';
 import * as firebase from "firebase/app";
 import "firebase/database";
 import firebaseConfig from "../../firebaseConfig";
-
+import '../../mainscreen.css';
 import moment from "moment";
 import update from 'react-addons-update';
 
@@ -80,6 +80,15 @@ class Event extends Component {
 
     }
 	render() {
+        const style = {
+            height : "300px",
+            overflowY : "scroll",
+        }
+
+        const quesitionStyle = {
+            position : "relative"
+        }
+
         const returnVal = (
             <Fragment>
                 <div className="new_signin">
@@ -91,13 +100,14 @@ class Event extends Component {
                 <div>
                     {this.state.flag ? 
                         this.state.EventList.map(data => (
-                            <Segment>
-                                <div id = "question">
-                                    {data.question}
+                            <Segment style = {style} >
+                                <div id = "question" style = {quesitionStyle}>
+                                    [ Question ]  &nbsp; {data.question}
                                 </div>
-                                {/* <div> */}
+                                <br/>
+                                <div>
                                 <EventList answer={data.answer}/>
-                                {/* </div> */}
+                                </div>
                             </Segment>
                             ))
                     :(

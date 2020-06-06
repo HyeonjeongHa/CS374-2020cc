@@ -22,7 +22,7 @@ const database = firebase.database();
 
 class EventInputForm extends Component {
   state = {
-    question : "who are you?",
+    question : "How old are you?",
     answer : "",
     open: false,
     data : {

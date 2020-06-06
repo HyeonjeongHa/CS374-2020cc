@@ -2,19 +2,67 @@ import React, { Component } from 'react';
 import { Coworker, Record, Event, EventInputForm, NotificationManager } from '..';
 import '../../mainscreen.css';
 import { Todo } from '../../routes';
-import Switch from '@material-ui/core/Switch';
+import Switch from 'react-switch';
+import { Notification } from '..';
+import Select from 'react-select'
+
+var timerId;
+
+const options = [
+	{ value: '1', label: '1h' },
+	{ value: '2', label: '2h' },
+	{ value: '3', label: '3h' },
+  ];
 
 class Mainscreen extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
 			data : this.props.data,
-			currentTab : this.props.currentTab,
-			noti_time : 1
+			currentTab : "Todo",
+			noti_time : 0.2,
+			noti_flag: false,
+			noti_title : "",
+			noti_page : "",
+			alarm_flag : true,		
+			noti_change : 0	,
+			selected : ""
 		}
-		this.notiChange = this.notiChange.bind(this) 
+		this.notiChange = this.notiChange.bind(this)
+		this.handleChange = this.handleChange.bind(this)
+	}
+	
+	handleTimer = (value) => {
+		console.log(value)
+		timerId = setInterval(() => {
+            this.setState({
+                noti_flag : true,
+                noti_title : "Mark the progress😀",
+				noti_page : 'http://localhost:3000/Odot/',
+				noti_time : value
+			})
+			this.setState({
+				noti_flag : false
+			})
+            }, 1000*60*value)
 	}
 
+	componentDidMount(){
+		this.handleTimer(this.state.noti_time);
+	}
+
+	shouldComponentUpdate(nextProps,nextState){
+
+		return true;
+	}
+
+	componentDidUpdate(prevProps,prevState){
+		if (prevState.noti_time !== this.state.noti_time){
+			this.setState({
+				noti_time : this.state.noti_time
+			})
+		}
+	}
 
 	handleDaily = () => {
 		this.setState({
@@ -46,16 +94,23 @@ class Mainscreen extends Component {
 		})
 	}
 
-	notiChange = (e) => {
-		
+	notiChange = (selectedOption) => {
+		clearInterval(timerId);
+		this.handleTimer(selectedOption.value);
 		this.setState({
-		  noti_time: e.target.value
+			noti_time: selectedOption.value,
+			selected : selectedOption
+		})
+	}
+
+	handleChange = (checked) => {
+		this.setState({
+			 alarm_flag : checked
 		});
 	}
 
-
 	render() {
-		// console.log(this.state.noti_time)
+		console.log("this is noti time" + this.state.noti_time)
 
 		if(this.props.data !== this.state.data){
 			this.setState({
@@ -96,17 +151,20 @@ class Mainscreen extends Component {
 	     		<div className="logo"></div>
 	     		<div className={this.state.currentTab === "Todo" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Todo</div>
 	     		<div className={this.state.currentTab === "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
-	     		<div className={this.state.currentTab === "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div>
+	     		{/* <div className={this.state.currentTab === "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div> */}
 	     		<div className={this.state.currentTab === "EventInput" ? 'clickedButton':'idleButton'}  onClick={this.handleEventInput}>EventInput</div>
 	     		<div className="alarm">
-                    <div className="alarm_icon"></div>
-					<div className="text2">Every <input style={{width: "40px"}} type="text" value={this.state.noti_time} onChange={this.notiChange}  /> min</div>
+					<div style = {{width:'150px'}}> <Select  placeholder = "Select Alarm time" value={this.state.selected} onChange={this.notiChange} options={options} /> </div>
                     <Switch
-                        checked={this.state.isAlarmOn}
-                        onChange={this.handleChange}
-                        name="alarmOn"
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
-                    />
+                        checked={this.state.alarm_flag}
+						onChange={this.handleChange}
+						uncheckedIcon = {false}
+						checkedIcon = {false}
+						offColor = '#888'
+						onColor = '#26CE7A'
+						height = {20}
+						width = {40}
+					/>
                 </div>
 	     		<div className="setting" onClick={this.handleSetting}></div>
 	        </div>
@@ -118,6 +176,13 @@ class Mainscreen extends Component {
 				<NotificationManager data={this.state.data}/>
 	        </div>
 	        <Coworker handler={this.props.coworkerHandler} data={this.state.data}/>
+			<div>
+                {this.state.noti_flag?
+                    <Notification noti_title={this.state.noti_title} noti_page={this.state.noti_page} noti_change={this.state.noti_change}/>
+                :(  
+                    null
+                )}
+            </div>
    		</div>
     );
   }

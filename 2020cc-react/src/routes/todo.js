@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import { Person, Notification } from '../components';
+import { Person} from '../components';
 import TodoList from '../components/mainscreen/todoList';
 import '../mainscreen.css';
 import '../login.css';
@@ -30,10 +30,7 @@ class Todo extends Component{
         TodoList: [], //initial list is empty
         id : this.props.data.id,
         flag : false,
-        isAlarmOn: true,
-        noti_flag: false,
-        noti_title : "",
-        noti_page : "",
+        //isAlarmOn: true
     };
     
     
@@ -42,22 +39,10 @@ class Todo extends Component{
         this._getDailyList();
         
         // 메인스크린에 mount아닌곳에 넣기
-        setInterval(() => {
-            this.setState({
-                noti_flag : false,
-                noti_title : "Mark the progress",
-                noti_page : "http://www.google.com/"
-            })
-            }, 1000*60*this.props.noti_time)
-            console.log("flag is true");
-        setInterval(() => {
-            this.setState({
-                noti_flag : false
-            })
-            }, 1000*60*(this.props.noti_time+0.2)) 
-            console.log("flag is false")    // 키는 시간보다 조금만 더 길게 설저해주면 됨.
+       
     }
 
+    //업데이트 되고 re-render됐을 때 부르는 함수 
     componentDidUpdate() {
         this.scrollToBottom();
     }
@@ -263,16 +248,14 @@ class Todo extends Component{
                         <Person isMine={true} name={this.state.name} position="Developer" />
                     </div>
                 </div>
-                {this.state.noti_flag ?
-                    <Notification noti_title={this.state.noti_title} noti_page={this.state.noti_page}/>
-                    
-                :(  
-                    null
-                )}
-                <TodoList data = {this.state.TodoList} onUpdate = {this.handleUpdate} onRemove = {this.handleRemove} />
-                <div className="add_task">
-                    <GrAddCircle size="48" color= "blue" title="Click to add a new task" onClick={this.handleCreate.bind(this)}/>
-                    
+                <div className = "button_ment" onClick={this.handleAdd}>
+                    <button className = "add_button" id="add" onClick={this.handleCreate.bind(this)}>
+                        <Icon name="add" />
+                    </button>&nbsp;&nbsp;&nbsp;
+                    <div className="add_task">Add task</div>
+                </div>
+                <div>
+                    <TodoList data = {this.state.TodoList} onUpdate = {this.handleUpdate} onRemove = {this.handleRemove} />
                 </div>
         
             </Fragment>
