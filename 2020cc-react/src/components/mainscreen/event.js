@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { Person , EventList} from '..';
+import { Person , EventList } from '..';
+import { Segment } from 'semantic-ui-react';
 import * as firebase from "firebase/app";
 import "firebase/database";
 import firebaseConfig from "../../firebaseConfig";
@@ -90,14 +91,14 @@ class Event extends Component {
                 <div>
                     {this.state.flag ? 
                         this.state.EventList.map(data => (
-                            <Fragment>
-                            <div>
-                                {data.question}
-                            </div>
-                            <div>
-                            <EventList answer={data.answer}/>
-                            </div>
-                            </Fragment>
+                            <Segment>
+                                <div id = "question">
+                                    {data.question}
+                                </div>
+                                {/* <div> */}
+                                <EventList answer={data.answer}/>
+                                {/* </div> */}
+                            </Segment>
                             ))
                     :(
                         <span>

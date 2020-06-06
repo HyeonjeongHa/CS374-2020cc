@@ -215,7 +215,7 @@ class Todo extends Component{
         const id = this.state.id;
         const today = moment().format("YYYYMMDD");
 
-        // console.log('handle remove id :', index);
+        console.log('handle remove id :', index);
         const { TodoList } = this.state;
         const t_this = this;
         database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
