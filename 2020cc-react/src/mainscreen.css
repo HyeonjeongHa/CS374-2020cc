@@ -172,7 +172,7 @@ body {
     font-weight: bold;
     align-items: center;
 
-    width: 400px;
+    width: 800px;
     height: 60px;
     padding: 10px;
 
@@ -203,5 +203,29 @@ body {
     justify-content: center;
 }
 .minus{
+    font-size: 20px;
+}
+.eventBox {
+    font-weight: bold;
+    align-items: center;
+
+    width: 800px;
+    height: 60px;
+    padding: 10px;
+
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background: #F6F7F9;
+    color: #34495e;
+    font-size: 15px;
+
+    /* margin-left: 3px; */
+    margin-top: 20px;
+}
+
+#question {
+    font-weight: bold;
+    color: #34495e;
     font-size: 20px;
 }

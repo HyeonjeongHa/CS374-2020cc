@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Coworker, Record } from '..';
+import { Coworker, Record, Event, EventInputForm } from '..';
 import '../../mainscreen.css';
 import { Todo } from '../../routes';
 import Switch from '@material-ui/core/Switch';
@@ -9,7 +9,7 @@ class Mainscreen extends Component {
 		super(props)
 		this.state = {
 			data : this.props.data,
-			currentTab : "Todo",
+			currentTab : this.props.currentTab,
 			noti_time : 1
 		}
 		this.notiChange = this.notiChange.bind(this) 
@@ -31,6 +31,12 @@ class Mainscreen extends Component {
 	handleRecord = () => {
 		this.setState({
 			currentTab : "Record"
+		})
+	}
+
+	handleEventInput = () => {
+		this.setState({
+			currentTab : "EventInput"
 		})
 	}
 
@@ -56,7 +62,7 @@ class Mainscreen extends Component {
     			data: this.props.data
     		})
 		}
-		
+		console.log("[mainscreen.js] this.props.currentTab", this.props.currentTab);
 		// console.log(this.props.data);
 		// console.log(this.state.data);
 
@@ -67,7 +73,7 @@ class Mainscreen extends Component {
         );
         let eventScheduler = (
             <div>
-                <Todo currentTab="Event" data={this.state.data} noti_time ={this.state.noti_time}/>
+                <Event currentTab="Event" data={this.state.data}/>
             </div>
         );
         let recordScheduler = (
@@ -75,6 +81,11 @@ class Mainscreen extends Component {
                 <Record currentTab="Record" data={this.state.data}/>
             </div>
 		);
+		let eventInput = (
+			<div>
+				<EventInputForm currentTab="EventInput" onhandleEvent = {this.handleEvent}/>
+			</div>
+		)
 		
 
 
@@ -86,6 +97,7 @@ class Mainscreen extends Component {
 	     		<div className={this.state.currentTab === "Todo" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Todo</div>
 	     		<div className={this.state.currentTab === "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
 	     		<div className={this.state.currentTab === "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div>
+	     		<div className={this.state.currentTab === "EventInput" ? 'clickedButton':'idleButton'}  onClick={this.handleEventInput}>EventInput</div>
 	     		<div className="alarm">
                     <div className="alarm_icon"></div>
 					<div className="text2">Every <input style={{width: "40px"}} type="text" value={this.state.noti_time} onChange={this.notiChange}  /> min</div>
@@ -100,8 +112,9 @@ class Mainscreen extends Component {
 	        </div>
 	        </div>
 	     	<div className="content">
-				{this.state.currentTab === "Todo" ? dailyScheduler : 
-				(this.state.currentTab === "Event" ? eventScheduler : recordScheduler)}
+				{this.state.currentTab === "Record" ? recordScheduler : 
+				(this.state.currentTab === "Event" ? eventScheduler : 
+				(this.state.currentTab === "EventInput" ? eventInput : dailyScheduler))}
 	        </div>
 	        <Coworker handler={this.props.coworkerHandler} data={this.state.data}/>
    		</div>
