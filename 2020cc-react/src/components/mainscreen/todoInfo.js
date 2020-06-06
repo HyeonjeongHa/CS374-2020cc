@@ -31,6 +31,7 @@ class TodoInfo extends Component {
     };
 
     handleToggleChange = () => {
+        if(!this.props.isCoworker){
         //console.log("handle toggle change\n");
         //console.log(this.state.toggle);
         const { toggle, task, duetime, progress, index, TodoList } = this.state;
@@ -50,7 +51,7 @@ class TodoInfo extends Component {
                 toggle: false,
             });
         }
-    
+    }
     };
 
     handleRemove = () => {
