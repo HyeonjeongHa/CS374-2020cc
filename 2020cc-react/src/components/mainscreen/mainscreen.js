@@ -67,12 +67,12 @@ class Mainscreen extends Component {
         );
         let eventScheduler = (
             <div>
-                <Scheduler currentTab="Event" data={this.state.data} noti_time ={this.state.noti_time}/>
+                <Todo currentTab="Event" data={this.state.data} noti_time ={this.state.noti_time}/>
             </div>
         );
         let recordScheduler = (
             <div>
-                <Scheduler currentTab="Record" data={this.state.data} noti_time ={this.state.noti_time}/>
+                <Record currentTab="Record" data={this.state.data}/>
             </div>
 		);
 		
