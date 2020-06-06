@@ -9,11 +9,17 @@ class Odot extends Component {
   }
 
   handleShowCoworker = (_data) => {
-  
-    this.setState({
-      coworkerData: _data,
-      isCoworker: true
-    })
+    if (_data.id == this.props.location.state.id) {
+      this.setState({
+        isCoworker : false
+      })
+    }
+    else {
+      this.setState({
+        coworkerData: _data,
+        isCoworker: true
+      })
+    }
   }
 
   render() {
