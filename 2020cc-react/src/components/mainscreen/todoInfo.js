@@ -2,8 +2,7 @@ import React, { Component , Fragment} from 'react';
 import { Progress, Segment, Button  } from 'semantic-ui-react';
 import { IoIosCloud, IoIosCloseCircle } from "react-icons/io"; 
 import { RiDeleteBin6Line } from "react-icons/ri"; 
-import { FiEdit, FiSave } from "react-icons/fi"; 
-import { TiPlus, TiMinus } from "react-icons/ti"; 
+import { FiEdit, FiSave, FiChevronLeft, FiChevronsLeft, FiChevronRight, FiChevronsRight } from "react-icons/fi"; 
 
 import '../../todo.css';
 import 'semantic-ui-css/semantic.min.css';
@@ -70,18 +69,28 @@ class TodoInfo extends Component {
     increment = () => {
         // onUpdate(data.index, { task: task, duetime : duetime, progress : progress + 10, index : index});
         this.setState(prevState => ({
-            progress: prevState.progress >= 100 ? 0 : prevState.progress + 10
+            progress: prevState.progress >= 100 ? 100 : prevState.progress + 10
         }));
-        console.log("+" + this.state.progress);
+    };
+    incrementFull = () => {
+        // onUpdate(data.index, { task: task, duetime : duetime, progress : progress + 10, index : index});
+        this.setState(prevState => ({
+            progress: 100
+        }));
     };
 
     decrement = () =>{
-        
         this.setState(prevState => ({
             progress: prevState.progress <= 10 ? 0 : prevState.progress - 10
         }));
-        console.log("-");
-    }
+    };
+
+    decrementFull = () => {
+        
+        this.setState(prevState => ({
+            progress: 0
+        }));
+    };
 
   render() {
     const { data, onUpdate, onRemove } = this.props;
@@ -97,14 +106,16 @@ class TodoInfo extends Component {
         </div>
     );
 
+
     const progressInput = (
         <div className="progressBtn">
-            <TiMinus size="32" onClick={this.decrement}/>  
+            <FiChevronsLeft className="forArrow" size="32" onClick={this.decrementFull}/>  
+            <FiChevronLeft className="forArrow" size="30" onClick={this.decrement}/>  
             {this.state.toggle ? (
-                <input className="new_login-username2" id="progressInput" value={this.state.progress} name="progress" placeholder="0" onChange={this.handleChange} type='text'></input>
-            ) : <span className="new_login-username2">{this.state.progress}</span>}
-            <span class="for_span">%</span>
-            <TiPlus size="32" onClick={this.increment}/>  
+                <input className="progress-percent-input" id="progressInput" value={this.state.progress} name="progress" placeholder="0" onChange={this.handleChange} type='text'></input>
+            ) : <span className="progress-percent-text">{this.state.progress + "%"}</span>}
+            <FiChevronRight className="forArrow" size="30" onClick={this.increment}/>  
+            <FiChevronsRight className="forArrow" size="32" onClick={this.incrementFull}/>  
         </div>
     );
 
@@ -113,8 +124,8 @@ class TodoInfo extends Component {
             <div>
                 <form className="mainBox">
                     {this.state.toggle ? (
-                        <input className="todo-task-input" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
-                    ) : <span className="todo-task-input">{this.props.data.task}</span>}
+                        <input autoFocus className="todo-task-input" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
+                    ) : <span className="todo-task-text" onClick={this.handleToggleChange}>{this.state.task === "" ? "Task" : this.state.task}</span>}
                     <div className = "rightBox">
                         {TimeInput}
                         {progressInput}

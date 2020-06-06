@@ -286,13 +286,6 @@ a {
 }
 
 
-
-.todo {
-    margin-left :-30px;
-    margin-right: 0px;
-    margin-bottom: 10px;
-}
-
 .new_signin {
     display: flex;
     align-items: center;

@@ -149,18 +149,6 @@ body {
   color: black;
 }
 
-.button_ment {
-    margin-left: 10px;
-    display: flex;
-    align-items: center;
-    border-radius: 5px;
-    border: 1px solid black;
-    width: 150px;
-    height: 30px;
-    background: #BDEDD2;
-    margin-top: -20px;
-}
-
 .add_button {
     border: none;
     background: #BDEDD2;
@@ -170,8 +158,12 @@ body {
 }
 
 .add_task {
-    color: black;
-    font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .recordBox {

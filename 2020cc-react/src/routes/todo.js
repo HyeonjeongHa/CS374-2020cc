@@ -14,6 +14,7 @@ import 'semantic-ui-css/semantic.min.css';
 import { animateScroll } from "react-scroll";
 import WebNotification from 'react-web-notification'
 
+import { GrAddCircle } from "react-icons/gr"; 
 
 if(!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -263,22 +264,16 @@ class Todo extends Component{
                         <Person isMine={true} name={this.state.name} position="Developer" />
                     </div>
                 </div>
-                <div className = "button_ment" onClick={this.handleCreate.bind(this)}>
-                    <button className = "add_button" id="add" >
-                        <Icon name="add" />
-                    </button>&nbsp;&nbsp;&nbsp;
-                    <div className="add_task">Add task</div>
-                </div>
-                <div>
-                    {this.state.noti_flag ?
-                        <Notification noti_title={this.state.noti_title} noti_page={this.state.noti_page}/>
-                        
-                    :(  
-                        null
-                    )}
-                </div>
-                <div>
-                    <TodoList data = {this.state.TodoList} onUpdate = {this.handleUpdate} onRemove = {this.handleRemove} />
+                {this.state.noti_flag ?
+                    <Notification noti_title={this.state.noti_title} noti_page={this.state.noti_page}/>
+                    
+                :(  
+                    null
+                )}
+                <TodoList data = {this.state.TodoList} onUpdate = {this.handleUpdate} onRemove = {this.handleRemove} />
+                <div className="add_task">
+                    <GrAddCircle size="48" color= "blue" title="Click to add a new task" onClick={this.handleCreate.bind(this)}/>
+                    
                 </div>
         
             </Fragment>
