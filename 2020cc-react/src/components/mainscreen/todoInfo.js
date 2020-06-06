@@ -17,7 +17,7 @@ class TodoInfo extends Component {
         toggle: false,
         task: this.props.data.task,
         duetime : this.props.data.duetime,
-        progress : this.props.data.progress,
+        progress : Number(this.props.data.progress),
         index : this.props.data.index,
         TodoList : this.props.TodoList
     };
@@ -64,6 +64,22 @@ class TodoInfo extends Component {
         });
     };
     
+    increment = () => {
+        // onUpdate(data.index, { task: task, duetime : duetime, progress : progress + 10, index : index});
+        this.setState(prevState => ({
+            progress: prevState.progress >= 100 ? 0 : prevState.progress + 10
+        }));
+        console.log("+" + this.state.progress);
+    };
+
+    decrement = () =>{
+        
+        this.setState(prevState => ({
+            progress: prevState.progress <= 10 ? 0 : prevState.progress - 10
+        }));
+        console.log("-");
+    }
+
   render() {
     const TimeInput2 = (
         <TimePicker
@@ -85,7 +101,7 @@ class TodoInfo extends Component {
                     {/* <input className="new_login-username2" id="progressInput" value={this.state.progress} name="progress" placeholder="0" onChange={this.handleChange} type='text'></input> */}
                     {this.state.toggle ? (
                         <input className="new_login-username2" id="progressInput" value={this.state.progress} name="progress" placeholder="0" onChange={this.handleChange} type='text'></input>
-                    ) : <span>{this.props.data.progress}</span>}
+                    ) : <span>{this.state.progress}</span>}
                     <Button onClick={this.increment}>+</Button>{" "}
                     <span class="for_span">%</span>
                     </div>
@@ -99,14 +115,14 @@ class TodoInfo extends Component {
         </Fragment>
     );
 
-    console.log(this.props.data.duetime);
+    // console.log(this.props.data.duetime);
     const { data, onUpdate, onRemove } = this.props;
     const { toggle, task, duetime, progress } = this.state;
-    console.log(task);
-    console.log(progress);
-    console.log(duetime);
-    console.log(data.task);
-    console.log(data.progress);
+    // console.log(task);
+    // console.log(progress);
+    // console.log(duetime);
+    // console.log(data.task);
+    // console.log(data.progress);
     return (
         <div className = "todo">
             <div class = "vertical_center">
@@ -117,7 +133,7 @@ class TodoInfo extends Component {
                 <button type="delete" onClick={this.handleRemove}><IoIosCloseCircle/></button>
                 {this.state.toggle ? (
                         <Progress  percent={this.state.progress} size='small' color='blue' progress indicating/>
-                    ) : <span><Progress  percent={this.props.data.progress} size='small' color='blue' progress indicating/></span>}
+                    ) : <span><Progress  percent={this.state.progress} size='small' color='blue' progress indicating/></span>}
                 {/* <Progress  percent={this.state.progress} size='small' color='blue' progress indicating/> */}
                 </Segment>
             </div>

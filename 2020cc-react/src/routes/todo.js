@@ -12,7 +12,7 @@ import update from 'react-addons-update';
 import { Icon } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import { animateScroll } from "react-scroll";
-import WebNotification from 'react-web-notifications'
+import WebNotification from 'react-web-notification'
 
 
 if(!firebase.apps.length) {
@@ -43,7 +43,7 @@ class Todo extends Component{
         // 메인스크린에 mount아닌곳에 넣기
         setInterval(() => {
             this.setState({
-                noti_flag : true,
+                noti_flag : false,
                 noti_title : "Mark the progress",
                 noti_page : "http://www.google.com/"
             })
@@ -242,9 +242,9 @@ class Todo extends Component{
 
     
     render(){
-        console.log(this.props.noti_time)
+        // console.log(this.props.noti_time)
         if(this.state.id !== this.props.data.id){
-            console.log("helo");
+            // console.log("helo");
             this.state.id = this.props.data.id;
             this.state.name = this.props.data.name;
             this.state.teamName = this.props.data.teamName;
@@ -254,7 +254,7 @@ class Todo extends Component{
             this._getDailyList();
         }
 
-        console.log(this.state.TodoList);
+        // console.log(this.state.TodoList);
         return(
             <Fragment>
                 <div className="new_signin">

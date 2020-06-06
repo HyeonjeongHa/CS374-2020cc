@@ -49,7 +49,7 @@ class Mainscreen extends Component {
 
 
 	render() {
-		console.log(this.state.noti_time)
+		// console.log(this.state.noti_time)
 
 		if(this.props.data !== this.state.data){
 			this.setState({

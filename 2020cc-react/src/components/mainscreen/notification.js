@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import '../../mainscreen.css';
-import WebNotification from 'react-web-notifications'
+import WebNotification from 'react-web-notification'
 
 class Notification extends Component {
     constructor(props) {
