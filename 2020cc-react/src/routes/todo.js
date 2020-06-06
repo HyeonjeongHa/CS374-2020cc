@@ -248,16 +248,12 @@ class Todo extends Component{
                         <Person isMine={true} name={this.state.name} position="Developer" />
                     </div>
                 </div>
-                <div className = "button_ment" onClick={this.handleAdd}>
-                    <button className = "add_button" id="add" onClick={this.handleCreate.bind(this)}>
-                        <Icon name="add" />
-                    </button>&nbsp;&nbsp;&nbsp;
-                    <div className="add_task">Add task</div>
-                </div>
                 <div>
                     <TodoList data = {this.state.TodoList} onUpdate = {this.handleUpdate} onRemove = {this.handleRemove} />
                 </div>
-        
+                <div className="add_task">
+                    <GrAddCircle size="48" color= "blue" title="Click to add a new task" onClick={this.handleCreate.bind(this)}/>
+                </div>
             </Fragment>
         )
     }

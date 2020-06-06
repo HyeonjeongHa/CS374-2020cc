@@ -144,10 +144,7 @@ class TodoInfo extends Component {
         </Fragment>
     );
 
-    //console.log(this.props.data.duetime);
-    const { data, onUpdate, onRemove } = this.props;
-    const { toggle, task, duetime, progress } = this.state;
-    //console.log(task);
+    //console.log(this.props
     //console.log(progress);
     //console.log(duetime);
     //console.log(data.task);
