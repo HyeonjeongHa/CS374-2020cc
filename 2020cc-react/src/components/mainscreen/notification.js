@@ -20,7 +20,7 @@ class Notification extends Component {
         return(
             <WebNotification
                 title= {title}
-                timeout={3000}
+                timeout={5000 }
                 onClickFn={ () => window.open(this.state.noti_page, '_blank') }
             />
         )
