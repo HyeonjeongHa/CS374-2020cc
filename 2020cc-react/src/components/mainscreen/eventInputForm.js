@@ -6,61 +6,103 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import * as firebase from "firebase/app";
+import "firebase/database";
+import firebaseConfig from "../../firebaseConfig";
+import moment from "moment";
+import {Mainscreen} from '..';
+import { createHashHistory } from 'history';
+export const history = createHashHistory();
 
+if(!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+
+const database = firebase.database();
 
 class EventInputForm extends Component {
   state = {
-    open: false
-    // setOpen: false
+    question : "who are you?",
+    answer : "",
+    open: false,
+    data : {
+      teamName : "2020cc",
+      id : "template97"
+    }
   };
   
   handleClickOpen = () => {
-   this.setState({
+    this.setState({
     open : true
-   })
+    })
   };
   
   handleClose = () => {
     this.setState({
       open :false
-     })
+    });
   };
 
-    render () {
-      // const [open, setOpen] = React.useState(false);
-        return (
-          <div>
-            <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-              Open form dialog
-            </Button>
-            <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-              <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  To subscribe to this website, please enter your email address here. We will send updates
-                  occasionally.
-                </DialogContentText>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="name"
-                  label="Email Address"
-                  type="email"
-                  fullWidth
-                />
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={this.handleClose} color="primary">
-                  Cancel
-                </Button>
-                <Button onClick={this.handleClose} color="primary">
-                  Subscribe
-                </Button>
-              </DialogActions>
-            </Dialog>
-          </div>
-        );
-    }
+  handleSubmit = () => {
+    console.log("[eventInputForm.js] handle submit function");
+    const teamName = this.state.data.teamName;
+    const id = this.state.data.id;
+    const today = moment().format("YYYYMMDD");
+
+    database.ref('Event/' + teamName + '/' + today).child(this.state.question).push().set({
+      id : id,
+      answer : this.state.answer
+    })
+    this.props.onhandleEvent();
+    this.setState({
+      open :false
+    });
+  };
+
+  handleChange = (e) => {
+    let nextState = {};
+    nextState[e.target.name] = e.target.value;
+    this.setState(nextState);
+    console.log(this.state.answer);
+  }
+
+  render () {
+      return (
+        <div>
+          <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+            Open form dialog
+          </Button>
+          <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+            <DialogTitle id="form-dialog-title">Pop-Up Event </DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                {this.state.question}
+              </DialogContentText>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="answer"
+                name = "answer"
+                type = "text"
+                label="Answer"
+                type="text"
+                onChange = {this.handleChange}
+                value = {this.state.answer}
+                fullWidth
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={this.handleSubmit} color="primary">
+                SUBMIT
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </div>
+      );
+  }
 }
 
 export default EventInputForm;

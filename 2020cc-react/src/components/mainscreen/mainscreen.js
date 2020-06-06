@@ -9,7 +9,7 @@ class Mainscreen extends Component {
 		super(props)
 		this.state = {
 			data : this.props.data,
-			currentTab : "Todo",
+			currentTab : this.props.currentTab,
 			noti_time : 1
 		}
 		this.notiChange = this.notiChange.bind(this) 
@@ -62,7 +62,7 @@ class Mainscreen extends Component {
     			data: this.props.data
     		})
 		}
-		
+		console.log("[mainscreen.js] this.props.currentTab", this.props.currentTab);
 		// console.log(this.props.data);
 		// console.log(this.state.data);
 
@@ -83,7 +83,7 @@ class Mainscreen extends Component {
 		);
 		let eventInput = (
 			<div>
-				<EventInputForm currentTab="EventInput"/>
+				<EventInputForm currentTab="EventInput" onhandleEvent = {this.handleEvent}/>
 			</div>
 		)
 		
@@ -112,9 +112,9 @@ class Mainscreen extends Component {
 	        </div>
 	        </div>
 	     	<div className="content">
-				{this.state.currentTab === "Todo" ? dailyScheduler : 
+				{this.state.currentTab === "Record" ? recordScheduler : 
 				(this.state.currentTab === "Event" ? eventScheduler : 
-				(this.state.currentTab === "EventInput" ? eventInput : recordScheduler))}
+				(this.state.currentTab === "EventInput" ? eventInput : dailyScheduler))}
 	        </div>
 	        <Coworker handler={this.props.coworkerHandler} data={this.state.data}/>
    		</div>

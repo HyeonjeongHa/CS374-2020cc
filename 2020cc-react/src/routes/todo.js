@@ -43,7 +43,7 @@ class Todo extends Component{
         // 메인스크린에 mount아닌곳에 넣기
         setInterval(() => {
             this.setState({
-                noti_flag : true,
+                noti_flag : false,
                 noti_title : "Mark the progress",
                 noti_page : "http://www.google.com/"
             })
