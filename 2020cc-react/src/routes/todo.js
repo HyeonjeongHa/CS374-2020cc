@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import { Person } from '../components';
+import { Person, Notification } from '../components';
 import TodoList from '../components/mainscreen/todoList';
 import '../mainscreen.css';
 import '../login.css';
@@ -12,6 +12,8 @@ import update from 'react-addons-update';
 import { Icon } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import { animateScroll } from "react-scroll";
+import WebNotification from 'react-web-notifications'
+
 
 if(!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -29,13 +31,34 @@ class Todo extends Component{
         TodoList: [], //initial list is empty
         id : this.props.data.id,
         flag : false,
-        isAlarmOn: true
+        isAlarmOn: true,
+        noti_flag: false,
+        noti_title : "",
+        noti_page : "",
     };
+    
     
     componentDidMount() {
         this.scrollToBottom();
         this._getDailyList();
+        
+        // 메인스크린에 mount아닌곳에 넣기
+        setInterval(() => {
+            this.setState({
+                noti_flag : true,
+                noti_title : "Mark the progress",
+                noti_page : "http://www.google.com/"
+            })
+            }, 1000*60*this.props.noti_time)
+            console.log("flag is true");
+        setInterval(() => {
+            this.setState({
+                noti_flag : false
+            })
+            }, 1000*60*(this.props.noti_time+0.2)) 
+            console.log("flag is false")    // 키는 시간보다 조금만 더 길게 설저해주면 됨.
     }
+
     componentDidUpdate() {
         this.scrollToBottom();
     }
@@ -67,7 +90,8 @@ class Todo extends Component{
 
                             }]
                         }),
-                    flag: true
+                    flag: true,
+                    
                 });
                 // maxIndex++;
                 console.log(tempThis.state.TodoList);
@@ -126,7 +150,8 @@ class Todo extends Component{
                         index : idx
                     }]
                 }),
-            flag: true
+            flag: true,
+            
         });
         // this.setState({
         //     TodoList : []
@@ -139,9 +164,11 @@ class Todo extends Component{
             isAlarmOn: event.target.checked 
         });
     };
+
+
     
     render(){
-        
+        console.log(this.props.noti_time)
         if(this.state.id !== this.props.data.id){
             console.log("helo");
             this.state.id = this.props.data.id;
@@ -166,6 +193,14 @@ class Todo extends Component{
                         <Icon name="add" />
                     </button>&nbsp;&nbsp;&nbsp;
                     <div className="add_task">Add task</div>
+                </div>
+                <div>
+                    {this.state.noti_flag ?
+                        <Notification noti_title={this.state.noti_title} noti_page={this.state.noti_page}/>
+                        
+                    :(  
+                        null
+                    )}
                 </div>
                 <div>
                     {this.state.flag ? 
