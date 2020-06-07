@@ -38,7 +38,7 @@
 }
 
 .rightBox {
-    width: 200px;
+    width: 180px;
 }
 
 .progressBtn{
@@ -73,7 +73,6 @@
     text-align: right;
     width: 50px;
     height: 35px;
-    padding: 6px 7px;
     border-radius: 5px;
     outline: none;
     border: none;
@@ -104,4 +103,11 @@
     margin-right: auto;
     margin-bottom: 10px;
     padding-right: 100px;
+}
+
+.timePickerStyle {
+    font-size: 100px;
+
+    text-align: center;
+    vertical-align: center;
 }

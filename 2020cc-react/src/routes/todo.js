@@ -6,6 +6,7 @@ import '../login.css';
 import * as firebase from "firebase/app";
 import "firebase/database";
 import firebaseConfig from "../firebaseConfig";
+import {FiSave} from "react-icons/fi"; 
 
 import moment from "moment";
 import update from 'react-addons-update';
@@ -30,7 +31,7 @@ class Todo extends Component{
         TodoList: [], //initial list is empty
         id : this.props.data.id,
         flag : false,
-        //isAlarmOn: true
+        isSaved : false
     };
     
     
@@ -148,9 +149,13 @@ class Todo extends Component{
                 });
             }
         })
+
+        this.setState({
+            isSaved: true
+        })
     };
 
-    handleUpdate = (index, data) => {
+    handleUpdate = (index, data, islikey=false) => {
         console.log(index);
         // console.log(data);
         const { TodoList } = this.state;
@@ -159,27 +164,28 @@ class Todo extends Component{
         const today = moment().format("YYYYMMDD");
 
         // console.log(index);
-
-
-        database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
-            // var tempThis = this;
-            // console.log(tempThis.state.index);
-            snapshot.forEach(function(child) {
-                let res = child.val();
-                if (res.index === index) {
-                    console.log("[todoform.js] inside of the IF");
-                    let childKey = child.key;
-                    // console.log("tempThis.state.progress", tempThis.state.progress);
-                    database.ref('teamName/'+ teamName + '/' + id).child(today).child(childKey).update({
-                        duetime : data.duetime,
-                        task : data.task,
-                        progress : data.progress,
-                        likey : data.likey
-                    });
-                return;
-                }
-            })  
-        });
+        if (!islikey) {
+            database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
+                // var tempThis = this;
+                // console.log(tempThis.state.index);
+                snapshot.forEach(function(child) {
+                    let res = child.val();
+                    if (res.index === index) {
+                        console.log("[todoform.js] inside of the IF");
+                        let childKey = child.key;
+                        // console.log("tempThis.state.progress", tempThis.state.progress);
+                        database.ref('teamName/'+ teamName + '/' + id).child(today).child(childKey).update({
+                            duetime : data.duetime,
+                            task : data.task,
+                            progress : data.progress,
+                            likey : data.likey
+                        });
+                    return;
+                    }
+                })  
+            });
+        }
+        
 
         this.setState({
           TodoList: TodoList.map((TodoList) => {
@@ -201,6 +207,7 @@ class Todo extends Component{
             }
             return TodoList;
           }),
+          isSaved: false
         });
     };
 
@@ -228,9 +235,47 @@ class Todo extends Component{
                 }
             })  
         });
+
+        this.setState({
+            isSaved: true
+        })        
     };
 
 
+    handleAllSave = () => {
+        // console.log(data);
+        const { TodoList } = this.state;
+        const teamName = this.state.teamName;
+        const id = this.state.id;
+        const today = moment().format("YYYYMMDD");
+
+        // console.log(index);
+
+        this.state.TodoList.forEach(function(data){
+            database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
+                var tempThis = this;
+                let index = data.index;
+                // console.log(tempThis.state.index);
+                snapshot.forEach(function(child) {
+                let res = child.val();
+                if (res.index === index) {
+                    let childKey = child.key;
+                    database.ref('teamName/'+ teamName + '/' + id).child(today).child(childKey).update({
+                        duetime : data.duetime,
+                        task : data.task,
+                        progress : data.progress,
+                        likey : data.likey,
+                    });
+                return;
+                }
+            })   
+            });     
+        })
+
+        this.setState({
+            isSaved: true
+        })        
+    }
     
     render(){
         // console.log(this.props.noti_time)
@@ -250,8 +295,10 @@ class Todo extends Component{
             <Fragment>
                 <div className="new_signin">
                     <div className="title">Todo</div>
+                    <FiSave title="Click to save all changes" size="32" onClick={this.handleAllSave}/>
+                    <div>{this.state.isSaved ? (" All changes are saved") : ("")}</div>
                     <div className="myProfile">
-                        <Person isMine={true} name={this.state.name} position="Developer" />
+                        <Person progress={80} handler={null} name={this.state.name}/>
                     </div>
                 </div>
                 <div>

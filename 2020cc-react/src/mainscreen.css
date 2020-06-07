@@ -123,7 +123,24 @@ body {
 .profile {
     display: flex;
     margin: 10px;
+    position: relative;
+    width: 120px;
+    left: 15px;
 }
+
+.circularProgress {
+    margin: 10px;
+    position: relative;
+    top: -140px;
+    left: -10px;
+    width: 150px;
+}
+
+.fitContent {
+    height: 150px;
+    margin-top: 20px;
+}
+
 
 .myProfile {
     display: flex;
@@ -227,3 +244,10 @@ body {
 .segment ::-webkit-scrollbar {
     display: none;
 }
+
+
+.hoverEffect {
+    box-shadow: 0 0 0 4px rgba(255,255,255,1);
+    transition: background 0.2s, color 0.2s;    
+}
+

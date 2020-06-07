@@ -81,19 +81,19 @@ class NotificationManager extends Component {
     }
 
     _findAskIndex(){
-        console.log("여기!!!!!!!!!!!!!")
+        // console.log("여기!!!!!!!!!!!!!")
         var result = -1;
         this.state.QuestionList.forEach(function(elem, index){
             // console.log(elem, index, moment().format("HH:MM"));
             if(elem.time === moment().format("HH:mm"))
                 result = index;
         });
-        console.log("여기!!!!!!!"+result)
+        // console.log("여기!!!!!!!"+result)
         return result;
         
     }
 	render() {
-        console.log(this.state.event_index+"으악!!!!!!!!!!!!")
+        // console.log(this.state.event_index+"으악!!!!!!!!!!!!")
         let i = this.state.event_index
         return (
             <div>    

@@ -15,9 +15,11 @@ import TimePicker from 'react-time-picker';
 import { Todo } from '../../routes';
 import update from 'react-addons-update';
 
+import { TextField } from '@material-ui/core';
+
 class TodoInfo extends Component {
     state = {
-        toggle: false,
+        toggle: false, //is changed?
         task: this.props.data.task,
         duetime : this.props.data.duetime,
         progress : Number(this.props.data.progress),
@@ -31,30 +33,45 @@ class TodoInfo extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
+        const { toggle, task, duetime, progress, index, TodoList } = this.state;
+        const { data, onUpdate } = this.props;
+
+        onUpdate(data.index, { task: task, duetime : duetime, progress : e.target.value, index : index});
+    };
+    handleChange2 = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value,
+        });
+        const { toggle, task, duetime, progress, index, TodoList } = this.state;
+        const { data, onUpdate } = this.props;
+
+        onUpdate(data.index, { task: e.target.value, duetime : duetime, progress : progress, index : index});
     };
 
+    timeChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value,
+        });
+        const { toggle, task, duetime, progress, index, TodoList } = this.state;
+        const { data, onUpdate } = this.props;
+
+        onUpdate(data.index, { task: task, duetime : e.target.value, progress : progress, index : index});
+    };
     handleToggleChange = () => {
         if(!this.props.isCoworker){
-        //console.log("handle toggle change\n");
-        //console.log(this.state.toggle);
-        const { toggle, task, duetime, progress, index, TodoList } = this.state;
-        // console.log('[todoinfo.js]', task, duetime, progress, index);
-        const { data, onUpdate } = this.props;
-        // false -> true
-        if (!toggle) {
-            this.setState({
-                toggle: true,
-            });
-        } else {
-        // true -> false
-            //console.log(this.state.index);
-            //console.log(this.props.data.index);
-            onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index});
-            this.setState({
-                toggle: false,
-            });
+            const { toggle, task, duetime, progress, index, TodoList } = this.state;
+            const { data, onUpdate } = this.props;
+            if (!toggle) {
+                this.setState({
+                    toggle: true,
+                });
+            } else {
+                onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index});
+                this.setState({
+                    toggle: false,
+                });
+            }
         }
-    }
     };
 
     handleRemove = () => {
@@ -96,7 +113,7 @@ class TodoInfo extends Component {
             }
         }
 
-        onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index, likey: this.state.likey });
+        onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index, likey: this.state.likey }, true);
         // this.setState({
         //     toggle: false,
         // });
@@ -143,28 +160,45 @@ class TodoInfo extends Component {
         }
     };
 
+
   render() {
     const { data, onUpdate, onRemove } = this.props;
-    const { toggle, task, duetime, progress } = this.state;
-
-    const TimeInput = (
+    const { toggle, task, duetime, progress, index, TodoList } = this.state;
+    
+    const TimeInput2 = (
         <div className="progressBtn">
             <TimePicker
+                className="timePickerStyle"
                 onChange={this.timeChange}
                 value={this.state.duetime}
                 name="duetime"
+                clockIcon={null}
+                clearIcon={null}
+                disableClock={true}
               />
         </div>
     );
-
+    const TimeInput = (
+        <div className="progressBtn">
+            <TextField
+                label="Duetime"
+                type="time"
+                value={this.state.duetime}
+                onChange={this.timeChange}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                name="duetime"
+                size="medium"
+            />
+      </div>
+    );
 
     const progressInput = (
         <div className="progressBtn">
             <FiChevronsLeft className="forArrow" size="32" onClick={this.decrementFull}/>  
             <FiChevronLeft className="forArrow" size="30" onClick={this.decrement}/>  
-            {this.state.toggle ? (
-                <input className="progress-percent-input" id="progressInput" value={this.state.progress} name="progress" placeholder="0" onChange={this.handleChange} type='text'></input>
-            ) : <span className="progress-percent-text">{this.props.data.progress + "%"}</span>}
+            <span label="Progress" className="progress-percent-text">{this.props.data.progress + "%"}</span>
             <FiChevronRight className="forArrow" size="30" onClick={this.increment}/>  
             <FiChevronsRight className="forArrow" size="32" onClick={this.incrementFull}/>  
         </div>
@@ -175,7 +209,7 @@ class TodoInfo extends Component {
             <div>
                 <form className="mainBox">
                     {this.state.toggle ? (
-                        <input autoFocus className="todo-task-input" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
+                        <input autoFocus className="todo-task-input" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange2} type='text'></input>
                     ) : <span className="todo-task-text" onClick={this.handleToggleChange}>{this.props.data.task === "" ? "Task" : this.props.data.task}</span>}
                     <div className = "rightBox">
                         {TimeInput}
@@ -189,9 +223,6 @@ class TodoInfo extends Component {
                                 ): <AiOutlineHeart size="32" onClick={this.handleLikey}/>}
                                 </div>) 
                             : (<div>
-                                {toggle 
-                                    ? <FiSave size="32" onClick={this.handleToggleChange}/> 
-                                    : <FiEdit size="32" onClick={this.handleToggleChange}/>}
                                 <RiDeleteBin6Line size="32" onClick={this.handleRemove}/>
                                 {this.state.heartFlag ? (
                                     <AiFillHeart size="32" onClick={this.handleLikey}/>
