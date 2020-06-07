@@ -81,7 +81,7 @@ class Event extends Component {
     }
 	render() {
         const style = {
-            height : "300px",
+            height : "250px",
             overflowY : "scroll",
         }
 

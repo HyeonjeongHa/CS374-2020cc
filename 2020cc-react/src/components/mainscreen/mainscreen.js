@@ -36,7 +36,7 @@ class Mainscreen extends Component {
 		console.log(value)
 		timerId = setInterval(() => {
             this.setState({
-                noti_flag : false,
+                noti_flag : true,
                 noti_title : "Mark the progress😀",
 				noti_page : 'http://localhost:3000/CS374-2020cc/EventInputForm/',
 				noti_time : value
