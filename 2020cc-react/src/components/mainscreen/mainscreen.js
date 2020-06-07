@@ -154,7 +154,7 @@ class Mainscreen extends Component {
 	     		{/* <div className={this.state.currentTab === "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div> */}
 	     		{/* <div className={this.state.currentTab === "EventInput" ? 'clickedButton':'idleButton'}  onClick={this.handleEventInput}>EventInput</div> */}
 	     		<div className="alarm">
-					<div style = {{width:'150px'}}> <Select  placeholder = "Select Alarm time" value={this.state.selected} onChange={this.notiChange} options={options} /> </div>
+					<div style = {{width:'150px', color:'black'}} > <Select  placeholder = "Select Alarm" value={this.state.selected} onChange={this.notiChange} options={options} /> </div>
                     <Switch
                         checked={this.state.alarm_flag}
 						onChange={this.handleChange}
@@ -177,7 +177,7 @@ class Mainscreen extends Component {
 	        </div>
 	        <Coworker handler={this.props.coworkerHandler} data={this.state.data}/>
 			<div>
-                {this.state.noti_flag?
+                {this.state.noti_flag&&this.state.alarm_flag ?
 					<Notification 
 						noti_title={this.state.noti_title} 
 						noti_page={"http://localhost:3000/CS374-2020cc/EventInputForm/"} 
