@@ -10,15 +10,23 @@ class Notification extends Component {
             noti_page : "http://localhost:3000/CS374-2020cc/EventInputForm/"
         }
     }
-
+    
     render(){
+        const options = {
+            body: "Go to WebPage",
+            tag : "http://localhost:3000/CS374-2020cc/EventInputForm/",
+            requireInteraction : true,
+            badge : ""
+        }
+
         console.log("여기다!!!!!");
         console.log(this.props.noti_title + "!!!!!!!!!!!!!!!!")
         return(
             <WebNotification
                 title= {this.props.noti_title}
                 timeout={5000 }
-                onClickFn={ () => window.open("http://localhost:3000/CS374-2020cc/EventInputForm/", '_blank') }
+                onClick={() => window.open("http://localhost:3000/CS374-2020cc/EventInputForm/", '_blank')}
+                options = {options}
             />
         )
     }

@@ -102,7 +102,7 @@ class NotificationManager extends Component {
             <WebNotification
             title= {this.state.QuestionList[i].question}
             timeout={5000 }
-            onClickFn={ () => window.open('http://localhost:3000/Odot/', '_blank') }
+            onClick={ () => window.open('http://localhost:3000/CS374-2020cc/EventInputForm/', '_blank') }
             />
            
 
