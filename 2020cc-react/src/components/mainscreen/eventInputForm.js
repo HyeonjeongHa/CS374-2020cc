@@ -66,6 +66,11 @@ class EventInputForm extends Component {
     console.log(this.state.answer);
   }
 
+  handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      this.handleSubmit();
+    }
+  }
   render () {
       return (
         <div>
@@ -88,6 +93,7 @@ class EventInputForm extends Component {
                 type="text"
                 onChange = {this.handleChange}
                 value = {this.state.answer}
+                onKeyPress={this.handleKeyDown}
                 fullWidth
               />
             </DialogContent>
