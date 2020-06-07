@@ -72,7 +72,7 @@ body {
 }
 
 .setting {
-    background-image: url('./setting_icon.png');
+    background-image: url('./settings.png');
     background-size: 40px 40px;
     width: 40px;
     height: 40px;
@@ -105,7 +105,7 @@ body {
 }
 
 .human_icon {
-    background-image: url('./human.png');
+    background-image: url('./person.png');
     background-size: 100px 100px;
     width: 100px;
     height: 100px;
@@ -126,6 +126,7 @@ body {
     position: relative;
     width: 120px;
     left: 15px;
+    margin-bottom: -6px;
 }
 
 .circularProgress {
