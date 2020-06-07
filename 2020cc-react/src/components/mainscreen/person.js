@@ -26,7 +26,7 @@ class Person extends Component {
 	    	<div className="profile">
                 <div className="center">
                 	<div className="human_icon"></div>
-                    <div className="text2">{this.state.name}</div>
+                    <div className="text2">{this.props.name}</div>
                     <div className="text2">{this.state.position}</div>
                 </div>
             </div>
@@ -37,7 +37,7 @@ class Person extends Component {
                 <div className="profile">
                     <div className="center">
                         <div className="human_icon"></div>
-                        <div className="text2">{this.state.name}</div>
+                        <div className="text2">{this.props.name}</div>
                     </div>
                 </div>
                 <div className="circularProgress">
