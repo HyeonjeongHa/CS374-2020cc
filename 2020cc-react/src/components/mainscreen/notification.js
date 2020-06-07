@@ -14,13 +14,12 @@ class Notification extends Component {
     
     handleNoti = () => {
         
-        window.open("http://localhost:3000/CS374-2020cc/EventInputForm/?name=template97", '_blank', "", false);
+        window.open("http://localhost:3000/CS374-2020cc/EventInputForm/?name=template97", '__self', "", false);
     }
     render(){
         const options = {
             body: "Go to WebPage",
             tag : "http://localhost:3000/CS374-2020cc/EventInputForm/",
-            requireInteraction : true,
             badge : ""
         }
         localStorage.setItem('name', this.props.data.name);
