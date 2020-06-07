@@ -29,6 +29,18 @@ class TodoInfo extends Component {
         heartFlag : false
     };
 
+    componentDidMount() {
+        this._setHeartFlag();
+    }
+
+    _setHeartFlag() {
+        if (this.props.data.likey[this.props.clickID] === "1") {
+            this.setState({
+                heartFlag: true
+            })
+        }
+    }
+
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value,

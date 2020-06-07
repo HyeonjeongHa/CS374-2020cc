@@ -14,7 +14,18 @@ class TodoList extends Component {
 
     render() {
         const { data, onUpdate, onRemove, onLikey } = this.props;
-        console.log(data);
+        console.log("[todoList.js] render() data!!!!!!!", data);
+        // var heartFlag;
+        // if (data.likey["null"] == "1") {
+        //     heartFlag = false;
+        // } else {
+        //     if (data.likey[this.props.clickID] == "1") {
+        //         heartFlag = true;
+        //     }
+        //     else {
+        //         heartFlag = false;
+        //     }
+        // }
         return (
             <div>
                 <ul>
