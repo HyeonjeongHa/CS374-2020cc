@@ -24,18 +24,13 @@ class EventInputForm extends Component {
   state = {
     question : "How old are you?",
     answer : "",
-    open: false,
+    open: true,
     data : {
       teamName : "2020cc",
       id : "template97"
     }
   };
-  
-  handleClickOpen = () => {
-    this.setState({
-    open : true
-    })
-  };
+
   
   handleClose = () => {
     this.setState({
@@ -69,9 +64,7 @@ class EventInputForm extends Component {
   render () {
       return (
         <div>
-          <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-            Open form dialog
-          </Button>
+          
           <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">Pop-Up Event </DialogTitle>
             <DialogContent>
