@@ -92,7 +92,7 @@ class TodoInfo extends Component {
         console.log("[todoInfo.js] data", data);
 
         let clickID = this.props.clickID;
-        let tempLikey = this.state.likey;
+        let tempLikey = this.state.likey; 
         if (tempLikey["null"] === "1") {
             tempLikey["null"] = "0";
             tempLikey[clickID] = "1";

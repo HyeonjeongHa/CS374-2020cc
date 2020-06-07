@@ -164,7 +164,7 @@ class Todo extends Component{
         const today = moment().format("YYYYMMDD");
 
         // console.log(index);
-        if (!islikey) {
+        if (islikey) {
             database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
                 // var tempThis = this;
                 // console.log(tempThis.state.index);
@@ -250,7 +250,7 @@ class Todo extends Component{
         const today = moment().format("YYYYMMDD");
 
         // console.log(index);
-
+    
         this.state.TodoList.forEach(function(data){
             database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
                 var tempThis = this;
@@ -263,8 +263,7 @@ class Todo extends Component{
                     database.ref('teamName/'+ teamName + '/' + id).child(today).child(childKey).update({
                         duetime : data.duetime,
                         task : data.task,
-                        progress : data.progress,
-                        likey : data.likey,
+                        progress : data.progress
                     });
                 return;
                 }
