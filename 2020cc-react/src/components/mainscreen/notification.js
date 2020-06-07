@@ -13,11 +13,10 @@ class Notification extends Component {
 
     render(){
         console.log("여기다!!!!!");
-        const title = this.state.noti_title;
-        console.log(title);
+        console.log(this.props.noti_title + "!!!!!!!!!!!!!!!!")
         return(
             <WebNotification
-                title= {title}
+                title= {this.props.noti_title}
                 timeout={5000 }
                 onClickFn={ () => window.open(this.state.noti_page, '_blank') }
             />
