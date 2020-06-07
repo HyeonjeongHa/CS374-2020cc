@@ -265,7 +265,7 @@ class Todo extends Component{
                 <div className="new_signin">
                     <div className="title">Todo</div>
                     <FiSave title="Click to save all changes" size="32" onClick={this.handleAllSave}/>
-                    <div>{this.state.isSaved ? ("All changes are saved") : ("")}</div>
+                    <div>{this.state.isSaved ? (" All changes are saved") : ("")}</div>
                     <div className="myProfile">
                         <Person isMine={true} name={this.state.name} position="Developer" />
                     </div>

@@ -14,6 +14,8 @@ import TimePicker from 'react-time-picker';
 import { Todo } from '../../routes';
 import update from 'react-addons-update';
 
+import { TextField } from '@material-ui/core';
+
 class TodoInfo extends Component {
     state = {
         toggle: false, //is changed?
@@ -43,6 +45,15 @@ class TodoInfo extends Component {
         onUpdate(data.index, { task: e.target.value, duetime : duetime, progress : progress, index : index});
     };
 
+    timeChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value,
+        });
+        const { toggle, task, duetime, progress, index, TodoList } = this.state;
+        const { data, onUpdate } = this.props;
+
+        onUpdate(data.index, { task: task, duetime : e.target.value, progress : progress, index : index});
+    };
     handleToggleChange = () => {
         if(!this.props.isCoworker){
             const { toggle, task, duetime, progress, index, TodoList } = this.state;
@@ -110,30 +121,45 @@ class TodoInfo extends Component {
         }
     };
 
+
   render() {
     const { data, onUpdate, onRemove } = this.props;
     const { toggle, task, duetime, progress, index, TodoList } = this.state;
     
-    // onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index});
-
-    const TimeInput = (
+    const TimeInput2 = (
         <div className="progressBtn">
             <TimePicker
+                className="timePickerStyle"
                 onChange={this.timeChange}
                 value={this.state.duetime}
                 name="duetime"
+                clockIcon={null}
+                clearIcon={null}
+                disableClock={true}
               />
         </div>
     );
-
+    const TimeInput = (
+        <div className="progressBtn">
+            <TextField
+                label="Duetime"
+                type="time"
+                value={this.state.duetime}
+                onChange={this.timeChange}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                name="duetime"
+                size="medium"
+            />
+      </div>
+    );
 
     const progressInput = (
         <div className="progressBtn">
             <FiChevronsLeft className="forArrow" size="32" onClick={this.decrementFull}/>  
             <FiChevronLeft className="forArrow" size="30" onClick={this.decrement}/>  
-            {this.state.toggle ? (
-                <input className="progress-percent-input" id="progressInput" value={this.state.progress} name="progress" placeholder="0" onChange={this.handleChange} type='text'></input>
-            ) : <span className="progress-percent-text">{this.props.data.progress + "%"}</span>}
+            <span label="Progress" className="progress-percent-text">{this.props.data.progress + "%"}</span>
             <FiChevronRight className="forArrow" size="30" onClick={this.increment}/>  
             <FiChevronsRight className="forArrow" size="32" onClick={this.incrementFull}/>  
         </div>
