@@ -36,9 +36,9 @@ class Mainscreen extends Component {
 		console.log(value)
 		timerId = setInterval(() => {
             this.setState({
-                noti_flag : false,
+                noti_flag : true,
                 noti_title : "Mark the progress😀",
-				noti_page : 'http://localhost:3000/Odot/',
+				noti_page : 'http://localhost:3000/CS374-2020cc/EventInputForm/',
 				noti_time : value
 			})
 			this.setState({
@@ -178,7 +178,7 @@ class Mainscreen extends Component {
 	        <Coworker handler={this.props.coworkerHandler} data={this.state.data}/>
 			<div>
                 {this.state.noti_flag?
-                    <Notification noti_title={this.state.noti_title} noti_page={this.state.noti_page} noti_change={this.state.noti_change}/>
+                    <Notification noti_title={this.state.noti_title} noti_page={"http://localhost:3000/CS374-2020cc/EventInputForm/"} noti_change={this.state.noti_change}/>
                 :(  
                     null
                 )}

@@ -7,7 +7,7 @@ class Notification extends Component {
         super(props);
         this.state = {
             noti_title: this.props.noti_title,
-            noti_page : this.props.noti_page
+            noti_page : "http://localhost:3000/CS374-2020cc/EventInputForm/"
         }
     }
 
@@ -18,7 +18,7 @@ class Notification extends Component {
             <WebNotification
                 title= {this.props.noti_title}
                 timeout={5000 }
-                onClickFn={ () => window.open(this.state.noti_page, '_blank') }
+                onClickFn={ () => window.open("http://localhost:3000/CS374-2020cc/EventInputForm/", '_blank') }
             />
         )
     }
