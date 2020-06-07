@@ -36,7 +36,7 @@ class Mainscreen extends Component {
 		console.log(value)
 		timerId = setInterval(() => {
             this.setState({
-                noti_flag : false,
+                noti_flag : true,
                 noti_title : "Mark the progress😀",
 				noti_page : 'http://localhost:3000/CS374-2020cc/EventInputForm/',
 				noti_time : value
@@ -152,7 +152,7 @@ class Mainscreen extends Component {
 	     		<div className={this.state.currentTab === "Todo" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Todo</div>
 	     		<div className={this.state.currentTab === "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
 	     		{/* <div className={this.state.currentTab === "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div> */}
-	     		<div className={this.state.currentTab === "EventInput" ? 'clickedButton':'idleButton'}  onClick={this.handleEventInput}>EventInput</div>
+	     		{/* <div className={this.state.currentTab === "EventInput" ? 'clickedButton':'idleButton'}  onClick={this.handleEventInput}>EventInput</div> */}
 	     		<div className="alarm">
 					<div style = {{width:'150px'}}> <Select  placeholder = "Select Alarm time" value={this.state.selected} onChange={this.notiChange} options={options} /> </div>
                     <Switch
@@ -171,8 +171,8 @@ class Mainscreen extends Component {
 	        </div>
 	     	<div className="content">
 				{this.state.currentTab === "Record" ? recordScheduler : 
-				(this.state.currentTab === "Event" ? eventScheduler : 
-				(this.state.currentTab === "EventInput" ? eventInput : dailyScheduler))}
+				(this.state.currentTab === "Event" ? eventScheduler : dailyScheduler)}
+				{/* (this.state.currentTab === "EventInput" ? eventInput : dailyScheduler))} */}
 				<NotificationManager data={this.state.data}/>
 	        </div>
 	        <Coworker handler={this.props.coworkerHandler} data={this.state.data}/>
@@ -181,7 +181,8 @@ class Mainscreen extends Component {
 					<Notification 
 						noti_title={this.state.noti_title} 
 						noti_page={"http://localhost:3000/CS374-2020cc/EventInputForm/"} 
-						noti_change={this.state.noti_change}/>
+						noti_change={this.state.noti_change}
+						data = {this.props.data}/>
                 :(  
                     null
                 )}

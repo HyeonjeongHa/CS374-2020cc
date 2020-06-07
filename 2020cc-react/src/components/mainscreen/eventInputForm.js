@@ -11,6 +11,7 @@ import "firebase/database";
 import firebaseConfig from "../../firebaseConfig";
 import moment from "moment";
 import {Mainscreen} from '..';
+import {withRouter} from 'react-router-dom';
 import { createHashHistory } from 'history';
 export const history = createHashHistory();
 
@@ -28,7 +29,9 @@ class EventInputForm extends Component {
     data : {
       teamName : "2020cc",
       id : "template97"
-    }
+    },
+    name : "",
+    teamName : ""
   };
   
   
@@ -39,16 +42,38 @@ class EventInputForm extends Component {
   };
 
   handleSubmit = () => {
+    console.log(window.location.href);
+    console.log(localStorage.getItem('name'));
+    console.log(localStorage.getItem('id'));
+    console.log(localStorage.getItem('teamName'));
+
     console.log("[eventInputForm.js] handle submit function");
-    const teamName = this.state.data.teamName;
-    const id = this.state.data.id;
+    // const teamName = this.state.data.teamName;
+    // const id = this.state.data.id;
+    const name = localStorage.getItem('name');
+    const teamName = localStorage.getItem('teamName');
+    const id = localStorage.getItem('id');
     const today = moment().format("YYYYMMDD");
+
 
     database.ref('Event/' + teamName + '/' + today).child(this.state.question).push().set({
       id : id,
       answer : this.state.answer
     })
-    this.props.onhandleEvent();
+
+    console.log(this.state.name);
+    console.log(this.state.teamName);
+    console.log(this.props);
+    
+    this.props.history.replace({
+      pathname : "/CS374-2020cc/Odot",
+      state : {
+        name : name,
+        teamName : teamName,
+        id : id, 
+      }
+    });
+
     this.setState({
       open :false
     });

@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import './App.css';
 import {App2, Odot} from './routes';
-import {Menu, Event, EventInputForm} from './components';
+import {Menu, Event, EventInputForm, EventProcess} from './components';
 import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
 
 class App extends Component {
@@ -14,6 +14,7 @@ class App extends Component {
               <Route path="/CS374-2020cc/Odot" component= {Odot}/>
               <Route path="/CS374-2020cc/Event" component= {Event}/>
               <Route path="/CS374-2020cc/EventInputForm" component= {EventInputForm}/>
+              <Route path="/CS374-2020cc/EventProcess" component= {EventProcess}/>
               <Route path="/CS374-2020cc/Menu" component= {Menu}/>
             </Switch>
           </div>
