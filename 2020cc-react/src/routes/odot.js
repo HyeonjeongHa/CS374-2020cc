@@ -35,8 +35,8 @@ class Odot extends Component {
     return (
    		<div style={{backgroundColor:"white"}}>
         {this.state.isCoworker ?
-          <Mainscreen coworkerHandler={this.handleShowCoworker} data={this.state.coworkerData} isCoworker={this.state.isCoworker}/>
-          : <Mainscreen coworkerHandler={this.handleShowCoworker} data={this.props.location.state} isCoworker={this.state.isCoworker}/>
+          <Mainscreen coworkerHandler={this.handleShowCoworker} loginID={this.props.location.state.id} data={this.state.coworkerData} isCoworker={this.state.isCoworker}/>
+          : <Mainscreen coworkerHandler={this.handleShowCoworker} loginID={this.props.location.state.id} data={this.props.location.state} isCoworker={this.state.isCoworker}/>
         }
     	</div>  
     );

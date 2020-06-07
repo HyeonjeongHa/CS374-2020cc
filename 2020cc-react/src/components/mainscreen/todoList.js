@@ -14,7 +14,7 @@ class TodoList extends Component {
 
     render() {
         const { data, onUpdate, onRemove, onLikey } = this.props;
-        console.log("[todoList.js] render() data!!!!!!!", data);
+        // console.log("[todoList.js] render() data!!!!!!!", data);
         // var heartFlag;
         // if (data.likey["null"] == "1") {
         //     heartFlag = false;
@@ -30,7 +30,7 @@ class TodoList extends Component {
             <div>
                 <ul>
                 {data.map(data  => (
-                    <TodoInfo TodoList = {this.props.data} clickID={this.props.clickID} data={data} onUpdate={onUpdate} onRemove={onRemove} onLikey={onLikey} isCoworker={this.props.isCoworker}/>
+                    <TodoInfo TodoList = {this.props.data} loginID={this.props.loginID} data={data} onUpdate={onUpdate} onRemove={onRemove} onLikey={onLikey} isCoworker={this.props.isCoworker}/>
                 ))}
                 </ul>
             </div>

@@ -26,6 +26,7 @@ class TodoInfo extends Component {
         index : this.props.data.index,
         likey : this.props.data.likey,
         TodoList : this.props.TodoList,
+        loginID : this.props.loginID,
         heartFlag : false
     };
 
@@ -34,7 +35,9 @@ class TodoInfo extends Component {
     }
 
     _setHeartFlag() {
-        if (this.props.data.likey[this.props.clickID] === "1") {
+        console.log("this.props.data.task", this.props.data.task);
+        console.log("this.props.data.likey[this.state.loginID]", this.props.data.likey[this.state.loginID]);
+        if (this.props.data.likey[this.state.loginID] === "1") {
             this.setState({
                 heartFlag: true
             })
@@ -103,22 +106,22 @@ class TodoInfo extends Component {
         console.log("[todoInfo.js] this.state.likey", this.state.likey);
         console.log("[todoInfo.js] data", data);
 
-        let clickID = this.props.clickID;
+        let loginID = this.state.loginID;
         let tempLikey = this.state.likey; 
         if (tempLikey["null"] === "1") {
             tempLikey["null"] = "0";
-            tempLikey[clickID] = "1";
+            tempLikey[loginID] = "1";
             this.setState({
                 heartFlag : true,
             })
         } else {
-            if (tempLikey[clickID] === "1") {
-                tempLikey[clickID] = "0";
+            if (tempLikey[loginID] === "1") {
+                tempLikey[loginID] = "0";
                 this.setState({
                     heartFlag : false,
                 })
             } else {
-                tempLikey[clickID] = "1";
+                tempLikey[loginID] = "1";
                 this.setState({
                     heartFlag : true,
                 })

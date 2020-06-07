@@ -80,7 +80,7 @@ class Todo extends Component{
                     
                 });
                 // maxIndex++;
-                console.log(tempThis.state.TodoList);
+                console.log("[todo.js _getDailyList()]", tempThis.state.TodoList);
             })  
         })
     }
@@ -288,6 +288,7 @@ class Todo extends Component{
 
             this._getDailyList();
         }
+        console.log("[todo.js in render(), todolist]", this.state.TodoList);
 
         // console.log(this.state.TodoList);
         return(
@@ -297,11 +298,11 @@ class Todo extends Component{
                     <FiSave title="Click to save all changes" size="32" onClick={this.handleAllSave}/>
                     <div>{this.state.isSaved ? (" All changes are saved") : ("")}</div>
                     <div className="myProfile">
-                        <Person progress={80} handler={null} name={this.state.name}/>
+                        <Person progress={80} handler={null} name={this.state.name} id={this.state.id} teamName={this.state.teamName}/>
                     </div>
                 </div>
                 <div>
-                    <TodoList data = {this.state.TodoList} clickID = {this.state.id} onUpdate = {this.handleUpdate} onRemove = {this.handleRemove} isCoworker={this.props.isCoworker}/>
+                    <TodoList data = {this.state.TodoList} loginID={this.props.loginID} onUpdate = {this.handleUpdate} onRemove = {this.handleRemove} isCoworker={this.props.isCoworker}/>
                 </div>
                 <div className="add_task">
                     {this.props.isCoworker ? null :

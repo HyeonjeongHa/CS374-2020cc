@@ -110,20 +110,20 @@ class Mainscreen extends Component {
 	}
 
 	render() {
-		console.log("this is noti time" + this.state.noti_time)
+		// console.log("this is noti time" + this.state.noti_time)
 
 		if(this.props.data !== this.state.data){
 			this.setState({
     			data: this.props.data
     		})
 		}
-		console.log("[mainscreen.js] this.props.currentTab", this.props.currentTab);
+		// console.log("[mainscreen.js] this.props.currentTab", this.props.currentTab);
 		// console.log(this.props.data);
 		// console.log(this.state.data);
 
 		var dailyScheduler = (
             <div>
-                <Todo currentTab="Todo" data={this.state.data} noti_time ={this.state.noti_time} isCoworker={this.props.isCoworker}/>
+                <Todo currentTab="Todo" data={this.state.data} noti_time ={this.state.noti_time} loginID={this.props.loginID} isCoworker={this.props.isCoworker}/>
             </div>
         );
         let eventScheduler = (
