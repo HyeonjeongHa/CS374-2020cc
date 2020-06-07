@@ -16,7 +16,7 @@ import update from 'react-addons-update';
 
 class TodoInfo extends Component {
     state = {
-        toggle: false,
+        toggle: false, //is changed?
         task: this.props.data.task,
         duetime : this.props.data.duetime,
         progress : Number(this.props.data.progress),
@@ -28,30 +28,36 @@ class TodoInfo extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
+        const { toggle, task, duetime, progress, index, TodoList } = this.state;
+        const { data, onUpdate } = this.props;
+
+        onUpdate(data.index, { task: task, duetime : duetime, progress : e.target.value, index : index});
+    };
+    handleChange2 = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value,
+        });
+        const { toggle, task, duetime, progress, index, TodoList } = this.state;
+        const { data, onUpdate } = this.props;
+
+        onUpdate(data.index, { task: e.target.value, duetime : duetime, progress : progress, index : index});
     };
 
     handleToggleChange = () => {
         if(!this.props.isCoworker){
-        //console.log("handle toggle change\n");
-        //console.log(this.state.toggle);
-        const { toggle, task, duetime, progress, index, TodoList } = this.state;
-        // console.log('[todoinfo.js]', task, duetime, progress, index);
-        const { data, onUpdate } = this.props;
-        // false -> true
-        if (!toggle) {
-            this.setState({
-                toggle: true,
-            });
-        } else {
-        // true -> false
-            //console.log(this.state.index);
-            //console.log(this.props.data.index);
-            onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index});
-            this.setState({
-                toggle: false,
-            });
+            const { toggle, task, duetime, progress, index, TodoList } = this.state;
+            const { data, onUpdate } = this.props;
+            if (!toggle) {
+                this.setState({
+                    toggle: true,
+                });
+            } else {
+                onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index});
+                this.setState({
+                    toggle: false,
+                });
+            }
         }
-    }
     };
 
     handleRemove = () => {
@@ -106,7 +112,9 @@ class TodoInfo extends Component {
 
   render() {
     const { data, onUpdate, onRemove } = this.props;
-    const { toggle, task, duetime, progress } = this.state;
+    const { toggle, task, duetime, progress, index, TodoList } = this.state;
+    
+    // onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index});
 
     const TimeInput = (
         <div className="progressBtn">
@@ -136,7 +144,7 @@ class TodoInfo extends Component {
             <div>
                 <form className="mainBox">
                     {this.state.toggle ? (
-                        <input autoFocus className="todo-task-input" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange} type='text'></input>
+                        <input autoFocus className="todo-task-input" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange2} type='text'></input>
                     ) : <span className="todo-task-text" onClick={this.handleToggleChange}>{this.props.data.task === "" ? "Task" : this.props.data.task}</span>}
                     <div className = "rightBox">
                         {TimeInput}
@@ -146,10 +154,6 @@ class TodoInfo extends Component {
                         {this.props.isCoworker 
                             ? null 
                             : (<div>
-
-                                {toggle 
-                                    ? <FiSave size="32" onClick={this.handleToggleChange}/> 
-                                    : <FiEdit size="32" onClick={this.handleToggleChange}/>}
                                 <RiDeleteBin6Line size="32" onClick={this.handleRemove}/>
                                 </div>)
                         }
