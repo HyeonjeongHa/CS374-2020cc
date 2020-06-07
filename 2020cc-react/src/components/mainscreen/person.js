@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import '../../mainscreen.css';
+import { CircularProgressbar, CircularProgressbarWithChildren, buildStyles} from 'react-circular-progressbar';
+import { CircularProgress } from '@material-ui/core';
 
 class Person extends Component {
 
 	state = {
         name : this.props.name,
         position : this.props.position,
-        isMine: this.props.isMine
+        progress: this.props.progress
     }
 
     handleClicked = () => {
@@ -19,17 +21,7 @@ class Person extends Component {
     }
     
 	render() {
-
-		const me = (
-	    	<div className="profile">
-                <div className="center">
-                    <div className="text">{this.props.name}</div>
-                    <div className="text">{this.props.position}</div>
-                </div>
-                <div className="human_icon"></div>
-            </div>
-	    );
-
+        
 	    const other = (
 	    	<div className="profile">
                 <div className="center">
@@ -40,8 +32,28 @@ class Person extends Component {
             </div>
 	    );
 
+        const personWithProgress = (
+            <div  className="fitContent">
+                <div className="profile">
+                    <div className="center">
+                        <div className="human_icon"></div>
+                        <div className="text2">{this.state.name}</div>
+                    </div>
+                </div>
+                <div className="circularProgress">
+                    <CircularProgress 
+
+                        variant="static" 
+                        value={this.state.progress} 
+                        thickness={2}
+                        size={150}
+                    />
+                </div>
+            </div>
+        )
+
 	    return (
-	    	<div onClick={this.handleClicked}>{this.state.isMine ? me : other}</div>
+	    	<div onClick={this.handleClicked}>{personWithProgress}</div>
 	    );
   	}
 }
