@@ -1,8 +1,9 @@
 import React, { Component , Fragment} from 'react';
 import { Progress, Segment, Button  } from 'semantic-ui-react';
 import { IoIosCloud, IoIosCloseCircle } from "react-icons/io"; 
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"; 
 import { RiDeleteBin6Line } from "react-icons/ri"; 
-import { FiEdit, FiSave, FiChevronLeft, FiChevronsLeft, FiChevronRight, FiChevronsRight } from "react-icons/fi"; 
+import { FiEdit, FiSave, FiHeart, FiChevronLeft, FiChevronsLeft, FiChevronRight, FiChevronsRight } from "react-icons/fi"; 
 
 import '../../todo.css';
 import 'semantic-ui-css/semantic.min.css';
@@ -21,7 +22,9 @@ class TodoInfo extends Component {
         duetime : this.props.data.duetime,
         progress : Number(this.props.data.progress),
         index : this.props.data.index,
-        TodoList : this.props.TodoList
+        likey : this.props.data.likey,
+        TodoList : this.props.TodoList,
+        heartFlag : false
     };
 
     handleChange = (e) => {
@@ -62,6 +65,42 @@ class TodoInfo extends Component {
             toggle: false,
         });
     };
+
+    handleLikey = () => {
+        const { data, onUpdate } = this.props;
+        const { toggle, task, duetime, progress, index, TodoList } = this.state;
+
+        console.log("[todoInfo.js] likey click@@@@@@@@");
+        console.log("[todoInfo.js] this.state.likey", this.state.likey);
+        console.log("[todoInfo.js] data", data);
+
+        let clickID = this.props.clickID;
+        let tempLikey = this.state.likey;
+        if (tempLikey["null"] === "1") {
+            tempLikey["null"] = "0";
+            tempLikey[clickID] = "1";
+            this.setState({
+                heartFlag : true,
+            })
+        } else {
+            if (tempLikey[clickID] === "1") {
+                tempLikey[clickID] = "0";
+                this.setState({
+                    heartFlag : false,
+                })
+            } else {
+                tempLikey[clickID] = "1";
+                this.setState({
+                    heartFlag : true,
+                })
+            }
+        }
+
+        onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index, likey: this.state.likey });
+        // this.setState({
+        //     toggle: false,
+        // });
+    }
     
     increment = () => {
         if(!this.props.isCoworker){
@@ -144,13 +183,19 @@ class TodoInfo extends Component {
                     </div>
                     <div className="btns">
                         {this.props.isCoworker 
-                            ? null 
+                            ? (<div>
+                                {this.state.heartFlag ? (
+                                    <AiFillHeart size="32" onClick={this.handleLikey}/>
+                                ): <AiOutlineHeart size="32" onClick={this.handleLikey}/>}
+                                </div>) 
                             : (<div>
-
                                 {toggle 
                                     ? <FiSave size="32" onClick={this.handleToggleChange}/> 
                                     : <FiEdit size="32" onClick={this.handleToggleChange}/>}
                                 <RiDeleteBin6Line size="32" onClick={this.handleRemove}/>
+                                {this.state.heartFlag ? (
+                                    <AiFillHeart size="32" onClick={this.handleLikey}/>
+                                ): <AiOutlineHeart size="32" onClick={this.handleLikey}/>}
                                 </div>)
                         }
                     </div>

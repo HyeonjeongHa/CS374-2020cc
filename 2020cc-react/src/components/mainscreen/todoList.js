@@ -13,13 +13,13 @@ class TodoList extends Component {
       };
 
     render() {
-        const { data, onUpdate, onRemove } = this.props;
+        const { data, onUpdate, onRemove, onLikey } = this.props;
         console.log(data);
         return (
             <div>
                 <ul>
                 {data.map(data  => (
-                    <TodoInfo TodoList = {this.props.data} data={data} onUpdate={onUpdate} onRemove={onRemove} isCoworker={this.props.isCoworker}/>
+                    <TodoInfo TodoList = {this.props.data} clickID={this.props.clickID} data={data} onUpdate={onUpdate} onRemove={onRemove} onLikey={onLikey} isCoworker={this.props.isCoworker}/>
                 ))}
                 </ul>
             </div>

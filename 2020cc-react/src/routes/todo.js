@@ -70,7 +70,8 @@ class Todo extends Component{
                                 duetime : res.duetime,
                                 task : res.task,
                                 progress : res.progress,
-                                index : res.index
+                                index : res.index,
+                                likey : res.likey
 
                             }]
                         }),
@@ -110,7 +111,8 @@ class Todo extends Component{
                         duetime : "00:00",
                         task : "",
                         progress : "0",
-                        index : idx
+                        index : idx,
+                        likey: {"null":"1"}
                     });
 
                     t_this.setState({
@@ -119,6 +121,7 @@ class Todo extends Component{
                             duetime : "00:00",
                             task : "",
                             progress : "0",
+                            likey: {"null":"1"}
                             // ...data,
                       }),
                     });
@@ -130,7 +133,8 @@ class Todo extends Component{
                     duetime : "00:00",
                     task : "",
                     progress : "0",
-                    index : 0
+                    index : 0,
+                    likey: {"null":"1"}
                 });
                 t_this.setState({
                     TodoList: TodoList.concat({
@@ -138,6 +142,7 @@ class Todo extends Component{
                         duetime : "00:00",
                         task : "",
                         progress : "0",
+                        likey: {"null":"1"}
                         // ...data,
                   }),
                 });
@@ -155,6 +160,7 @@ class Todo extends Component{
 
         // console.log(index);
 
+
         database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
             // var tempThis = this;
             // console.log(tempThis.state.index);
@@ -167,7 +173,8 @@ class Todo extends Component{
                     database.ref('teamName/'+ teamName + '/' + id).child(today).child(childKey).update({
                         duetime : data.duetime,
                         task : data.task,
-                        progress : data.progress
+                        progress : data.progress,
+                        likey : data.likey
                     });
                 return;
                 }
@@ -183,6 +190,7 @@ class Todo extends Component{
               TodoList.duetime = data.duetime;
               TodoList.progress = data.progress;
               TodoList.task = data.task;
+              TodoList.likey = data.likey;
             //   console.log("update after : ", TodoList);
               return {
                 index,
@@ -220,8 +228,6 @@ class Todo extends Component{
                 }
             })  
         });
-
-        
     };
 
 
@@ -249,7 +255,7 @@ class Todo extends Component{
                     </div>
                 </div>
                 <div>
-                    <TodoList data = {this.state.TodoList} onUpdate = {this.handleUpdate} onRemove = {this.handleRemove} isCoworker={this.props.isCoworker}/>
+                    <TodoList data = {this.state.TodoList} clickID = {this.state.id} onUpdate = {this.handleUpdate} onRemove = {this.handleRemove} isCoworker={this.props.isCoworker}/>
                 </div>
                 <div className="add_task">
                     {this.props.isCoworker ? null :
