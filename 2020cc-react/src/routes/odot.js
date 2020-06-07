@@ -25,11 +25,11 @@ class Odot extends Component {
   render() {
 
     if (this.props.location.state == null) {
-      this.props.location.state = {
-        id: "template97",
-        name: "yuz",
-        teamName: "2020cc"
-    }
+        this.props.location.state = {
+          id: "template97",
+          name: "yuz",
+          teamName: "2020cc"
+        }
     }
     console.log("isCoworker:" + this.state.isCoworker, this.state.coworkerData);
     return (
