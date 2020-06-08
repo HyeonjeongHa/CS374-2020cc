@@ -148,9 +148,9 @@ class Mainscreen extends Component {
 			<div className="ShowProfileAlign">
 				<div className="ShowProfilePhoto" />
 				<div className="ShowProfile">
-					{this.state.data.id}
+					{this.props.loginID}
 					<br/>
-					{this.state.data.name}
+					{this.props.loginName}
 					<br/>
 					developer
 				</div>
