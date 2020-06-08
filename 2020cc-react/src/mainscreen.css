@@ -95,6 +95,13 @@ body {
     height: 40px;
     display: flex;
 }
+.alarm_icon2 {
+    background-image: url('./packard-bell.png');
+    background-size: 40px 40px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+}
 
 .alarm {
     display: flex;

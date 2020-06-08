@@ -161,6 +161,7 @@ class Authentication extends Component {
         const inputBoxes = (
             <div>
                 <form class="signin">
+                <br></br><br></br>
                     <h1 class="signup1">SIGN IN</h1>
                     <br></br><br></br>
                     <input
@@ -189,6 +190,7 @@ class Authentication extends Component {
         const inputBoxes2 = (
             <div>
                 <form class="signup">
+                <br></br><br></br>
                     <h1 class="signup1">SIGN UP</h1>
                     <br></br><br></br>
                     <input
@@ -223,7 +225,7 @@ class Authentication extends Component {
                     value={this.state.teamName}
                     onKeyPress={this.handleKeyPress}
                     placeholder="teamName*"/>
-                
+                    <br></br><br></br>
                     <div>{this.btn2?null:<a class="btn2" id="btn2"
                     onClick={this.handleRegister}>Sign Up</a>}
                     </div>

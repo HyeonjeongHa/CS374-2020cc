@@ -154,7 +154,8 @@ class Mainscreen extends Component {
 	     		{/* <div className={this.state.currentTab === "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div> */}
 	     		{/* <div className={this.state.currentTab === "EventInput" ? 'clickedButton':'idleButton'}  onClick={this.handleEventInput}>EventInput</div> */}
 	     		<div className="alarm">
-					<div style = {{width:'150px', color:'black'}} > <Select  placeholder = "Select Alarm" value={this.state.selected} onChange={this.notiChange} options={options} /> </div>
+					 <div className="alarm_icon2"></div>
+					<div style = {{width:'90px', marginLeft:'5px', marginRight:'10px', color:'black'}} > <Select  placeholder = "Time" value={this.state.selected} onChange={this.notiChange} options={options} /> </div>
                     <Switch
                         checked={this.state.alarm_flag}
 						onChange={this.handleChange}
