@@ -71,6 +71,7 @@ class Authentication extends Component {
             totalProgress : 0
         }).then((response) => {
             // console.log(response);
+            this.handleLeft();
             console.log('register success');
             this.setState({
                 id: '',
