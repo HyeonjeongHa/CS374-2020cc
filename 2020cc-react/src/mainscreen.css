@@ -363,3 +363,9 @@ body {
     display: flex;
     align-items: center;
 }
+
+.answerID {
+    float: right;
+    color: lightgray;
+    font-size: 15px;
+}

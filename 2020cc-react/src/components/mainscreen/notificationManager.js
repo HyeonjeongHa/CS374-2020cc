@@ -62,7 +62,7 @@ class NotificationManager extends Component {
         })
 
 
-        this._periodicTimeUpdate(60);
+        this._periodicTimeUpdate(30);
         
     }
 
@@ -84,9 +84,11 @@ class NotificationManager extends Component {
         // console.log("여기!!!!!!!!!!!!!")
         var result = -1;
         this.state.QuestionList.forEach(function(elem, index){
-            // console.log(elem, index, moment().format("HH:MM"));
-            if(elem.time === moment().format("HH:mm"))
+            console.log(elem, index, moment().format("HH:MM"));
+            if(elem.time === moment().format("HH:mm")) {
+                // console.log("Find!!!!!!!!!!!!!!!!! (Noti)");
                 result = index;
+            }
         });
         // console.log("여기!!!!!!!"+result)
         return result;
@@ -98,7 +100,6 @@ class NotificationManager extends Component {
         return (
             <div>    
             { (i !== -1) && this.state.event_flag ?
-            
             <WebNotification
             title= {this.state.QuestionList[i].question}
             timeout={5000 }

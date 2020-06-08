@@ -34,7 +34,7 @@ getAnswerList() {
         <div>
           <ul>
           {this.state.answerList.map(data  => (
-              <div className = "eventBox">{data.answer} {data.id}</div>
+              <div className = "eventBox">{data.answer} <span className="answerID"> by {data.id}</span></div>
           ))}
           </ul>
         </div>
