@@ -36,6 +36,7 @@ class Person extends Component {
                         value={Number(this.props.progress)} 
                         thickness={2}
                         size={150}
+                        color="inherit"
                     />
                 </div>
             </div>
