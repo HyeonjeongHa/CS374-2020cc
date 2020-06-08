@@ -33,7 +33,6 @@ class Coworker extends Component {
                 database.ref('authentication/' + child.key).once('value').then((snapshot2) => {
                     const res = snapshot2.val();
 
-                    // console.log("coworker!!", res.totalProgress);
                     if(tempThis.props.data.id !== res.id){
                         tempThis.setState({
                             coworkerList : update(

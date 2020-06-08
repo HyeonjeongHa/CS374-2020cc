@@ -110,17 +110,18 @@ class Mainscreen extends Component {
 		});
 	}
 
+	handleProfile = () => {
+		this.props.coworkerHandler({
+			id : this.props.loginID
+		});
+	}
 	render() {
-		// console.log("this is noti time" + this.state.noti_time)
 
 		if(this.props.data !== this.state.data){
 			this.setState({
     			data: this.props.data
     		})
 		}
-		// console.log("[mainscreen.js] this.props.currentTab", this.props.currentTab);
-		// console.log(this.props.data);
-		// console.log(this.state.data);
 
 		var dailyScheduler = (
             <div>
@@ -163,10 +164,10 @@ class Mainscreen extends Component {
     	<div className="app">
     		<div>
 	     	<div className="sidebar">
-	     		<div className="logo"></div>
+	     		<div className="logo" onClick={this.handleProfile}></div>
 	     		<div className={this.state.currentTab === "Todo" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Todo</div>
 	     		<div className={this.state.currentTab === "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
-				<div className = "profileDiv">{ShowProfile}</div>
+				<div className = "profileDiv" onClick={this.handleProfile}>{ShowProfile}</div>
 	     		{/* <div className={this.state.currentTab === "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div> */}
 	     		{/* <div className={this.state.currentTab === "EventInput" ? 'clickedButton':'idleButton'}  onClick={this.handleEventInput}>EventInput</div> */}
 	     		<div className="alarm">

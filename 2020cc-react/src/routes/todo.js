@@ -85,6 +85,7 @@ class Todo extends Component {
             })
         });
 
+        console.log(id);
         database.ref('authentication/' + id).once('value').then((snapshot) => {
             const res = snapshot.val();
             const getTotalProgress = res.totalProgress;
@@ -208,8 +209,6 @@ class Todo extends Component {
             TodoList: TodoList.map((TodoList) => {
                 // console.log(TodoList);
                 if (TodoList.index === index) {
-                    //   console.log(TodoList.index + ' / ' + index);
-                    //   console.log("[todo.js update] ", TodoList);
                     TodoList.duetime = data.duetime;
                     TodoList.progress = data.progress;
                     TodoList.task = data.task;
@@ -335,41 +334,46 @@ class Todo extends Component {
             this._getDailyList();
         }
 
-        return (             
-        <Fragment>
-            <div className = "new_signin" >
-                <div className = "title" >Todo</div>
+        const saveBtn = (
+            <div className="onlyFlex">
                 <FiSave title = "Click to save all changes" size = "32" onClick = { this.handleAllSave }/> 
                 <div>{ this.state.isSaved ? (" All changes are saved") : ("") } </div> 
-                <div className = "myProfile">
-                    <Person 
-                        progress = { this.state.totalProgress } 
-                        handler = { null }
-                        name = { this.state.name }
-                        id = { this.props.data.id }
-                        teamName = { this.props.data.teamName }
-                        isMe = { true }
+            </div>
+            )
+        return ( 
+            <Fragment>
+                <div className = "new_signin" >
+                    <div className = "title" >Todo</div>
+                    {this.props.isCoworker ? null : saveBtn}
+                    <div className = "myProfile">
+                        <Person 
+                            progress = { this.state.totalProgress } 
+                            handler = { null }
+                            name = { this.state.name }
+                            id = { this.props.data.id }
+                            teamName = { this.props.data.teamName }
+                            isMe = { true }
+                        /> 
+                    </div> 
+                </div>
+                <div>
+                    <TodoList 
+                        data = { this.state.TodoList }
+                        loginID = { this.props.loginID }
+                        onUpdate = { this.handleUpdate }
+                        onRemove = { this.handleRemove }
+                        isCoworker = { this.props.isCoworker }
                     /> 
                 </div> 
-            </div>
-            <div>
-                <TodoList 
-                    data = { this.state.TodoList }
-                    loginID = { this.props.loginID }
-                    onUpdate = { this.handleUpdate }
-                    onRemove = { this.handleRemove }
-                    isCoworker = { this.props.isCoworker }
-                /> 
-            </div> 
-            <div className = "add_task" >
-                {this.props.isCoworker ? null :
-                 (<GrAddCircle 
-                    size = "48" 
-                    color = "blue" 
-                    title = "Click to add a new task" 
-                    onClick = { this.handleCreate.bind(this)}/>)} 
-            </div> 
-        </Fragment>
+                <div className = "add_task" >
+                    {this.props.isCoworker ? null :
+                     (<GrAddCircle 
+                        size = "48" 
+                        color = "blue" 
+                        title = "Click to add a new task" 
+                        onClick = { this.handleCreate.bind(this)}/>)} 
+                </div> 
+            </Fragment>
             )
         }
     }
