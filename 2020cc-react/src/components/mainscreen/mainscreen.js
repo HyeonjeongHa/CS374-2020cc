@@ -188,7 +188,7 @@ class Mainscreen extends Component {
 						width = {40}
 					/>
                 </div>
-	     		<div className="setting" onClick={this.handleSetting}></div>
+	     		{/* <div className="setting" onClick={this.handleSetting}></div> */}
 	        </div>
 	        </div> 
 	     	<div className="content">

@@ -277,7 +277,6 @@ class TodoInfo extends Component {
                         <div className="heartNum">{this.state.heartNum}</div>
                     </div>
                 </form>
-                
             </div>
             
         </Fragment>
