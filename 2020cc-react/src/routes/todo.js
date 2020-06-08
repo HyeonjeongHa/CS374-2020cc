@@ -37,7 +37,7 @@ class Todo extends Component{
     
     
     componentDidMount() {
-        this.scrollToBottom();
+        // this.scrollToBottom();
         this._getDailyList();
         
         // 메인스크린에 mount아닌곳에 넣기
@@ -46,7 +46,7 @@ class Todo extends Component{
 
     //업데이트 되고 re-render됐을 때 부르는 함수 
     componentDidUpdate() {
-        this.scrollToBottom();
+        // this.scrollToBottom();
     }
     scrollToBottom() {
         animateScroll.scrollToBottom({
@@ -81,7 +81,7 @@ class Todo extends Component{
                     
                 });
                 // maxIndex++;
-                console.log("[todo.js _getDailyList()]", tempThis.state.TodoList);
+                // console.log("[todo.js _getDailyList()]", tempThis.state.TodoList);
             })  
         });
 
@@ -91,14 +91,14 @@ class Todo extends Component{
             this.setState({
                 totalProgress: res.totalProgress
             })
-            console.log("totalProgress", this.state.totalProgress);
+            // console.log("totalProgress", this.state.totalProgress);
         });
             
     }
 
     async handleCreate (data) {
         const { TodoList } = this.state;
-        console.log(data);
+        // console.log(data);
         const teamName = this.state.teamName;
         const id = this.state.id;
         const today = moment().format("YYYYMMDD");
@@ -237,7 +237,6 @@ class Todo extends Component{
         database.ref('teamName/'+ teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
             snapshot.forEach(function(child) {
                 let res = child.val();
-                console.log(index);
                 if (res.index === index) {
                     let childKey = child.key;
                     // console.log("[remove]", index);
@@ -306,7 +305,7 @@ class Todo extends Component{
 
         this.state.TodoList.forEach(function(data){
             _totalProgress += Number(data.progress);
-            console.log("total progress", data.progress);
+            // console.log("total progress", data.progress);
         })
 
         console.log(_totalProgress);
@@ -318,7 +317,7 @@ class Todo extends Component{
             totalProgress : _totalProgress
         })
 
-        console.log(_totalProgress);
+        // console.log(_totalProgress);
         return _totalProgress;
     };
     render(){
