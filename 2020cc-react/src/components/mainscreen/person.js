@@ -21,17 +21,6 @@ class Person extends Component {
     }
     
 	render() {
-        
-	    const other = (
-	    	<div className="profile">
-                <div className="center">
-                	<div className="human_icon"></div>
-                    <div className="text2">{this.props.name}</div>
-                    <div className="text2">{this.state.position}</div>
-                </div>
-            </div>
-	    );
-
         const personWithProgress = (
             <div  className="fitContent">
                 <div className="profile">
@@ -42,11 +31,11 @@ class Person extends Component {
                 </div>
                 <div className="circularProgress">
                     <CircularProgress 
-
                         variant="static" 
-                        value={this.state.progress} 
+                        value={Number(this.props.progress)} 
                         thickness={2}
                         size={150}
+                        color="red"
                     />
                 </div>
             </div>

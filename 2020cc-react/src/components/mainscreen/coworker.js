@@ -33,15 +33,15 @@ class Coworker extends Component {
                 database.ref('authentication/' + child.key).once('value').then((snapshot2) => {
                     const res = snapshot2.val();
 
-                    // if(tempThis.state.name !== res.name){
+                    // console.log("coworker!!", res.totalProgress);
                     tempThis.setState({
                         coworkerList : update(
                             tempThis.state.coworkerList, {
                                 $push : [{
                                     id: res.id,
                                     name: res.name,
-                                    position: "developer",
-                                    teamName: res.teamName
+                                    teamName: res.teamName,
+                                    progress: res.totalProgress
                                 }]
                             }
                         ),
@@ -61,7 +61,7 @@ class Coworker extends Component {
 	    return (
 			<div className="coworker" style={style}>
 				{this.state.flag 
-					? this.state.coworkerList.map(data => (<Person progress={80} handler={this.props.handler} name={data.name} id={data.id} teamName={data.teamName} position={data.position} />))
+					? this.state.coworkerList.map(data => (<Person handler={this.props.handler} name={data.name} id={data.id} teamName={data.teamName} progress={data.progress} />))
                     : ( <div/>
                 )}
 	   		</div>

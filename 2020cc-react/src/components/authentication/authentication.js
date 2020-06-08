@@ -76,6 +76,7 @@ class Authentication extends Component {
                 pw: '',
                 name : '',
                 teamName : '2020cc', //default
+                totalProgess: 0,
                 mode : true
             });
         }).catch((error) => {
@@ -84,6 +85,7 @@ class Authentication extends Component {
                 pw: '',
                 name : '',
                 teamName : '2020cc', //default
+                totalProgess: 0,
                 mode : false
             });
         });
@@ -100,6 +102,7 @@ class Authentication extends Component {
             const getPw = res.pw;
             const getName = res.name;
             const getTeamName = res.teamName;
+            const getTotalProgress = res.totalProgess;
             if(getId === id && getPw === pw) {
                 //login success
                 loginFlag =1;
@@ -109,7 +112,8 @@ class Authentication extends Component {
                     state : {
                         id: getId,
                         name: getName,
-                        teamName: getTeamName
+                        teamName: getTeamName,
+                        totalProgess: getTotalProgress
                     }
                 }); 
 

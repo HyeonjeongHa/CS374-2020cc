@@ -31,7 +31,8 @@ class Todo extends Component{
         TodoList: [], //initial list is empty
         id : this.props.data.id,
         flag : false,
-        isSaved : false
+        isSaved : false,
+        totalProgress : 0
     };
     
     
@@ -82,7 +83,17 @@ class Todo extends Component{
                 // maxIndex++;
                 console.log("[todo.js _getDailyList()]", tempThis.state.TodoList);
             })  
-        })
+        });
+
+        database.ref('authentication/' + id).once('value').then((snapshot) => {
+            const res = snapshot.val();
+            const getTotalProgress = res.totalProgess;
+            this.setState({
+                totalProgress: res.totalProgress
+            })
+            console.log("totalProgress", this.state.totalProgress);
+        });
+            
     }
 
     async handleCreate (data) {
@@ -150,7 +161,10 @@ class Todo extends Component{
             }
         })
 
+        const _totalProgress = this._calulateTotalProgress();
+
         this.setState({
+            totalProgress: _totalProgress,
             isSaved: true
         })
     };
@@ -189,7 +203,7 @@ class Todo extends Component{
 
         this.setState({
           TodoList: TodoList.map((TodoList) => {
-            console.log(TodoList);
+            // console.log(TodoList);
             if (TodoList.index === index) {
             //   console.log(TodoList.index + ' / ' + index);
             //   console.log("[todo.js update] ", TodoList);
@@ -236,7 +250,10 @@ class Todo extends Component{
             })  
         });
 
+        const _totalProgress = this._calulateTotalProgress();
+
         this.setState({
+            totalProgress: _totalProgress,
             isSaved: true
         })        
     };
@@ -248,7 +265,6 @@ class Todo extends Component{
         const teamName = this.state.teamName;
         const id = this.state.id;
         const today = moment().format("YYYYMMDD");
-
         // console.log(index);
     
         this.state.TodoList.forEach(function(data){
@@ -257,27 +273,55 @@ class Todo extends Component{
                 let index = data.index;
                 // console.log(tempThis.state.index);
                 snapshot.forEach(function(child) {
-                let res = child.val();
-                if (res.index === index) {
-                    let childKey = child.key;
-                    database.ref('teamName/'+ teamName + '/' + id).child(today).child(childKey).update({
-                        duetime : data.duetime,
-                        task : data.task,
-                        progress : data.progress
-                    });
-                return;
-                }
-            })   
+                    let res = child.val();
+                    if (res.index === index) {
+                        let childKey = child.key;
+                        database.ref('teamName/'+ teamName + '/' + id).child(today).child(childKey).update({
+                            duetime : data.duetime,
+                            task : data.task,
+                            progress : data.progress
+                        });
+                    return;
+                    }
+                });  
             });     
         })
 
+        const _totalProgress = this._calulateTotalProgress();
+
         this.setState({
+            totalProgress: _totalProgress,
             isSaved: true
         })        
-    }
+        
+    };
     
+    _calulateTotalProgress = () =>{
+        const teamName = this.state.teamName;
+        const id = this.state.id;
+        const today = moment().format("YYYYMMDD");
+
+        const l = this.state.TodoList.length;
+        let _totalProgress = 0;
+
+        this.state.TodoList.forEach(function(data){
+            _totalProgress += Number(data.progress);
+            console.log("total progress", data.progress);
+        })
+
+        console.log(_totalProgress);
+
+        if(l === 0) _totalProgress = 0
+        else _totalProgress = (_totalProgress/l);
+
+        database.ref('authentication/' + id).update({
+            totalProgress : _totalProgress
+        })
+
+        console.log(_totalProgress);
+        return _totalProgress;
+    };
     render(){
-        // console.log(this.props.noti_time)
         if(this.state.id !== this.props.data.id){
             // console.log("helo");
             this.state.id = this.props.data.id;
@@ -288,9 +332,7 @@ class Todo extends Component{
 
             this._getDailyList();
         }
-        console.log("[todo.js in render(), todolist]", this.state.TodoList);
 
-        // console.log(this.state.TodoList);
         return(
             <Fragment>
                 <div className="new_signin">
@@ -298,7 +340,7 @@ class Todo extends Component{
                     <FiSave title="Click to save all changes" size="32" onClick={this.handleAllSave}/>
                     <div>{this.state.isSaved ? (" All changes are saved") : ("")}</div>
                     <div className="myProfile">
-                        <Person progress={80} handler={null} name={this.state.name} id={this.props.data.id} teamName={this.props.data.teamName}/>
+                        <Person progress={this.state.totalProgress} handler={null} name={this.state.name} id={this.props.data.id} teamName={this.props.data.teamName}/>
                     </div>
                 </div>
                 <div>
