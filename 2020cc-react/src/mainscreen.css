@@ -27,7 +27,7 @@ body {
 
 .coworker {
     border-radius: 20px;
-    border: 2px solid black;
+    /* border: 2px solid #caf4eb; */
     background: white;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px, rgba(0, 0, 0, 0.2) 0px 2px 24px;
     position: sticky;
@@ -38,6 +38,7 @@ body {
     margin-bottom: auto;
     max-height: 100vh;
 }
+
 
 .collapsed {
     width: 60px;
