@@ -87,7 +87,7 @@ class Todo extends Component {
 
         database.ref('authentication/' + id).once('value').then((snapshot) => {
             const res = snapshot.val();
-            const getTotalProgress = res.totalProgess;
+            const getTotalProgress = res.totalProgress;
             this.setState({
                     totalProgress: res.totalProgress
                 })
@@ -335,47 +335,41 @@ class Todo extends Component {
             this._getDailyList();
         }
 
-        return ( <
-            Fragment >
-            <
-            div className = "new_signin" >
-            <
-            div className = "title" > Todo < /div> <
-            FiSave title = "Click to save all changes"
-            size = "32"
-            onClick = { this.handleAllSave }
-            /> <
-            div > { this.state.isSaved ? (" All changes are saved") : ("") } < /div> <
-            div className = "myProfile" >
-            <
-            Person progress = { this.state.totalProgress }
-            handler = { null }
-            name = { this.state.name }
-            id = { this.props.data.id }
-            teamName = { this.props.data.teamName }
-            isMe = { true }
-            /> <
-            /div> <
-            /div> <
-            div >
-            <
-            TodoList data = { this.state.TodoList }
-            loginID = { this.props.loginID }
-            onUpdate = { this.handleUpdate }
-            onRemove = { this.handleRemove }
-            isCoworker = { this.props.isCoworker }
-            /> <
-            /div> <
-            div className = "add_task" > {
-                this.props.isCoworker ? null :
-                    ( < GrAddCircle size = "48"
-                        color = "blue"
-                        title = "Click to add a new task"
-                        onClick = { this.handleCreate.bind(this) }
-                        />)
-                    } <
-                    /div> <
-                    /Fragment>
+        return (             
+        <Fragment>
+            <div className = "new_signin" >
+                <div className = "title" >Todo</div>
+                <FiSave title = "Click to save all changes" size = "32" onClick = { this.handleAllSave }/> 
+                <div>{ this.state.isSaved ? (" All changes are saved") : ("") } </div> 
+                <div className = "myProfile">
+                    <Person 
+                        progress = { this.state.totalProgress } 
+                        handler = { null }
+                        name = { this.state.name }
+                        id = { this.props.data.id }
+                        teamName = { this.props.data.teamName }
+                        isMe = { true }
+                    /> 
+                </div> 
+            </div>
+            <div>
+                <TodoList 
+                    data = { this.state.TodoList }
+                    loginID = { this.props.loginID }
+                    onUpdate = { this.handleUpdate }
+                    onRemove = { this.handleRemove }
+                    isCoworker = { this.props.isCoworker }
+                /> 
+            </div> 
+            <div className = "add_task" >
+                {this.props.isCoworker ? null :
+                 (<GrAddCircle 
+                    size = "48" 
+                    color = "blue" 
+                    title = "Click to add a new task" 
+                    onClick = { this.handleCreate.bind(this)}/>)} 
+            </div> 
+        </Fragment>
             )
         }
     }

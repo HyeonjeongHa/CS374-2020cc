@@ -31,6 +31,11 @@
     align-items: center;
 }
 
+.heartNum {
+    text-align: center;
+    vertical-align: center;
+}
+
 .mainBox {
     display: flex;
     align-items: center;

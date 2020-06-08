@@ -27,11 +27,13 @@ class TodoInfo extends Component {
         likey : this.props.data.likey,
         TodoList : this.props.TodoList,
         loginID : this.props.loginID,
-        heartFlag : false
+        heartFlag : false,
+        heartNum : 0
     };
 
     componentDidMount() {
         this._setHeartFlag();
+        this._setHeartNum();
     }
 
     _setHeartFlag() {
@@ -42,6 +44,21 @@ class TodoInfo extends Component {
                 heartFlag: true
             })
         }
+    }
+
+    _setHeartNum() {
+        var tempLikey = this.state.likey; 
+        var numLikey = 0;
+        Object.keys(tempLikey).forEach(function(k){
+            if (k !== "null") {
+                if (tempLikey[k] === "1") {
+                    numLikey++;
+                }
+            }
+        })
+        this.setState({
+            heartNum: numLikey
+        })
     }
 
     handleChange = (e) => {
@@ -108,6 +125,15 @@ class TodoInfo extends Component {
 
         let loginID = this.state.loginID;
         let tempLikey = this.state.likey; 
+        // var numLikey = 0;
+        // Object.keys(tempLikey).forEach(function(k){
+        //     if (k !== "null") {
+        //         if (tempLikey[k] === "1") {
+        //             numLikey++;
+        //         }
+        //     }
+        // })
+        
         if (tempLikey["null"] === "1") {
             tempLikey["null"] = "0";
             tempLikey[loginID] = "1";
@@ -127,6 +153,9 @@ class TodoInfo extends Component {
                 })
             }
         }
+
+        this._setHeartNum();
+
 
         onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index, likey: this.state.likey }, true);
         // this.setState({
@@ -244,6 +273,7 @@ class TodoInfo extends Component {
                                 ): <AiOutlineHeart size="32" onClick={this.handleLikey}/>}
                                 </div>)
                         }
+                        <div className="heartNum">{this.state.heartNum}</div>
                     </div>
                 </form>
                 
@@ -257,6 +287,8 @@ class TodoInfo extends Component {
     //console.log(duetime);
     //console.log(data.task);
     //console.log(data.progress);
+    console.log("this.state.heartNum", this.state.heartNum);
+
     return (
         <div className = "todo">
             <Segment>   
