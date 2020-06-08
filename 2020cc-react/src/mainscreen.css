@@ -200,12 +200,12 @@ body {
 
 .ShowProfile {
     color: black;
-    /* display: flex; */
-    align-items: center;
+    align-items: right;
     position: absolute;
-    bottom: 110px;
-    left: 10px;
-    /* display: flex; */
+    font-family: "Arial Black", serif;
+    font-weight: lighter;
+    left: 70px;
+    margin-top : 3px;
     
 }
 
@@ -213,7 +213,8 @@ body {
     background-image: url('./face.png');
     align-items: center;
     position: absolute;
-    bottom: 110px;
+    /* bottom: 110px; */
+    margin-top : 12px;
     left: 10px;
     background-size: 40px 40px;
     width: 40px;
@@ -221,9 +222,19 @@ body {
 }
 
 .ShowProfileAlign {
-    display: flex;
-}
+    display: inline-flex;
+    position: absolute;
+    margin-left : 5px;
+    bottom:120px;
+    left: 10px;
+    /* border-radius: 20px; */
+    /* border: 2px solid; */
+    background: #E7F6F8;
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px, rgba(0, 0, 0, 0.2) 0px 2px 24px; */
+    width : 170px;
+    height: 70px;
 
+}
 
 .myProfile {
     display: flex;

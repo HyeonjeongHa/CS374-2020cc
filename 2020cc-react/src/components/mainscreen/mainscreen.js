@@ -5,6 +5,7 @@ import { Todo } from '../../routes';
 import Switch from 'react-switch';
 import { Notification } from '..';
 import Select from 'react-select'
+import { Segment } from 'semantic-ui-react';
 
 var timerId;
 
@@ -136,21 +137,25 @@ class Mainscreen extends Component {
                 <Record currentTab="Record" data={this.state.data}/>
             </div>
 		);
+
 		let eventInput = (
 			<div>
 				<EventInputForm currentTab="EventInput" onhandleEvent = {this.handleEvent}/>
 			</div>
-		)
+		);
+
 		let ShowProfile = (
 			<div className="ShowProfileAlign">
 				<div className="ShowProfilePhoto" />
-				<div>
-					<div>{this.state.data.id}</div>
-					<div>{this.state.data.name}</div>
-					<div>developer</div>
+				<div className="ShowProfile">
+					{this.state.data.id}
+					<br/>
+					{this.state.data.name}
+					<br/>
+					developer
 				</div>
 			</div>
-		)
+		) 
 		
 
 
@@ -161,7 +166,7 @@ class Mainscreen extends Component {
 	     		<div className="logo"></div>
 	     		<div className={this.state.currentTab === "Todo" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Todo</div>
 	     		<div className={this.state.currentTab === "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
-				<div className="ShowProfile">{ShowProfile}</div>
+				<div className = "profileDiv">{ShowProfile}</div>
 	     		{/* <div className={this.state.currentTab === "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div> */}
 	     		{/* <div className={this.state.currentTab === "EventInput" ? 'clickedButton':'idleButton'}  onClick={this.handleEventInput}>EventInput</div> */}
 	     		<div className="alarm">
