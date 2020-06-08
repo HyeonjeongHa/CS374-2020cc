@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Coworker, Record, Event, EventInputForm, NotificationManager } from '..';
 import '../../mainscreen.css';
 import { Todo } from '../../routes';
@@ -141,6 +141,16 @@ class Mainscreen extends Component {
 				<EventInputForm currentTab="EventInput" onhandleEvent = {this.handleEvent}/>
 			</div>
 		)
+		let ShowProfile = (
+			<div className="ShowProfileAlign">
+				<div className="ShowProfilePhoto" />
+				<div>
+					<div>{this.state.data.id}</div>
+					<div>{this.state.data.name}</div>
+					<div>developer</div>
+				</div>
+			</div>
+		)
 		
 
 
@@ -151,11 +161,16 @@ class Mainscreen extends Component {
 	     		<div className="logo"></div>
 	     		<div className={this.state.currentTab === "Todo" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Todo</div>
 	     		<div className={this.state.currentTab === "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
+				<div className="ShowProfile">{ShowProfile}</div>
 	     		{/* <div className={this.state.currentTab === "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div> */}
 	     		{/* <div className={this.state.currentTab === "EventInput" ? 'clickedButton':'idleButton'}  onClick={this.handleEventInput}>EventInput</div> */}
 	     		<div className="alarm">
 					 <div className="alarm_icon2"></div>
-					<div style = {{width:'90px', marginLeft:'5px', marginRight:'10px', color:'black'}} > <Select  placeholder = "Time" value={this.state.selected} onChange={this.notiChange} options={options} /> </div>
+					<div style = {{width:'90px', marginLeft:'5px', marginRight:'10px', color:'black'}} > 
+					<div className="select-up">
+					<Select placeholder = "Time" value={this.state.selected} onChange={this.notiChange} options={options} /> 
+					</div>
+					</div>
                     <Switch
                         checked={this.state.alarm_flag}
 						onChange={this.handleChange}

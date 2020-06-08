@@ -176,9 +176,52 @@ body {
     color: #95e8d7;
 }
 
+.select-up .Select-menu-outer {
+    position: absolute !important;
+    top: auto !important;
+    bottom: calc(100% - 1px) !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+}
+
+.select-up .is-open .Select-control {
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-right-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
+}
+
 .fitContent {
     height: 150px;
     margin-top: 20px;
+}
+
+.ShowProfile {
+    color: black;
+    /* display: flex; */
+    align-items: center;
+    position: absolute;
+    bottom: 110px;
+    left: 10px;
+    /* display: flex; */
+    
+}
+
+.ShowProfilePhoto {
+    background-image: url('./face.png');
+    align-items: center;
+    position: absolute;
+    bottom: 110px;
+    left: 10px;
+    background-size: 40px 40px;
+    width: 40px;
+    height: 40px;
+}
+
+.ShowProfileAlign {
+    display: flex;
 }
 
 
