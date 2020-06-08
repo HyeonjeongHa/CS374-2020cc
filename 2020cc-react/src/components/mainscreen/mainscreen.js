@@ -25,7 +25,7 @@ class Mainscreen extends Component {
 			noti_flag: false,
 			noti_title : "",
 			noti_page : "",
-			alarm_flag : true,		
+			alarm_flag : false,		
 			noti_change : 0	,
 			selected : ""
 		}
@@ -37,7 +37,7 @@ class Mainscreen extends Component {
 		console.log(value)
 		timerId = setInterval(() => {
             this.setState({
-                noti_flag : false,
+                noti_flag : true,
                 noti_title : "Mark the progress😀",
 				noti_page : 'http://localhost:3000/CS374-2020cc/EventInputForm/',
 				noti_time : value
@@ -178,11 +178,11 @@ class Mainscreen extends Component {
 					 <div className="alarm_icon2"></div>
 					<div style = {{width:'90px', marginLeft:'5px', marginRight:'10px', color:'black'}} > 
 					<div className="select-up">
-					<Select id = "container_2" placeholder = "Time" value={this.state.selected} onChange={this.notiChange} options={options} /> 	
+					<Select id = "container_2" placeholder = "Time" value={this.state.selected} isDisabled={!this.state.alarm_flag} onChange={this.notiChange} options={options} /> 	
 					</div>
 					</div>
                     <Switch
-                        checked={this.state.alarm_flag}
+						checked={this.state.alarm_flag}
 						onChange={this.handleChange}
 						uncheckedIcon = {false}
 						checkedIcon = {false}

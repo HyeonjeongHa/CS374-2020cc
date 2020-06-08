@@ -282,12 +282,6 @@ class TodoInfo extends Component {
         </Fragment>
     );
 
-    //console.log(this.props
-    //console.log(progress);
-    //console.log(duetime);
-    //console.log(data.task);
-    //console.log(data.progress);
-    console.log("this.state.heartNum", this.state.heartNum);
 
     return (
         <div className = "todo">
