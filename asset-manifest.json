@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/CS374-2020cc2/static/css/main.9d96af7a.chunk.css",
-    "main.js": "/CS374-2020cc2/static/js/main.cc54f7ee.chunk.js",
-    "main.js.map": "/CS374-2020cc2/static/js/main.cc54f7ee.chunk.js.map",
-    "runtime-main.js": "/CS374-2020cc2/static/js/runtime-main.b39c8b49.js",
-    "runtime-main.js.map": "/CS374-2020cc2/static/js/runtime-main.b39c8b49.js.map",
-    "static/css/2.73d76cf1.chunk.css": "/CS374-2020cc2/static/css/2.73d76cf1.chunk.css",
-    "static/js/2.52faef0d.chunk.js": "/CS374-2020cc2/static/js/2.52faef0d.chunk.js",
-    "static/js/2.52faef0d.chunk.js.map": "/CS374-2020cc2/static/js/2.52faef0d.chunk.js.map",
-    "index.html": "/CS374-2020cc2/index.html",
-    "precache-manifest.ee2650bd6578380eb631b7d503e43a63.js": "/CS374-2020cc2/precache-manifest.ee2650bd6578380eb631b7d503e43a63.js",
-    "service-worker.js": "/CS374-2020cc2/service-worker.js",
-    "static/css/2.73d76cf1.chunk.css.map": "/CS374-2020cc2/static/css/2.73d76cf1.chunk.css.map",
-    "static/css/main.9d96af7a.chunk.css.map": "/CS374-2020cc2/static/css/main.9d96af7a.chunk.css.map",
-    "static/js/2.52faef0d.chunk.js.LICENSE.txt": "/CS374-2020cc2/static/js/2.52faef0d.chunk.js.LICENSE.txt",
-    "static/media/mainscreen.css": "/CS374-2020cc2/static/media/setting_icon.bac8c02a.png",
-    "static/media/semantic.min.css": "/CS374-2020cc2/static/media/outline-icons.ef60a4f6.woff",
-    "static/media/login.css": "/CS374-2020cc2/static/media/logo.b282a357.PNG"
+    "main.css": "/matabear21.github.io/static/css/main.a2dc4879.chunk.css",
+    "main.js": "/matabear21.github.io/static/js/main.3e041095.chunk.js",
+    "main.js.map": "/matabear21.github.io/static/js/main.3e041095.chunk.js.map",
+    "runtime-main.js": "/matabear21.github.io/static/js/runtime-main.3c93716e.js",
+    "runtime-main.js.map": "/matabear21.github.io/static/js/runtime-main.3c93716e.js.map",
+    "static/css/2.dad63967.chunk.css": "/matabear21.github.io/static/css/2.dad63967.chunk.css",
+    "static/js/2.b651b028.chunk.js": "/matabear21.github.io/static/js/2.b651b028.chunk.js",
+    "static/js/2.b651b028.chunk.js.map": "/matabear21.github.io/static/js/2.b651b028.chunk.js.map",
+    "index.html": "/matabear21.github.io/index.html",
+    "precache-manifest.d6a11f7b13b9a19e6987b1bcf5640f53.js": "/matabear21.github.io/precache-manifest.d6a11f7b13b9a19e6987b1bcf5640f53.js",
+    "service-worker.js": "/matabear21.github.io/service-worker.js",
+    "static/css/2.dad63967.chunk.css.map": "/matabear21.github.io/static/css/2.dad63967.chunk.css.map",
+    "static/css/main.a2dc4879.chunk.css.map": "/matabear21.github.io/static/css/main.a2dc4879.chunk.css.map",
+    "static/js/2.b651b028.chunk.js.LICENSE.txt": "/matabear21.github.io/static/js/2.b651b028.chunk.js.LICENSE.txt",
+    "static/media/mainscreen.css": "/matabear21.github.io/static/media/setting_icon.bac8c02a.png",
+    "static/media/semantic.min.css": "/matabear21.github.io/static/media/outline-icons.ef60a4f6.woff",
+    "static/media/login.css": "/matabear21.github.io/static/media/logo.b282a357.PNG"
   },
   "entrypoints": [
-    "static/js/runtime-main.b39c8b49.js",
-    "static/css/2.73d76cf1.chunk.css",
-    "static/js/2.52faef0d.chunk.js",
-    "static/css/main.9d96af7a.chunk.css",
-    "static/js/main.cc54f7ee.chunk.js"
+    "static/js/runtime-main.3c93716e.js",
+    "static/css/2.dad63967.chunk.css",
+    "static/js/2.b651b028.chunk.js",
+    "static/css/main.a2dc4879.chunk.css",
+    "static/js/main.3e041095.chunk.js"
   ]
 }
