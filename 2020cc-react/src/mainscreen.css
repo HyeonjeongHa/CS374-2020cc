@@ -218,12 +218,19 @@ body {
     margin-top : 3px;
 }
 
+.ShoeProfileTextMe {
+    color:black;
+    margin-top: 40px;
+    text-align: center;
+    font-family: "Arial Black", serif;
+}
+
 .ShowProfilePhoto {
     background-image: url('./face.png');
     align-items: center;
     position: absolute;
     /* bottom: 110px; */
-    margin-top : 12px;
+    margin-top : 5px;
     left: 10px;
     background-size: 40px 40px;
     width: 40px;

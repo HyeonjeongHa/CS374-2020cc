@@ -147,7 +147,11 @@ class Mainscreen extends Component {
 
 		let ShowProfile = (
 			<div className="ShowProfileAlign">
-				<div className="ShowProfilePhoto" />
+				<div className="ShowProfilePhoto">
+					<div className="ShoeProfileTextMe">
+						Me
+					</div>
+				</div>
 				<div className="ShowProfile">
 					{this.props.loginID}
 					<br/>
