@@ -13,15 +13,15 @@
 
 # Explanation
 
-> CS374-2020cc/2020cc-react/src  
-- Some of top components, .css, .png are here.
-    > CS374-2020cc/2020cc-react/src/components
+-  CS374-2020cc/2020cc-react/src  
+    - Some of top components, .css, .png are here.
+- CS374-2020cc/2020cc-react/src/components
     - Manage our components  
-        > CS374-2020cc/2020cc-react/src/components/authentication
-        - For register/login
-        > CS374-2020cc/2020cc-react/src/components/mainscreen
-        - For mainscreen (scheduler)
-    > CS374-2020cc/2020cc-react/src/components
+- CS374-2020cc/2020cc-react/src/components/authentication
+    - For register/login
+- CS374-2020cc/2020cc-react/src/components/mainscreen
+    - For mainscreen (scheduler)
+- CS374-2020cc/2020cc-react/src/components
     - Routes between components
 
 # Developer
