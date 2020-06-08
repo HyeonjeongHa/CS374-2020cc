@@ -17,7 +17,8 @@ class Person extends Component {
             teamName: this.props.teamName,
             id: this.props.id
         }
-        this.props.handler(data);
+        if(this.props.handler !== null)
+            this.props.handler(data);
     }
     
 	render() {

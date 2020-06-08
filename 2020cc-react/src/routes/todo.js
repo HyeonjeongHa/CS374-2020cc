@@ -119,14 +119,6 @@ class Todo extends Component{
                     console.log("index : ", idx);
                     idx++;
                     
-                    database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({ 
-                        duetime : "00:00",
-                        task : "",
-                        progress : "0",
-                        index : idx,
-                        likey: {"null":"1"}
-                    });
-
                     t_this.setState({
                         TodoList: TodoList.concat({
                             index: idx,
@@ -137,17 +129,20 @@ class Todo extends Component{
                             // ...data,
                       }),
                     });
+
+                    database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({ 
+                        duetime : "00:00",
+                        task : "",
+                        progress : "0",
+                        index : idx,
+                        likey: {"null":"1"}
+                    });
+
                 });
             } else {
                 // console.log('child is empty');
                 idx = 0;
-                database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({ 
-                    duetime : "00:00",
-                    task : "",
-                    progress : "0",
-                    index : 0,
-                    likey: {"null":"1"}
-                });
+                
                 t_this.setState({
                     TodoList: TodoList.concat({
                         index: 0,
@@ -157,6 +152,14 @@ class Todo extends Component{
                         likey: {"null":"1"}
                         // ...data,
                   }),
+                });
+
+                database.ref('teamName/'+ teamName + '/' + id).child(today).push().set({ 
+                    duetime : "00:00",
+                    task : "",
+                    progress : "0",
+                    index : 0,
+                    likey: {"null":"1"}
                 });
             }
         })

@@ -34,19 +34,21 @@ class Coworker extends Component {
                     const res = snapshot2.val();
 
                     // console.log("coworker!!", res.totalProgress);
-                    tempThis.setState({
-                        coworkerList : update(
-                            tempThis.state.coworkerList, {
-                                $push : [{
-                                    id: res.id,
-                                    name: res.name,
-                                    teamName: res.teamName,
-                                    progress: res.totalProgress
-                                }]
-                            }
-                        ),
-                        flag: true
-                    }); 
+                    if(tempThis.props.data.id !== res.id){
+                        tempThis.setState({
+                            coworkerList : update(
+                                tempThis.state.coworkerList, {
+                                    $push : [{
+                                        id: res.id,
+                                        name: res.name,
+                                        teamName: res.teamName,
+                                        progress: res.totalProgress
+                                    }]
+                                }
+                            ),
+                            flag: true
+                        }); 
+                    }
                 })
             })
         })
