@@ -352,3 +352,8 @@ body {
     box-shadow: 0 0 0 4px rgba(255, 255, 255, 1);
     transition: background 0.2s, color 0.2s;
 }
+
+.onlyFlex{
+    display: flex;
+    align-items: center;
+}

@@ -67,7 +67,8 @@ class Authentication extends Component {
             id :id,
             pw : pw,
             name : name,
-            teamName : teamName
+            teamName : teamName,
+            totalProgress : 0
         }).then((response) => {
             // console.log(response);
             console.log('register success');
@@ -76,7 +77,7 @@ class Authentication extends Component {
                 pw: '',
                 name : '',
                 teamName : '2020cc', //default
-                totalProgess: 0,
+                totalProgress: 0,
                 mode : true
             });
         }).catch((error) => {
@@ -85,7 +86,7 @@ class Authentication extends Component {
                 pw: '',
                 name : '',
                 teamName : '2020cc', //default
-                totalProgess: 0,
+                totalProgress: 0,
                 mode : false
             });
         });
