@@ -162,7 +162,7 @@ class Mainscreen extends Component {
 						uncheckedIcon = {false}
 						checkedIcon = {false}
 						offColor = '#888'
-						onColor = '#26CE7A'
+						onColor = '#F67E7D'
 						height = {20}
 						width = {40}
 					/>

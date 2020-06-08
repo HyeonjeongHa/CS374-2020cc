@@ -42,11 +42,11 @@ class Person extends Component {
                 </div>
                 <div className="circularProgress">
                     <CircularProgress 
-
                         variant="static" 
                         value={this.state.progress} 
                         thickness={2}
                         size={150}
+                        color="inherit"
                     />
                 </div>
             </div>

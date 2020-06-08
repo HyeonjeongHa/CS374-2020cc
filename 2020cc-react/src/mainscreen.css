@@ -53,10 +53,12 @@ body {
     height: 40px;
     border: 0;
     background-color: rgba(0, 0, 0, 0);
-    color: black;
+    color: #666666;
     padding: 10px;
     font-size: 20px;
     margin-top: 7px;
+    font-weight: 200;
+    font-family: "Arial Black", Gadget, sans-serif;
 }
 
 .clickedButton {
@@ -64,11 +66,12 @@ body {
     height: 40px;
     border: 0;
     background-color: rgba(0, 0, 0, 0);
-    color: #0A27D9;
+    color: #32445b;
     padding: 10px;
     font-size: 24px;
     font-weight: bold;
     margin-top: 7px;
+    font-family: "Arial Black", Gadget, sans-serif;
 }
 
 .setting {
@@ -112,7 +115,7 @@ body {
 }
 
 .human_icon {
-    background-image: url('./person.png');
+    background-image: url('./face.png');
     background-size: 100px 100px;
     width: 100px;
     height: 100px;
@@ -121,10 +124,11 @@ body {
 
 .title {
     padding: 10px;
-    font-size: 50px;
+    font-size: 40px;
     text-align: center;
     width: 150px;
     height: 50px;
+    font-family: "Arial Black", Gadget, sans-serif;
 }
 
 .profile {
@@ -142,6 +146,7 @@ body {
     top: -140px;
     left: -10px;
     width: 150px;
+    color: #95e8d7;
 }
 
 .fitContent {
@@ -171,6 +176,8 @@ body {
     font-size: 15px;
     text-align: center;
     color: black;
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-weight: lighter;
 }
 
 .add_button {
