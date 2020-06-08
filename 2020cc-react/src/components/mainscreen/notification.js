@@ -14,7 +14,7 @@ class Notification extends Component {
     
     handleNoti = () => {
         
-        window.open("http://localhost:3000/CS374-2020cc/EventInputForm/?name=template97", '__self', "", false);
+        window.open("http://localhost:3000/CS374-2020cc/EventInputForm/?name=template97", '_self', "", false);
     }
     render(){
         const options = {
