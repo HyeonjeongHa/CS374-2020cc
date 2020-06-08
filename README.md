@@ -20,7 +20,11 @@
 - CS374-2020cc/2020cc-react/src/components/authentication
     - For register/login
 - CS374-2020cc/2020cc-react/src/components/mainscreen
-    - For mainscreen (scheduler)
+    - For mainscreen (scheduler). Most important components that need for our prototype are here.
+    - __coworkers.js, person.js__ : Show the coworkers in our team. We can see other worker's scheduler.
+    - __event.js, eventInputForm.js, eventList.js, eventProcess.js, record.js, recordList.js__ : Send a push event message to each workers and show the answer list.
+    - __mainscreen.js, todoList.js, todoInfo.js__ : Show the main screen of our prototype. (Daily Scheduler) We can modify our schduler (add, remove, modify, heart)
+    - __notification.js, notificationManager.js__ : Send a push alarm message to each workers that make them to mark the progress regularly.
 - CS374-2020cc/2020cc-react/src/components
     - Routes between components
 
