@@ -95,7 +95,8 @@ class Authentication extends Component {
     handleLogin = () => {
         let id = this.state.id;
         let pw = this.state.pw;
- 
+        
+        
         database.ref('authentication/' + id).once('value').then((snapshot) => {
             let loginFlag = 0;
             const res = snapshot.val();
@@ -105,6 +106,11 @@ class Authentication extends Component {
             const getTeamName = res.teamName;
             const getTotalProgress = res.totalProgess;
             if(getId === id && getPw === pw) {
+                localStorage.setItem('id', getId);
+                localStorage.setItem('pw', getPw);
+                localStorage.setItem('teamName', getTeamName);
+                localStorage.setItem('name', getName);
+                
                 //login success
                 loginFlag =1;
                 console.log('login success');
