@@ -164,7 +164,7 @@ class Mainscreen extends Component {
     	<div className="app">
     		<div>
 	     	<div className="sidebar">
-	     		<div className="logo"></div>
+	     		<div className="logo" onClick={this.handleProfile}></div>
 	     		<div className={this.state.currentTab === "Todo" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Todo</div>
 	     		<div className={this.state.currentTab === "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
 				<div className = "profileDiv" onClick={this.handleProfile}>{ShowProfile}</div>
