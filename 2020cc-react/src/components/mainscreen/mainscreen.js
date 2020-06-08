@@ -168,7 +168,7 @@ class Mainscreen extends Component {
 					 <div className="alarm_icon2"></div>
 					<div style = {{width:'90px', marginLeft:'5px', marginRight:'10px', color:'black'}} > 
 					<div className="select-up">
-					<Select placeholder = "Time" value={this.state.selected} onChange={this.notiChange} options={options} /> 
+					<Select id = "container_2" placeholder = "Time" value={this.state.selected} onChange={this.notiChange} options={options} /> 	
 					</div>
 					</div>
                     <Switch
@@ -191,7 +191,9 @@ class Mainscreen extends Component {
 				{/* (this.state.currentTab === "EventInput" ? eventInput : dailyScheduler))} */}
 				<NotificationManager data={this.state.data}/>
 	        </div>
-	        <Coworker handler={this.props.coworkerHandler} data={this.state.data}/>
+			<div id = "container1">
+					<Coworker handler={this.props.coworkerHandler} data={this.state.data}/>
+			</div>
 			<div>
                 {this.state.noti_flag&&this.state.alarm_flag ?
 					<Notification 
