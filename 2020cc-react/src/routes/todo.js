@@ -342,7 +342,7 @@ class Todo extends Component{
                     <FiSave title="Click to save all changes" size="32" onClick={this.handleAllSave}/>
                     <div>{this.state.isSaved ? (" All changes are saved") : ("")}</div>
                     <div className="myProfile">
-                        <Person progress={this.state.totalProgress} handler={null} name={this.state.name} id={this.props.data.id} teamName={this.props.data.teamName}/>
+                        <Person progress={this.state.totalProgress} handler={null} name={this.state.name} id={this.props.data.id} teamName={this.props.data.teamName} isMe={true}/>
                     </div>
                 </div>
                 <div>

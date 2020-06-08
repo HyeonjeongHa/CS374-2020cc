@@ -63,7 +63,9 @@ class Coworker extends Component {
 	    return (
 			<div className="coworker" style={style}>
 				{this.state.flag 
-					? this.state.coworkerList.map(data => (<Person handler={this.props.handler} name={data.name} id={data.id} teamName={data.teamName} progress={data.progress} />))
+					? this.state.coworkerList.map(data => (
+                    <Person handler={this.props.handler} name={data.name} id={data.id} teamName={data.teamName} progress={data.progress} isMe={false} />
+                    ))
                     : ( <div/>
                 )}
 	   		</div>

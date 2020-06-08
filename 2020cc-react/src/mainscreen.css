@@ -118,6 +118,14 @@ body {
 
 .human_icon {
     background-image: url('./face.png');
+    background-size: 80px 80px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    margin-top: 5px;
+}
+.human_icon_Me {
+    background-image: url('./face.png');
     background-size: 100px 100px;
     width: 100px;
     height: 100px;
@@ -141,8 +149,25 @@ body {
     left: 15px;
     margin-bottom: -6px;
 }
+.profileMe {
+    display: flex;
+    margin: 10px;
+    position: relative;
+    width: 10px;
+    left: 15px;
+    margin-bottom: -6px;
+}
 
 .circularProgress {
+    margin: 10px;
+    position: relative;
+    top: -123px;
+    left: -12px;
+    width: 150px;
+    color: #95e8d7;
+}
+
+.circularProgressMe {
     margin: 10px;
     position: relative;
     top: -140px;

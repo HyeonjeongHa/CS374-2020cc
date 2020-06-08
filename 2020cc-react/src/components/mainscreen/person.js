@@ -8,7 +8,8 @@ class Person extends Component {
 	state = {
         name : this.props.name,
         position : this.props.position,
-        progress: this.props.progress
+        progress: this.props.progress,
+        isMe: this.props.isMe
     }
 
     handleClicked = () => {
@@ -35,6 +36,25 @@ class Person extends Component {
                         variant="static" 
                         value={Number(this.props.progress)} 
                         thickness={2}
+                        size={135}
+                        color="inherit"
+                    />
+                </div>
+            </div>
+        )
+        const personWithProgressMe = (
+            <div  className="fitContent">
+                <div className="profile">
+                    <div className="center">
+                        <div className="human_icon_Me"></div>
+                        <div className="text2">{this.props.name}</div>
+                    </div>
+                </div>
+                <div className="circularProgressMe">
+                    <CircularProgress 
+                        variant="static" 
+                        value={Number(this.props.progress)} 
+                        thickness={2}
                         size={150}
                         color="inherit"
                     />
@@ -43,7 +63,7 @@ class Person extends Component {
         )
 
 	    return (
-	    	<div onClick={this.handleClicked}>{personWithProgress}</div>
+	    	<div onClick={this.handleClicked}>{this.state.isMe? personWithProgressMe : personWithProgress}</div>
 	    );
   	}
 }
