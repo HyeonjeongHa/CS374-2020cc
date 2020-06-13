@@ -295,8 +295,8 @@ class TodoInfo extends Component {
                 {ProgressExampleAttached}
                 <div className="deleteMarginBottom">
                     {this.state.toggle ? (
-                            <Progress percent={this.state.progress} size='small' color='blue' progress indicating/>
-                        ) : <span><Progress percent={this.state.progress} size='small' color='blue' progress indicating/></span>}
+                            <Progress percent={this.state.progress} size='small' color='gray' progress indicating/>
+                        ) : <span><Progress percent={this.state.progress} size='small' color='gray' progress indicating/></span>}
                 </div>
                 
             </Segment>    
