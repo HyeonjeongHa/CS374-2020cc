@@ -263,15 +263,17 @@ class TodoInfo extends Component {
                         {this.props.isCoworker 
                             ? (<div>
                                 {this.state.heartFlag ? (
-                                    <AiFillHeart size={32} onClick={this.handleLikey}/>
+                                    <div style={{color: 'red'}}>
+                                        <AiFillHeart size={32} onClick={this.handleLikey}/>
+                                    </div>
                                     
-                                ): <AiOutlineHeart size="32" onClick={this.handleLikey}/>}
+                                ): <div style={{color: 'red'}}><AiOutlineHeart size="32" onClick={this.handleLikey}/></div>}
                                 </div>) 
                             : (<div>
                                 <RiDeleteBin6Line size="32" onClick={this.handleRemove}/>
                                 {this.state.heartFlag ? (
-                                    <AiFillHeart size="32" onClick={this.handleLikey}/>
-                                ): <AiOutlineHeart size="32" onClick={this.handleLikey}/>}
+                                    <div style={{color: 'red'}}><AiFillHeart size="32" onClick={this.handleLikey}/></div>
+                                ): <div style={{color: 'red'}}><AiOutlineHeart size="32" onClick={this.handleLikey}/></div>}
                                 </div>)
                         }
                         <div className="heartNum">{this.state.heartNum}</div>
