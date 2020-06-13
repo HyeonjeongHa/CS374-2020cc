@@ -120,7 +120,7 @@ class TodoInfo extends Component {
         const { data, onUpdate } = this.props;
 
         onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index}, false, true);
-    }
+    };
 
     handleToggleChange = () => {
         if(!this.props.isCoworker){
@@ -243,6 +243,7 @@ class TodoInfo extends Component {
         }
     };
 
+    handleFocus = (event) => event.target.select();
 
   render() {
     const { data, onUpdate, onRemove } = this.props;
@@ -277,7 +278,9 @@ class TodoInfo extends Component {
                     name="progress" 
                     type="number" 
                     onKeyPress={this.handleKeyPress}
-                    onBlur={this.handleBlur}>
+                    onBlur={this.handleBlur}
+                    onFocus={this.handleFocus}
+                    >
                 </input>)
                 :(<span 
                     label="Progress" 
@@ -305,7 +308,9 @@ class TodoInfo extends Component {
                             onChange={this.handleTaskChange} 
                             type='text' 
                             onKeyPress={this.handleKeyPress}
-                            onBlur={this.handleBlur}>
+                            onBlur={this.handleBlur}
+                            onFocus={this.handleFocus}
+                            >
                         </input>
                     ) : <span 
                             className="todo-task-text" 
