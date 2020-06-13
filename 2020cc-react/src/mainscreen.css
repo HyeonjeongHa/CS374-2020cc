@@ -291,6 +291,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
 }
 
 .recordBox {
@@ -368,4 +369,11 @@ body {
     float: right;
     color: lightgray;
     font-size: 15px;
+}
+
+.nullSign {
+    font-weight: bold;
+    color: #34495e;
+    font-size: 15px;
+    text-align: center;
 }
