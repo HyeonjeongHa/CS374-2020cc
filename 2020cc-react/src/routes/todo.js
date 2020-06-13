@@ -173,7 +173,7 @@ class Todo extends Component {
         })
     };
 
-    handleUpdate = (index, data, islikey = false) => {
+    handleUpdate = (index, data, islikey = false, isAllSave = false) => {
         console.log(index);
         // console.log(data);
         const { TodoList } = this.state;
@@ -225,6 +225,9 @@ class Todo extends Component {
             }),
             isSaved: false
         });
+
+        if( isAllSave )
+            this.handleAllSave();
     };
 
     handleRemove = (index) => {
