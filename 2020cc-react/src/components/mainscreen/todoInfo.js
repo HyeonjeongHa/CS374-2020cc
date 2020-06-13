@@ -20,6 +20,7 @@ import { TextField } from '@material-ui/core';
 class TodoInfo extends Component {
     state = {
         toggle: false, //is changed?
+        toggle2: false, //is changed?
         task: this.props.data.task,
         duetime : this.props.data.duetime,
         progress : Number(this.props.data.progress),
@@ -34,7 +35,7 @@ class TodoInfo extends Component {
     componentDidMount() {
         this._setHeartFlag();
         this._setHeartNum();
-    }
+    };
 
     _setHeartFlag() {
         console.log("this.props.data.task", this.props.data.task);
@@ -44,7 +45,7 @@ class TodoInfo extends Component {
                 heartFlag: true
             })
         }
-    }
+    };
 
     _setHeartNum() {
         var tempLikey = this.state.likey; 
@@ -59,18 +60,25 @@ class TodoInfo extends Component {
         this.setState({
             heartNum: numLikey
         })
-    }
+    };
 
-    handleChange = (e) => {
+    handleProgressChange = (e) => {
+
+        if( isNaN(e.target.value) )
+            return;
+        let value = Number(e.target.value);
+        if( value > 100 ) value = 100;
+        if( value < 0 ) value = 0;
+
         this.setState({
-            [e.target.name]: e.target.value,
+            [e.target.name]: value,
         });
         const { toggle, task, duetime, progress, index, TodoList } = this.state;
         const { data, onUpdate } = this.props;
 
-        onUpdate(data.index, { task: task, duetime : duetime, progress : e.target.value, index : index});
+        onUpdate(data.index, { task: task, duetime : duetime, progress : value, index : index});
     };
-    handleChange2 = (e) => {
+    handleTaskChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value,
         });
@@ -89,6 +97,31 @@ class TodoInfo extends Component {
 
         onUpdate(data.index, { task: task, duetime : e.target.value, progress : progress, index : index});
     };
+
+    handleKeyPress = (e) => {
+        if(e.charCode===13) {
+            this.setState({
+                toggle: false,
+                toggle2: false
+            })
+        }
+        const { toggle, task, duetime, progress, index, TodoList } = this.state;
+        const { data, onUpdate } = this.props;
+
+        onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index}, false, true);
+    };
+
+    handleBlur = (e) => {
+        this.setState({
+            toggle: false,
+            toggle2: false
+        });
+        const { toggle, task, duetime, progress, index, TodoList } = this.state;
+        const { data, onUpdate } = this.props;
+
+        onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index}, false, true);
+    };
+
     handleToggleChange = () => {
         if(!this.props.isCoworker){
             const { toggle, task, duetime, progress, index, TodoList } = this.state;
@@ -101,6 +134,23 @@ class TodoInfo extends Component {
                 onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index});
                 this.setState({
                     toggle: false,
+                });
+            }
+        }
+    };
+
+    handleToggleChange2 = () => {
+        if(!this.props.isCoworker){
+            const { toggle, task, duetime, progress, index, TodoList } = this.state;
+            const { data, onUpdate } = this.props;
+            if (!toggle) {
+                this.setState({
+                    toggle2: true,
+                });
+            } else {
+                onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index});
+                this.setState({
+                    toggle2: false,
                 });
             }
         }
@@ -125,14 +175,6 @@ class TodoInfo extends Component {
 
         let loginID = this.state.loginID;
         let tempLikey = this.state.likey; 
-        // var numLikey = 0;
-        // Object.keys(tempLikey).forEach(function(k){
-        //     if (k !== "null") {
-        //         if (tempLikey[k] === "1") {
-        //             numLikey++;
-        //         }
-        //     }
-        // })
         
         if (tempLikey["null"] === "1") {
             tempLikey["null"] = "0";
@@ -158,16 +200,13 @@ class TodoInfo extends Component {
 
 
         onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index, likey: this.state.likey }, true);
-        // this.setState({
-        //     toggle: false,
-        // });
-    }
+    };
     
     increment = () => {
         if(!this.props.isCoworker){
             const { data, onUpdate, onRemove } = this.props;
             let newProgress = this.state.progress >= 100 ? 100 : this.state.progress + 10;
-            onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : newProgress, index : this.state.index});
+            onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : newProgress, index : this.state.index}, false, true);
             this.setState(prevState => ({
                 progress: newProgress
             }));
@@ -176,7 +215,7 @@ class TodoInfo extends Component {
     incrementFull = () => {
         if(!this.props.isCoworker){
             const { data, onUpdate, onRemove } = this.props;
-            onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : 100, index : this.state.index});
+            onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : 100, index : this.state.index}, false, true);
             this.setState(prevState => ({
                 progress: 100
             }));
@@ -187,7 +226,7 @@ class TodoInfo extends Component {
         if(!this.props.isCoworker){
             const { data, onUpdate, onRemove } = this.props;
             let newProgress = this.state.progress - 10 <= 0 ? 0 : this.state.progress - 10
-            onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : newProgress, index : this.state.index});
+            onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : newProgress, index : this.state.index}, false, true);
             this.setState(prevState => ({
                 progress: newProgress
             }));
@@ -197,31 +236,19 @@ class TodoInfo extends Component {
     decrementFull = () => {
         if(!this.props.isCoworker){
             const { data, onUpdate, onRemove } = this.props;
-            onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : 0, index : this.state.index});
+            onUpdate(data.index, { task: this.state.task, duetime : this.state.duetime, progress : 0, index : this.state.index}, false, true);
             this.setState(prevState => ({
                 progress: 0
             }));
         }
     };
 
+    handleFocus = (event) => event.target.select();
 
   render() {
     const { data, onUpdate, onRemove } = this.props;
     const { toggle, task, duetime, progress, index, TodoList } = this.state;
     
-    const TimeInput2 = (
-        <div className="progressBtn">
-            <TimePicker
-                className="timePickerStyle"
-                onChange={this.timeChange}
-                value={this.state.duetime}
-                name="duetime"
-                clockIcon={null}
-                clearIcon={null}
-                disableClock={true}
-              />
-        </div>
-    );
     const TimeInput = (
         <div className="progressBtn">
             <TextField
@@ -242,7 +269,25 @@ class TodoInfo extends Component {
         <div className="progressBtn">
             <FiChevronsLeft className="forArrow" size="32" onClick={this.decrementFull}/>  
             <FiChevronLeft className="forArrow" size="30" onClick={this.decrement}/>  
-            <span label="Progress" className="progress-percent-text">{this.props.data.progress + "%"}</span>
+            {this.state.toggle2 ? 
+                (<input 
+                    autoFocus 
+                    className="progress-percent-input" 
+                    value={this.state.progress} 
+                    onChange={this.handleProgressChange} 
+                    name="progress" 
+                    type="number" 
+                    onKeyPress={this.handleKeyPress}
+                    onBlur={this.handleBlur}
+                    onFocus={this.handleFocus}
+                    >
+                </input>)
+                :(<span 
+                    label="Progress" 
+                    className="progress-percent-text"  
+                    onClick={this.handleToggleChange2}>
+                        {this.props.data.progress + "%"
+                    }</span>)}
             <FiChevronRight className="forArrow" size="30" onClick={this.increment}/>  
             <FiChevronsRight className="forArrow" size="32" onClick={this.incrementFull}/>  
         </div>
@@ -253,8 +298,25 @@ class TodoInfo extends Component {
             <div>
                 <form className="mainBox">
                     {this.state.toggle ? (
-                        <input autoFocus className="todo-task-input" id="taskInput" value={this.state.task} name="task" placeholder="Task" onChange={this.handleChange2} type='text'></input>
-                    ) : <span className="todo-task-text" onClick={this.handleToggleChange}>{this.props.data.task === "" ? "Task" : this.props.data.task}</span>}
+                        <input 
+                            autoFocus 
+                            className="todo-task-input" 
+                            id="taskInput" 
+                            value={this.state.task} 
+                            name="task" 
+                            placeholder="Task" 
+                            onChange={this.handleTaskChange} 
+                            type='text' 
+                            onKeyPress={this.handleKeyPress}
+                            onBlur={this.handleBlur}
+                            onFocus={this.handleFocus}
+                            >
+                        </input>
+                    ) : <span 
+                            className="todo-task-text" 
+                            onClick={this.handleToggleChange}>
+                                {this.props.data.task === "" ? "Task" : this.props.data.task}
+                        </span>}
                     <div className = "rightBox">
                         {TimeInput}
                         {progressInput}
