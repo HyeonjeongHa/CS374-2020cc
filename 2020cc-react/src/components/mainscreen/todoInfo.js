@@ -267,16 +267,16 @@ class TodoInfo extends Component {
                                         <AiFillHeart size={32} onClick={this.handleLikey}/>
                                     </div>
                                     
-                                ): <div style={{color: 'red'}}><AiOutlineHeart size="32" onClick={this.handleLikey}/></div>}
+                                ): <div><AiOutlineHeart size="32" onClick={this.handleLikey}/></div>}
                                 </div>) 
                             : (<div>
                                 <RiDeleteBin6Line size="32" onClick={this.handleRemove}/>
                                 {this.state.heartFlag ? (
                                     <div style={{color: 'red'}}><AiFillHeart size="32" onClick={this.handleLikey}/></div>
-                                ): <div style={{color: 'red'}}><AiOutlineHeart size="32" onClick={this.handleLikey}/></div>}
+                                ): <div><AiOutlineHeart size="32" onClick={this.handleLikey}/></div>}
                                 </div>)
                         }
-                        <div className="heartNum">{this.state.heartNum}</div>
+                        <div className="heartNum">{this.state.heartNum}&nbsp;{this.state.heartNum>1 ? "likes" : "like"}</div>
                     </div>
                 </form>
             </div>
