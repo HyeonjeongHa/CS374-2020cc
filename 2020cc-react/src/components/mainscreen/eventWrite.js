@@ -6,6 +6,9 @@ import "firebase/database";
 import firebaseConfig from "../../firebaseConfig";
 import moment from "moment";
 import { TextField } from '@material-ui/core';
+import { Segment  } from 'semantic-ui-react';
+
+import { FiSend } from "react-icons/fi"; 
 
 if(!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -39,31 +42,41 @@ class EventWrite extends Component {
     })
   }
 
+  handleKeyPress = (e) => {
+    if(e.charCode===13) {
+       this.handleSubmit();
+    }
+  };
+
   render() {
       const CreateQuestion = (
-          <div>
-              <TextField
-                label = "Question"
-                value = {this.state.question}
-                onChange = {this.handleChange}
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                name="question"
-                size="medium"
-              />
-              <Button onClick = {this.handleSubmit}>Submit</Button>
+          <div className="question">
+              <input 
+                  autoFocus 
+                  className="question-input" 
+                  id="taskInput" 
+                  value = {this.state.question}
+                  name="question" 
+                  placeholder="Enter the Qusetion"
+                  onChange = {this.handleChange}
+                  onKeyPress = {this.handleKeyPress}
+                  type='text'
+                  >
+              </input>
+              <FiSend className="submitButton" size="36" onClick={this.handleSubmit}/>  
           </div>
         );
 
 
     return (
-        <Fragment>
-            <div>Create Event Question!</div>
-            <div>
-                {CreateQuestion}
-            </div>
-        </Fragment>
+        <div>
+          <div className = "title3" >Event Write</div>
+          <div>
+            <Segment className="segmentBox">
+              {CreateQuestion}
+            </Segment>
+          </div>
+        </div>
     );
   }
 }
