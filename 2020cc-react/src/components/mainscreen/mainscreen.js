@@ -44,6 +44,8 @@ class Mainscreen extends Component {
 		this.handleChange = this.handleChange.bind(this)
 	}
 	
+
+
 	handleTimer = (value) => {
 		console.log(value)
 		timerId = setInterval(() => {
@@ -59,8 +61,27 @@ class Mainscreen extends Component {
             }, 1000*60*value)
 	}
 
+	getalarmflag = () => {
+		var local_id = localStorage.getItem('id');
+		console.log("hellooo" + localStorage.getItem('alarmflag') );
+		let past_flag = localStorage.getItem('alarmflag');
+		if (this.props.loginID === local_id){
+			if((past_flag + "") === "false"){
+				this.setState({
+					alarm_flag : false
+				})
+			}
+			else {
+				this.setState({
+					alarm_flag : true
+				})
+			}
+		} 
+	}
+
 	componentDidMount(){
 		this.handleTimer(this.state.noti_time);
+		this.getalarmflag();
 	}
 
 	shouldComponentUpdate(nextProps,nextState){
@@ -119,6 +140,9 @@ class Mainscreen extends Component {
 		this.setState({
 			 alarm_flag : checked
 		});
+		localStorage.setItem('alarmflag', checked);
+		console.log("here is " + checked)
+		console.log("here is "+ localStorage.getItem('alarmflag'));
 	}
 
 	handleProfile = () => {
@@ -140,6 +164,7 @@ class Mainscreen extends Component {
 	  };
 	
 	render() {
+
 
 		if(this.props.data !== this.state.data){
 			this.setState({
