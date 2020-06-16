@@ -38,9 +38,9 @@ class TodoInfo extends Component {
     };
 
     _setHeartFlag() {
-        console.log("this.props.data.task", this.props.data.task);
-        console.log("this.props.data.likey[this.state.loginID]", this.props.data.likey[this.state.loginID]);
-        if (this.props.data.likey[this.state.loginID] === "1") {
+        //console.log("this.props.data.task", this.props.data.task);
+        //console.log("this.props.data.likey[this.state.loginID]", this.props.data.likey[this.state.loginID]);
+        if (this.props.data.likey[this.state.loginID] !== null && this.props.data.likey[this.state.loginID] === "1" ) {
             this.setState({
                 heartFlag: true
             })

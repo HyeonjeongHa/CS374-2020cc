@@ -124,6 +124,14 @@ body {
     left: 10px;
 }
 
+.alarm2 {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 270px;
+    left: 10px;
+}
+
 .for_test {
     display: flex;
     position: absolute;
@@ -192,6 +200,11 @@ body {
     left: -10px;
     width: 150px;
     color: #95e8d7;
+}
+
+.select-flex {
+    display: flex;
+    align-items: center;
 }
 
 .select-up .Select-menu-outer {

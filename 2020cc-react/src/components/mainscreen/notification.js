@@ -18,8 +18,8 @@ class Notification extends Component {
     }
     render(){
         const options = {
-            body: "Go to WebPage",
-            tag : "http://localhost:3000/CS374-2020cc/Odot/",
+            body: "",
+            tag : "",   
             badge : ""
         }
         localStorage.setItem('name', this.props.data.name);
