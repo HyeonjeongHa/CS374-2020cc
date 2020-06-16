@@ -93,9 +93,6 @@ class Event extends Component {
             <Fragment>
                 <div className="new_signin">
                     <div className="title">Event</div>
-                    <div className="myProfile">
-                        <Person isMine={true} name={this.state.data.name} position="Developer" />
-                    </div>
                 </div>
                 <div>
                     {this.state.flag ? 
