@@ -22,105 +22,55 @@ class Event extends Component {
         data : this.props.data,
         QuestionList : [],
 		EventList : [],
-		flag : false
+        flag : false,
+        callFlag : false
 	}
 
 	componentDidMount() {
-        this._getQuestionList();
+        // this._getEventList();
     }
 
- 	_getDailyList(){
-        const teamName = this.state.data.teamName;
-        const id = this.state.id;
-        const today = moment().format("YYYYMMDD");
-        const question = "What do you want!!!!!!!!!!!!!!";
-        // database.ref('Event/'+ teamName + '/' + today).child(question).push().set({
-        //     id : "aaaaaa",
-        //     answer : "bbbbbbbb"
-        // });
-        // database.ref('Event/'+ teamName + '/' + today).child(question).push().set({
-        //     id : "ccccccccc",
-        //     answer : "dddddddddd"
-        // });
-        // database.ref('Event/'+ teamName + '/' + today).child(question).push().set({
-        //     id : "eeeeeeeee",
-        //     answer : "fffffffff"
-        // });
-        
-        database.ref('Event/'+ teamName).once('value').then((snapshot) => {
-            // console.log("this outside of foreach", this);
-            var tempThis = this;
-            // var maxIndex = 0;
-            // console.log("outside foreach, snapshot.val()", snapshot.val());
-            // this.setState({
-            //     EventList: [snapshot.val()]
-            // })
-            snapshot.forEach(function(child) {
-                let res = child.val();
-                let childKey = child.key;
-                let childQAnswer = res.QuestionAnswer;
-                console.log("in foreach, res", res);
-                console.log("in foreach, childKey", childKey);
-                database.ref('Event/' + teamName + '/' + childKey).once('value').then((snapshot) => {
-                    let res2 = child.val();
-                    console.log("in foreach2, snapshot", snapshot);
-                    tempThis.setState({
-                        EventList : update(
-                            tempThis.state.EventList, {
-                                $push : [{
-                                    question: childKey,
-                                    // q_maker: res.QuestionMaker.id,
-                                    answer: res.QuestionAnswer
-                                }]
-                            }),
-                        flag: true
-                    });
-                })
-            })  
-            
-        })
-        // console.log("[event.js] database check, this.state.EventList", this.state.EventList);
-    }
 
-    _getQuestionList() {
+    _getEventList() {
 		const teamName = this.state.data.teamName;
 		
 		database.ref('Event/'+ teamName + '/').once('value').then((snapshot) => {
-			// console.log("this outside of foreach", this);
 			var tempThis = this;
 			snapshot.forEach(function(child) {
 				let res = child.val();
 				let childKey = child.key;
-                // console.log("in foreach, res", res.QuestionMaker.id);
-                console.log("childKey@@@@@@@@@@@@@@2", childKey);
-				var id = "";
+                var id = "";
+                let allAnswer = [];
 				database.ref('Event/'+ teamName + '/'+ childKey + '/QuestionAnswer').once('value').then((snapshot) => {
-                    var tempThis2 = tempThis;
-					snapshot.forEach(function(child) {
-						let res = child.val();
-						console.log(res);
-						id = res.id;
-						let tempanswer = res.answer;
-						console.log("getquestionList",res.id);
-                        console.log(res.answer);
-                        console.log("tempThis2", tempThis2);
-						tempThis2.setState({
-							EventList : update(
-								tempThis2.state.EventList, {
-									$push : [{
-										question: childKey,
-                                        id : res.id,
-                                        answer : res.answer
-									}]
-								}),
-						});
+                    snapshot.forEach(function(child) {
+                        let tempAnswer = new Object();
+                        let res2 = child.val();
+                        console.log("in getEventList, snapshotForeach, res2", res2);
+                        tempAnswer.answer = res2.answer;
+                        tempAnswer.id = res2.id;
+                        allAnswer.push(tempAnswer);
 					})
-				})
-			})  
+                });
+                tempThis.setState({
+                    EventList : update(
+                        tempThis.state.EventList, {
+                            $push : [{
+                                question: childKey,
+                                answer : allAnswer
+                            }]
+                        }),
+                    flag: true
+                });
+			})
         })
     }
     
 	render() {
+        if (!this.state.callFlag) {
+            this.state.callFlag = true;
+            this._getEventList();
+        }
+
         const style = {
             height : "300px",
             overflowY : "scroll",
@@ -159,9 +109,10 @@ class Event extends Component {
         
         </Fragment>
         )
-        console.log(this.state.EventList[0]);
-        console.log(this.state.EventList[1]);
-        
+        console.log("this.state.EventList", this.state.EventList);
+        // console.log("this.state.EventList[0]", this.state.EventList[0]);
+        // console.log("this.state.EventList[0].answer", this.state.EventList[0].question);
+        // console.log("this.state.EventList[0].answer", this.state.EventList[0].answer);
     return (
     <div>
     	{this.state.flag? returnVal : null}

@@ -13,23 +13,35 @@ class EventList extends Component {
   }
 
   componentDidMount() {
-    this.getAnswerList();
-}
-getAnswerList() {
-    const myanswerList = [];
-    Object.keys(this.state.answer).forEach(key => {
-        // console.log("[eventList.js] getAnswerList() this.state.answer[key].answer", this.state.answer[key].answer);
-        // console.log("[eventList.js] getAnswerList() this.state.answer[key].id", this.state.answer[key].id);
-        // console.log("[eventList.js] getAnswerList() this.state.answer[key]", this.state.answer[key]);
-        myanswerList.push({answer: this.state.answer[key].answer, id: this.state.answer[key].id})
-    })
-    this.setState({
-        answerList: myanswerList,
-        flag: true
-    })
-}
+    // console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@this.props.data.answer", this.props.data.answer);
+    // this._getAnswerList();
+  }
+
+  _getAnswerList() {
+      const myanswerList = [];
+      var answerArray = this.state.answer;
+      console.log("########### _getAnswerList, answerArray", answerArray);
+      // numbers.map((number) => number * 2);
+
+      answerArray.forEach(function(data, idx){
+        // console.log("###########################in foreach, data", data);
+          // console.log("[eventList.js] getAnswerList() this.state.answer[key].answer", this.state.answer[key].answer);
+          // console.log("[eventList.js] getAnswerList() this.state.answer[key].id", this.state.answer[key].id);
+          // console.log("[eventList.js] getAnswerList() this.state.answer[key]", this.state.answer[key]);
+          myanswerList.push({answer: data.answer, id: data.id})
+      })
+      console.log("myanswerList", myanswerList);
+      this.setState({
+          answerList: myanswerList,
+          flag: true
+      })
+  }
 
   render() {
+    console.log("eventList.js, answerList", this.state.answerList);
+    if (!this.state.flag) {
+      this._getAnswerList();
+    }
       const returnVal = (
         <div>
           <ul>

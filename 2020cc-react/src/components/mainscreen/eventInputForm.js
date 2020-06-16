@@ -72,7 +72,7 @@ class EventInputForm extends Component {
 
   handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      this.props.handleSubmit();
+      this.handleSubmit();
     }
   }
 

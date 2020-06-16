@@ -39,7 +39,7 @@ class Mainscreen extends Component {
 			noti_change : 0	,
 			selected : "",
 			open : false,
-			question : "How old are you?",
+			question : "What did you eat?",
 			questionList : []
 		}
 		this.notiChange = this.notiChange.bind(this)
@@ -84,18 +84,19 @@ class Mainscreen extends Component {
 	}
 	_getQuestionList(){
 		const teamName = this.state.data.teamName;
-		const tempThis = this;
+		var tempThis = this;
 		database.ref('Event/'+ teamName + '/').once('value').then((snapshot) => {
 			// console.log("this outside of foreach", this);
 			snapshot.forEach(function(child) {
 				let res = child.val();
 				let childKey = child.key;
+				var tempThis2 = tempThis;
 				database.ref('Event/'+ teamName + '/'+ childKey + '/QuestionMaker').once('value').then((snapshot) => {
 					snapshot.forEach(function(child) {
 						let res = child.val();
-						tempThis.setState({
+						tempThis2.setState({
 							questionList : update(
-								tempThis.state.questionList, {
+								tempThis2.state.questionList, {
 									$push : [{
 										question: childKey,
 										id : res.id
@@ -162,13 +163,17 @@ class Mainscreen extends Component {
 	}
 
 	handleOpen = () => { 
-		const random = (Math.random() * (this.state.questionList.length-1));
-		const randomQuestion = this.state.questionList[random].question;
-		// console.log("[mainscreen.js]", Number(random), randomQuestion);
+		// console.log(this.state.questionList);
+		// var random = (Math.random() * (this.state.questionList.length-1));
+		// if(Math.floor(random) == -1) {
+		// 	random = 0;
+		// }
+		// const randomQuestion = this.state.questionList[random].question;
+		// // console.log("[mainscreen.js]", Number(random), randomQuestion);
 
 		this.setState({
 			open : true,  
-			question : randomQuestion
+			// question : randomQuestion
 		})
 		
 	};
@@ -181,6 +186,7 @@ class Mainscreen extends Component {
 	
 	render() {
 		console.log("[mainscreen.js]", console.log(this.state.questionList));
+		console.log("mainscreen.js, currentTab", this.state.currentTab);
 		if(this.props.data !== this.state.data){
 			this.setState({
     			data: this.props.data
