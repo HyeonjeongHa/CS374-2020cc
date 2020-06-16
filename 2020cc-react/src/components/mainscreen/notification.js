@@ -22,9 +22,9 @@ class Notification extends Component {
             tag : "",   
             badge : ""
         }
-        localStorage.setItem('name', this.props.data.name);
-        localStorage.setItem('teamName', this.props.data.teamName);
-        localStorage.setItem('id', this.props.data.id);
+        localStorage.setItem('name', this.props.loginName);
+        localStorage.setItem('teamName', this.props.loginTeamname);
+        localStorage.setItem('id', this.props.loginID);
 
         console.log("여기다!!!!!");
         console.log(this.props.noti_title + "!!!!!!!!!!!!!!!!")

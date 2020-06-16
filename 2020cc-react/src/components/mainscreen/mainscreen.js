@@ -267,7 +267,10 @@ class Mainscreen extends Component {
 						noti_title={this.state.noti_title} 
 						noti_page={"http://localhost:3000/CS374-2020cc/Odot/"} 
 						noti_change={this.state.noti_change}
-						data = {this.props.data}/>
+						loginTeamname = {this.props.loginTeamname} 
+						loginID={this.props.loginID}
+						loginName={this.props.loginName}
+						/>
                 :(  
                     null
                 )}
