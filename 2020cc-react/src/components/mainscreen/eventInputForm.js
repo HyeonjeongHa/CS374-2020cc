@@ -35,11 +35,17 @@ class EventInputForm extends Component {
   };
   
   
-  handleClose = () => {
-    this.setState({
-      open :false
-    });
-  };
+  // handleClose = () => {
+  //   this.setState({
+  //     open :false
+  //   });
+  // };
+
+  // handleOpen = () => {
+  //   this.setState({
+  //     open : true
+  //   })
+  // };
 
   handleSubmit = () => {
     console.log(window.location.href);
@@ -64,15 +70,7 @@ class EventInputForm extends Component {
     console.log(this.state.name);
     console.log(this.state.teamName);
     console.log(this.props);
-    
-    this.props.history.replace({
-      pathname : "/CS374-2020cc/Odot",
-      state : {
-        name : name,
-        teamName : teamName,
-        id : id, 
-      }
-    });
+
 
     this.setState({
       open :false
@@ -88,13 +86,16 @@ class EventInputForm extends Component {
 
   handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      this.handleSubmit();
+      this.props.handleSubmit();
     }
   }
+
   render () {
+    console.log('[eventInputForm.js]', this.state.answer);
       return (
         <div>
-          <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+          {/* <Button onClick = {this.handleOpen}>Open the Pop Up window</Button> */}
+          <Dialog open={this.state.open} onClose={this.props.handleClose} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">Pop-Up Event </DialogTitle>
             <DialogContent>
               <DialogContentText>
@@ -115,7 +116,7 @@ class EventInputForm extends Component {
               />
             </DialogContent>
             <DialogActions>
-              <Button onClick={this.handleClose} color="primary">
+              <Button onClick={this.props.handleClose} color="primary">
                 Cancel
               </Button>
               <Button onClick={this.handleSubmit} color="primary">

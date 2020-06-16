@@ -124,6 +124,14 @@ body {
     left: 10px;
 }
 
+.EventBtn{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 250px;
+    left: 10px;
+}
+
 .human_icon {
     background-image: url('./face.png');
     background-size: 80px 80px;

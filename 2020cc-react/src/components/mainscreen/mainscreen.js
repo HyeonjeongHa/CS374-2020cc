@@ -6,7 +6,18 @@ import Switch from 'react-switch';
 import { Notification } from '..';
 import Select from 'react-select'
 import { Segment } from 'semantic-ui-react';
+import Button from '@material-ui/core/Button';
+import * as firebase from "firebase/app";
+import "firebase/database";
+import firebaseConfig from "../../firebaseConfig";
+import moment from "moment";
+import { createHashHistory } from 'history';
+export const history = createHashHistory();
+if(!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
 
+const database = firebase.database();
 var timerId;
 
 const options = [
@@ -27,7 +38,9 @@ class Mainscreen extends Component {
 			noti_page : "",
 			alarm_flag : false,		
 			noti_change : 0	,
-			selected : ""
+			selected : "",
+			open : false,
+			question : "How old are you?",
 		}
 		this.notiChange = this.notiChange.bind(this)
 		this.handleChange = this.handleChange.bind(this)
@@ -115,6 +128,19 @@ class Mainscreen extends Component {
 			id : this.props.loginID
 		});
 	}
+
+	handleOpen = () => { 
+		this.setState({
+			open : true
+		})
+	};
+
+	handleClose = () => {
+		this.setState({
+		  open :false
+		});
+	  };
+	
 	render() {
 
 		if(this.props.data !== this.state.data){
@@ -162,7 +188,10 @@ class Mainscreen extends Component {
 			</div>
 		) 
 		
-
+	    const style = {
+			fontFamily : "Arial Black, Gadget, sans-serif",
+			color : "lightgray"
+		}
 
     return (
     	<div className="app">
@@ -184,7 +213,7 @@ class Mainscreen extends Component {
                     <Switch
 						checked={this.state.alarm_flag}
 						onChange={this.handleChange}
-						uncheckedIcon = {false}
+					uncheckedIcon = {false}
 						checkedIcon = {false}
 						offColor = '#888'
 						onColor = '#F67E7D'
@@ -193,6 +222,8 @@ class Mainscreen extends Component {
 					/>
                 </div>
 	     		{/* <div className="setting" onClick={this.handleSetting}></div> */}
+				 <div className = "EventBtn"> <Button style = {style} onClick = {this.handleOpen}>Open the Pop Up window</Button></div>
+				 <div>{this.state.open ? <EventInputForm open = {true} handleClose = {this.handleClose}/> : null} </div>
 	        </div>
 	        </div> 
 	     	<div className="content">
