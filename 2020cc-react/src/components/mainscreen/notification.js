@@ -19,7 +19,7 @@ class Notification extends Component {
     render(){
         const options = {
             body: "",
-            tag : "",   
+            tag : "http://localhost:3000/CS374-2020cc/Odot",   
             badge : ""
         }
         localStorage.setItem('name', this.props.loginName);
