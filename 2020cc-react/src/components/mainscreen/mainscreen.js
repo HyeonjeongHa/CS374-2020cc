@@ -21,9 +21,7 @@ const database = firebase.database();
 var timerId;
 
 const options = [
-	{ value: '1', label: '1h' },
-	{ value: '2', label: '2h' },
-	{ value: '3', label: '3h' },
+	{ value: '0.1', label: '6s' },
   ];
 
 class Mainscreen extends Component {
@@ -32,7 +30,7 @@ class Mainscreen extends Component {
 		this.state = {
 			data : this.props.data,
 			currentTab : "Todo",
-			noti_time : 0.2,
+			noti_time : 0.1,
 			noti_flag: false,
 			noti_title : "",
 			noti_page : "",
@@ -52,7 +50,7 @@ class Mainscreen extends Component {
             this.setState({
                 noti_flag : true,
                 noti_title : "Mark the progress😀",
-				noti_page : 'http://localhost:3000/CS374-2020cc/EventInputForm/',
+				noti_page : 'http://localhost:3000/CS374-2020cc/Odot/',
 				noti_time : value
 			})
 			this.setState({
@@ -203,11 +201,12 @@ class Mainscreen extends Component {
 				<div className = "profileDiv" onClick={this.handleProfile}>{ShowProfile}</div>
 	     		{/* <div className={this.state.currentTab === "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div> */}
 	     		{/* <div className={this.state.currentTab === "EventInput" ? 'clickedButton':'idleButton'}  onClick={this.handleEventInput}>EventInput</div> */}
+				<div className = "for_test">For easy prototype testing, <br></br> we only allow interval to '6s'</div>
 	     		<div className="alarm">
-					 <div className="alarm_icon2"></div>
+					<div className="alarm_icon2"></div>
 					<div style = {{width:'90px', marginLeft:'5px', marginRight:'10px', color:'black'}} > 
 					<div className="select-up">
-					<Select id = "container_2" placeholder = "Time" value={this.state.selected} isDisabled={!this.state.alarm_flag} onChange={this.notiChange} options={options} /> 	
+					<Select  id = "container_2" placeholder = "Time" value={this.state.selected} isDisabled={!this.state.alarm_flag} onChange={this.notiChange} options={options} /> 	
 					</div>
 					</div>
                     <Switch
@@ -233,13 +232,15 @@ class Mainscreen extends Component {
 				<NotificationManager data={this.state.data}/>
 	        </div>
 			<div id = "container1">
+			{this.state.currentTab === "Todo" ? 
 					<Coworker handler={this.props.coworkerHandler} data={this.state.data}/>
+					: null}
 			</div>
 			<div>
                 {this.state.noti_flag&&this.state.alarm_flag ?
 					<Notification 
 						noti_title={this.state.noti_title} 
-						noti_page={"http://localhost:3000/CS374-2020cc/EventInputForm/"} 
+						noti_page={"http://localhost:3000/CS374-2020cc/Odot/"} 
 						noti_change={this.state.noti_change}
 						data = {this.props.data}/>
                 :(  

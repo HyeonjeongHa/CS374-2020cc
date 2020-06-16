@@ -41,7 +41,7 @@ class Todo extends Component {
         this._getDailyList();
 
         // 메인스크린에 mount아닌곳에 넣기
-
+        
     }
 
     //업데이트 되고 re-render됐을 때 부르는 함수 
@@ -57,9 +57,9 @@ class Todo extends Component {
     _getDailyList() {
         const teamName = this.state.teamName;
         const id = this.state.id;
-        const today = moment().format("YYYYMMDD");
+        //const today = moment().format("YYYYMMDD");
 
-        database.ref('teamName/' + teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
+        database.ref('teamName/' + teamName + '/' + id ).once('value').then((snapshot) => {
             console.log("this outside of foreach", this);
             var tempThis = this;
             // var maxIndex = 0;
@@ -102,16 +102,16 @@ class Todo extends Component {
         // console.log(data);
         const teamName = this.state.teamName;
         const id = this.state.id;
-        const today = moment().format("YYYYMMDD");
+        //const today = moment().format("YYYYMMDD");
 
         // console.log("[todo.js] CLICK!!!!!!!!!!!!!!!!");
         var idx;
         const t_this = this;
-        await database.ref('teamName/' + teamName + '/' + id).child(today).once('value', function(snapshot) {
+        await database.ref('teamName/' + teamName + '/' + id).once('value', function(snapshot) {
             // console.log(snapshot.numChildren());
             if (snapshot.numChildren() > 0) {
                 // console.log("child exist");
-                database.ref('teamName/' + teamName + '/' + id).child(today).limitToLast(1).once("child_added", function(child) {
+                database.ref('teamName/' + teamName + '/' + id).limitToLast(1).once("child_added", function(child) {
 
                     // console.log("get index");
                     // console.log("limit to last child", child.numChildren(), child);
@@ -131,7 +131,7 @@ class Todo extends Component {
                         }),
                     });
 
-                    database.ref('teamName/' + teamName + '/' + id).child(today).push().set({
+                    database.ref('teamName/' + teamName + '/' + id).push().set({
                         duetime: "00:00",
                         task: "",
                         progress: "0",
@@ -155,7 +155,7 @@ class Todo extends Component {
                     }),
                 });
 
-                database.ref('teamName/' + teamName + '/' + id).child(today).push().set({
+                database.ref('teamName/' + teamName + '/' + id).push().set({
                     duetime: "00:00",
                     task: "",
                     progress: "0",
@@ -179,11 +179,11 @@ class Todo extends Component {
         const { TodoList } = this.state;
         const teamName = this.state.teamName;
         const id = this.state.id;
-        const today = moment().format("YYYYMMDD");
+        //const today = moment().format("YYYYMMDD");
 
         // console.log(index);
         if (islikey) {
-            database.ref('teamName/' + teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
+            database.ref('teamName/' + teamName + '/' + id ).once('value').then((snapshot) => {
                 // var tempThis = this;
                 // console.log(tempThis.state.index);
                 snapshot.forEach(function(child) {
@@ -192,7 +192,7 @@ class Todo extends Component {
                         console.log("[todoform.js] inside of the IF");
                         let childKey = child.key;
                         // console.log("tempThis.state.progress", tempThis.state.progress);
-                        database.ref('teamName/' + teamName + '/' + id).child(today).child(childKey).update({
+                        database.ref('teamName/' + teamName + '/' + id).child(childKey).update({
                             duetime: data.duetime,
                             task: data.task,
                             progress: data.progress,
@@ -233,19 +233,19 @@ class Todo extends Component {
     handleRemove = (index) => {
         const teamName = this.state.teamName;
         const id = this.state.id;
-        const today = moment().format("YYYYMMDD");
+        //const today = moment().format("YYYYMMDD");
 
         console.log('handle remove id :', index);
         const { TodoList } = this.state;
         const t_this = this;
 
-        database.ref('teamName/' + teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
+        database.ref('teamName/' + teamName + '/' + id ).once('value').then((snapshot) => {
             snapshot.forEach(function(child) {
                 let res = child.val();
                 if (res.index === index) {
                     let childKey = child.key;
                     // console.log("[remove]", index);
-                    database.ref('teamName/' + teamName + '/' + id + '/' + today).child(childKey).remove();
+                    database.ref('teamName/' + teamName + '/' + id ).child(childKey).remove();
                     // return;
                     t_this.setState({
                         TodoList: TodoList.filter((data) => data.index !== index),
@@ -268,11 +268,11 @@ class Todo extends Component {
         const { TodoList } = this.state;
         const teamName = this.state.teamName;
         const id = this.state.id;
-        const today = moment().format("YYYYMMDD");
+        //const today = moment().format("YYYYMMDD");
         // console.log(index);
 
         this.state.TodoList.forEach(function(data) {
-            database.ref('teamName/' + teamName + '/' + id + '/' + today).once('value').then((snapshot) => {
+            database.ref('teamName/' + teamName + '/' + id ).once('value').then((snapshot) => {
                 var tempThis = this;
                 let index = data.index;
                 // console.log(tempThis.state.index);
@@ -280,7 +280,7 @@ class Todo extends Component {
                     let res = child.val();
                     if (res.index === index) {
                         let childKey = child.key;
-                        database.ref('teamName/' + teamName + '/' + id).child(today).child(childKey).update({
+                        database.ref('teamName/' + teamName + '/' + id).child(childKey).update({
                             duetime: data.duetime,
                             task: data.task,
                             progress: data.progress
@@ -303,7 +303,7 @@ class Todo extends Component {
     _calulateTotalProgress = () => {
         const teamName = this.state.teamName;
         const id = this.state.id;
-        const today = moment().format("YYYYMMDD");
+        //const today = moment().format("YYYYMMDD");
 
         const l = this.state.TodoList.length;
         let _totalProgress = 0;
