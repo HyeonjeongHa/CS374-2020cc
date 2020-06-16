@@ -39,13 +39,21 @@ class Mainscreen extends Component {
 			noti_change : 0	,
 			selected : "",
 			open : false,
+<<<<<<< HEAD
 			question : "What did you eat?",
 			questionList : []
+=======
+			question : "How old are you?",
+			questionList : [],
+			flag : false
+>>>>>>> e102fe3fca4ed430c97df9bb9b2553cad6af4d44
 		}
 		this.notiChange = this.notiChange.bind(this)
 		this.handleChange = this.handleChange.bind(this)
 	}
 	
+
+
 	handleTimer = (value) => {
 		console.log(value)
 		timerId = setInterval(() => {
@@ -64,10 +72,29 @@ class Mainscreen extends Component {
 	getRandomArbitrary = (min, max) => {
 		return Math.random() * (max - min) + min;
 	}
+	
+	getalarmflag = () => {
+		var local_id = localStorage.getItem('id');
+		console.log("hellooo" + localStorage.getItem('alarmflag') );
+		let past_flag = localStorage.getItem('alarmflag');
+		if (this.props.loginID === local_id){
+			if((past_flag + "") === "false"){
+				this.setState({
+					alarm_flag : false
+				})
+			}
+			else {
+				this.setState({
+					alarm_flag : true
+				})
+			}
+		} 
+	}
 
 	componentDidMount(){
 		this.handleTimer(this.state.noti_time);
 		this._getQuestionList();
+		this.getalarmflag();
 	}
 
 	shouldComponentUpdate(nextProps,nextState){
@@ -84,32 +111,48 @@ class Mainscreen extends Component {
 	}
 	_getQuestionList(){
 		const teamName = this.state.data.teamName;
+<<<<<<< HEAD
 		var tempThis = this;
+=======
+		// var questionListBeforeRender = [];
+		const tempThis = this;
+		// let questionList = this.state.questionList;
+>>>>>>> e102fe3fca4ed430c97df9bb9b2553cad6af4d44
 		database.ref('Event/'+ teamName + '/').once('value').then((snapshot) => {
-			// console.log("this outside of foreach", this);
 			snapshot.forEach(function(child) {
-				let res = child.val();
 				let childKey = child.key;
+<<<<<<< HEAD
 				var tempThis2 = tempThis;
 				database.ref('Event/'+ teamName + '/'+ childKey + '/QuestionMaker').once('value').then((snapshot) => {
 					snapshot.forEach(function(child) {
 						let res = child.val();
 						tempThis2.setState({
+=======
+				// let id = "";
+				database.ref('Event/'+ teamName + '/'+ childKey + '/QuestionMaker').once("value").then((snapshots) => { 
+					// let res = .val();
+					// console.log("[mainscreen.js]", childKey, res.id);
+					snapshots.forEach(function(child2) {
+						let res2 = child2.val();
+						tempThis.setState({
+>>>>>>> e102fe3fca4ed430c97df9bb9b2553cad6af4d44
 							questionList : update(
 								tempThis2.state.questionList, {
 									$push : [{
 										question: childKey,
-										id : res.id
+										id : res2.id
 									}]
 								}),
-						});
+								flag : true
+						})
+
 					})
-				})
+				});
+
+				
 			})  
 		})
 	}
-
-	
 
 	handleDaily = () => {
 		this.setState({
@@ -154,6 +197,9 @@ class Mainscreen extends Component {
 		this.setState({
 			 alarm_flag : checked
 		});
+		localStorage.setItem('alarmflag', checked);
+		console.log("here is " + checked)
+		console.log("here is "+ localStorage.getItem('alarmflag'));
 	}
 
 	handleProfile = () => {
@@ -163,20 +209,47 @@ class Mainscreen extends Component {
 	}
 
 	handleOpen = () => { 
-		// console.log(this.state.questionList);
-		// var random = (Math.random() * (this.state.questionList.length-1));
-		// if(Math.floor(random) == -1) {
-		// 	random = 0;
-		// }
-		// const randomQuestion = this.state.questionList[random].question;
-		// // console.log("[mainscreen.js]", Number(random), randomQuestion);
+		if(this.state.flag) {
 
-		this.setState({
-			open : true,  
-			// question : randomQuestion
-		})
+			console.log("[mainscreen.js]",this.state.questionList);
+			let random = Math.floor((Math.random() * (this.state.questionList.length-1)));
+			// console.log(Math.floor(random));
+			if(random == -1) {
+				random = 0;
+			}
+			const randomQuestion = this.state.questionList[random].question;
+			// console.log("[mainscreen.js]", Number(random), randomQuestion);
+	
+			this.setState({
+				open : true,  
+				question : randomQuestion
+			})
+		
+		} else {
+			console.log("[mainscreen.js] state.flag is false");
+			this.setState({
+				open : true,
+				question : "What did you eat?"
+			})
+		}
 		
 	};
+
+	handleUpdate = (question, id) => {
+        // console.log(index);
+		// console.log(data);
+		console.log(question);
+		console.log('handle update');
+		const questionList = this.state.questionList;
+		this.setState({
+			questionList: questionList.concat({
+				question : question,
+				id : id
+			}),
+			flag : true
+		});
+	}
+		
 
 	handleClose = () => {
 		this.setState({
@@ -185,8 +258,12 @@ class Mainscreen extends Component {
 	  };
 	
 	render() {
+<<<<<<< HEAD
 		console.log("[mainscreen.js]", console.log(this.state.questionList));
 		console.log("mainscreen.js, currentTab", this.state.currentTab);
+=======
+		
+>>>>>>> e102fe3fca4ed430c97df9bb9b2553cad6af4d44
 		if(this.props.data !== this.state.data){
 			this.setState({
     			data: this.props.data
@@ -211,7 +288,7 @@ class Mainscreen extends Component {
 
 		let eventWrite = (
 			<div>
-				<EventWrite currentTab="EventWrite" data={this.state.data} questionList = {this.state.questionList}/>
+				<EventWrite currentTab="EventWrite" data={this.state.data} questionList = {this.state.questionList} update = {this.handleUpdate}/>
 			</div>
 		);
 
@@ -286,7 +363,10 @@ class Mainscreen extends Component {
 						noti_title={this.state.noti_title} 
 						noti_page={"http://localhost:3000/CS374-2020cc/Odot/"} 
 						noti_change={this.state.noti_change}
-						data = {this.props.data}/>
+						loginTeamname = {this.props.loginTeamname} 
+						loginID={this.props.loginID}
+						loginName={this.props.loginName}
+						/>
                 :(  
                     null
                 )}

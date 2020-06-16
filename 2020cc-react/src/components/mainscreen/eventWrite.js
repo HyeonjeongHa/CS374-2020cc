@@ -8,6 +8,8 @@ import firebaseConfig from "../../firebaseConfig";
 import moment from "moment";
 import { TextField } from '@material-ui/core';
 
+import { FiSend } from "react-icons/fi"; 
+
 if(!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
@@ -37,25 +39,35 @@ class EventWrite extends Component {
       id : id,
     })
 
+    this.props.update(this.state.question, id);
+
     this.setState({
         question : ""
     })
   }
 
+  handleKeyPress = (e) => {
+    if(e.charCode===13) {
+       this.handleSubmit();
+    }
+  };
+
   render() {
       const CreateQuestion = (
-          <div>
-              <TextField
-                label = "Question"
-                value = {this.state.question}
-                onChange = {this.handleChange}
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                name="question"
-                size="medium"
-              />
-              <Button onClick = {this.handleSubmit}>Submit</Button>
+          <div className="question">
+              <input 
+                  autoFocus 
+                  className="question-input" 
+                  id="taskInput" 
+                  value = {this.state.question}
+                  name="question" 
+                  placeholder="Enter the Qusetion"
+                  onChange = {this.handleChange}
+                  onKeyPress = {this.handleKeyPress}
+                  type='text'
+                  >
+              </input>
+              <FiSend className="submitButton" size="36" onClick={this.handleSubmit}/>  
           </div>
         );
 
@@ -67,23 +79,19 @@ class EventWrite extends Component {
         console.log(this.state.questionList);
 
     return (
-        <Fragment>
-            <div>Create Event Question!</div>
-            <div>
-                {CreateQuestion}
-            </div>
-            <div>
-                <Segment style = {style}>
-                    <div>
-                        [ QuestionList ] 
-                    </div>
-                    <br/>
-                    {this.state.questionList.map(data => (
-                        <div className = "eventBox">{data.question} <span className="answerID"> by {data.id}</span></div>
+
+        <div>
+          <div className = "title3" >Event Write</div>
+            <Segment className="segmentBox">
+              {CreateQuestion}
+              </Segment>
+              <br/>
+              <Segment>
+                {this.props.questionList.map(data => (
+                    <div className = "eventBox">{data.question} <span className="answerID"> by {data.id}</span></div>
                     ))}
-                </Segment>
-            </div>
-        </Fragment>
+            </Segment>
+        </div>
     );
   }
 }
