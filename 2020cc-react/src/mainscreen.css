@@ -124,6 +124,14 @@ body {
     left: 10px;
 }
 
+.for_test {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    bottom: 370px;
+    color: black;
+}
+
 .human_icon {
     background-image: url('./face.png');
     background-size: 80px 80px;
@@ -215,11 +223,11 @@ body {
     font-family: "Arial Black", serif;
     font-weight: lighter;
     left: 70px;
-    margin-top : 3px;
+    margin-top: 3px;
 }
 
 .ShoeProfileTextMe {
-    color:black;
+    color: black;
     margin-top: 40px;
     text-align: center;
     font-family: "Arial Black", serif;
@@ -230,7 +238,7 @@ body {
     align-items: center;
     position: absolute;
     /* bottom: 110px; */
-    margin-top : 5px;
+    margin-top: 5px;
     left: 10px;
     background-size: 40px 40px;
     width: 40px;
@@ -240,16 +248,15 @@ body {
 .ShowProfileAlign {
     display: inline-flex;
     position: absolute;
-    margin-left : 5px;
+    margin-left: 5px;
     bottom: 20px;
     left: 10px;
     /* border-radius: 20px; */
     /* border: 2px solid; */
     background: #E7F6F8;
     /* box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px, rgba(0, 0, 0, 0.2) 0px 2px 24px; */
-    width : 170px;
+    width: 170px;
     height: 70px;
-
 }
 
 .myProfile {
@@ -360,7 +367,7 @@ body {
     transition: background 0.2s, color 0.2s;
 }
 
-.onlyFlex{
+.onlyFlex {
     display: flex;
     align-items: center;
 }

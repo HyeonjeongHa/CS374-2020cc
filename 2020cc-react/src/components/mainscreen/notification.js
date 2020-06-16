@@ -8,18 +8,18 @@ class Notification extends Component {
         super(props);
         this.state = {
             noti_title: this.props.noti_title,
-            noti_page : "http://localhost:3000/CS374-2020cc/EventInputForm/"
+            noti_page : "http://localhost:3000/CS374-2020cc/Odot/"
         }
     }
     
     handleNoti = () => {
         
-        window.open("http://localhost:3000/CS374-2020cc/EventInputForm/?name=template97", '_self', "", false);
+        window.open("http://localhost:3000/CS374-2020cc/Odot", '_self', "", false);
     }
     render(){
         const options = {
             body: "Go to WebPage",
-            tag : "http://localhost:3000/CS374-2020cc/EventInputForm/",
+            tag : "http://localhost:3000/CS374-2020cc/Odot/",
             badge : ""
         }
         localStorage.setItem('name', this.props.data.name);
