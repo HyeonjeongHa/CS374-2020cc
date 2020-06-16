@@ -83,10 +83,12 @@ class EventWrite extends Component {
           <div className = "title3" >Event Write</div>
             <Segment className="segmentBox">
               {CreateQuestion}
+              </Segment>
               <br/>
-            {this.state.questionList.map(data => (
-                <div className = "eventBox">{data.question} <span className="answerID"> by {data.id}</span></div>
-            ))}
+              <Segment>
+                {this.state.questionList.map(data => (
+                    <div className = "eventBox">{data.question} <span className="answerID"> by {data.id}</span></div>
+                    ))}
             </Segment>
         </div>
     );
