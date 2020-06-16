@@ -23,7 +23,7 @@ const database = firebase.database();
 
 class EventInputForm extends Component {
   state = {
-    question : "How old are you?",
+    question : this.props.question,
     answer : "",
     open: true,
     data : {
@@ -31,63 +31,9 @@ class EventInputForm extends Component {
       id : "template97"
     },
     name : "",
-    teamName : ""
+    teamName : "",
   };
-  
-  // componentDidMount() {
-  //   this.AList();
-  // }
 
-  // _getDailyList(){
-  //     const teamName = this.state.data.teamName;
-  //     const id = this.state.id;
-  //     const today = moment().format("YYYYMMDD");
-  //     const question = "What do you want!!!!!!!!!!!!!!";
-  //     // database.ref('Event/'+ teamName + '/' + today).child(question).push().set({
-  //     //     id : "aaaaaa",
-  //     //     answer : "bbbbbbbb"
-  //     // });
-  //     // database.ref('Event/'+ teamName + '/' + today).child(question).push().set({
-  //     //     id : "ccccccccc",
-  //     //     answer : "dddddddddd"
-  //     // });
-  //     // database.ref('Event/'+ teamName + '/' + today).child(question).push().set({
-  //     //     id : "eeeeeeeee",
-  //     //     answer : "fffffffff"
-  //     // });
-      
-  //     database.ref('Event/'+ teamName + '/' + today).once('value').then((snapshot) => {
-  //         // console.log("this outside of foreach", this);
-  //         var tempThis = this;
-  //         // var maxIndex = 0;
-  //         // console.log("outside foreach, snapshot.val()", snapshot.val());
-  //         // this.setState({
-  //         //     EventList: [snapshot.val()]
-  //         // })
-  //         snapshot.forEach(function(child) {
-  //             let res = child.val();
-  //             let childKey = child.key;
-  //             // console.log("in foreach, res", res);
-  //             // console.log("in foreach, childKey", childKey);
-
-  //             // console.log("in foreach, snapshot", snapshot);
-  //             tempThis.setState({
-  //                 EventList : update(
-  //                     tempThis.state.EventList, {
-  //                         $push : [{
-  //                             question: childKey,
-  //                             answer: res
-  //                         }]
-  //                     }),
-  //                 flag: true
-  //             });
-  //         })  
-          
-  //     })
-
-  //     // console.log("[event.js] database check, this.state.EventList", this.state.EventList);
-  // }
-  
   handleSubmit = () => {
     console.log(window.location.href);
     console.log(localStorage.getItem('name'));
@@ -115,9 +61,6 @@ class EventInputForm extends Component {
     console.log(this.props);
 
     this.props.handleClose();
-    // this.setState({
-    //   open :false
-    // });
   };
 
   handleChange = (e) => {

@@ -11,6 +11,7 @@ import * as firebase from "firebase/app";
 import "firebase/database";
 import firebaseConfig from "../../firebaseConfig";
 import moment from "moment";
+import update from 'react-addons-update';
 import { createHashHistory } from 'history';
 export const history = createHashHistory();
 if(!firebase.apps.length) {
@@ -39,6 +40,7 @@ class Mainscreen extends Component {
 			selected : "",
 			open : false,
 			question : "How old are you?",
+			questionList : []
 		}
 		this.notiChange = this.notiChange.bind(this)
 		this.handleChange = this.handleChange.bind(this)
@@ -59,8 +61,13 @@ class Mainscreen extends Component {
             }, 1000*60*value)
 	}
 
+	getRandomArbitrary = (min, max) => {
+		return Math.random() * (max - min) + min;
+	}
+
 	componentDidMount(){
 		this.handleTimer(this.state.noti_time);
+		this._getQuestionList();
 	}
 
 	shouldComponentUpdate(nextProps,nextState){
@@ -75,6 +82,33 @@ class Mainscreen extends Component {
 			})
 		}
 	}
+	_getQuestionList(){
+		const teamName = this.state.data.teamName;
+		const tempThis = this;
+		database.ref('Event/'+ teamName + '/').once('value').then((snapshot) => {
+			// console.log("this outside of foreach", this);
+			snapshot.forEach(function(child) {
+				let res = child.val();
+				let childKey = child.key;
+				database.ref('Event/'+ teamName + '/'+ childKey + '/QuestionMaker').once('value').then((snapshot) => {
+					snapshot.forEach(function(child) {
+						let res = child.val();
+						tempThis.setState({
+							questionList : update(
+								tempThis.state.questionList, {
+									$push : [{
+										question: childKey,
+										id : res.id
+									}]
+								}),
+						});
+					})
+				})
+			})  
+		})
+	}
+
+	
 
 	handleDaily = () => {
 		this.setState({
@@ -128,9 +162,15 @@ class Mainscreen extends Component {
 	}
 
 	handleOpen = () => { 
+		const random = (Math.random() * (this.state.questionList.length-1));
+		const randomQuestion = this.state.questionList[random].question;
+		// console.log("[mainscreen.js]", Number(random), randomQuestion);
+
 		this.setState({
-			open : true
+			open : true,  
+			question : randomQuestion
 		})
+		
 	};
 
 	handleClose = () => {
@@ -140,7 +180,7 @@ class Mainscreen extends Component {
 	  };
 	
 	render() {
-
+		console.log("[mainscreen.js]", console.log(this.state.questionList));
 		if(this.props.data !== this.state.data){
 			this.setState({
     			data: this.props.data
@@ -165,7 +205,7 @@ class Mainscreen extends Component {
 
 		let eventWrite = (
 			<div>
-				<EventWrite currentTab="EventWrite" data={this.state.data}/>
+				<EventWrite currentTab="EventWrite" data={this.state.data} questionList = {this.state.questionList}/>
 			</div>
 		);
 
@@ -200,8 +240,6 @@ class Mainscreen extends Component {
 	     		<div className={this.state.currentTab === "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
 	     		<div className={this.state.currentTab === "EventWrite" ? 'clickedButton':'idleButton'}  onClick={this.handleEventWrite}>EventWrite</div>
 				<div className = "profileDiv" onClick={this.handleProfile}>{ShowProfile}</div>
-	     		{/* <div className={this.state.currentTab === "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div> */}
-	     		{/* <div className={this.state.currentTab === "EventInput" ? 'clickedButton':'idleButton'}  onClick={this.handleEventInput}>EventInput</div> */}
 				<div className = "for_test">For easy prototype testing, <br></br> we only allow interval to '6s'</div>
 	     		<div className="alarm">
 					<div className="alarm_icon2"></div>
@@ -221,9 +259,8 @@ class Mainscreen extends Component {
 						width = {40}
 					/>
                 </div>
-	     		{/* <div className="setting" onClick={this.handleSetting}></div> */}
 				 <div className = "EventBtn"> <Button style = {style} onClick = {this.handleOpen}>Open the Pop Up window</Button></div>
-				 <div>{this.state.open ? <EventInputForm open = {true} handleClose = {this.handleClose}/> : null} </div>
+				 <div>{this.state.open ? <EventInputForm open = {true} question = {this.state.question} handleClose = {this.handleClose}/> : null} </div>
 	        </div>
 	        </div> 
 	     	<div className="content">
