@@ -60,21 +60,23 @@ class EventInputForm extends Component {
     const teamName = localStorage.getItem('teamName');
     const id = localStorage.getItem('id');
     const today = moment().format("YYYYMMDD");
+    var current_time = moment().format("YYYY/MM/DD HH:mm")
 
 
     database.ref('Event/' + teamName + '/' + today).child(this.state.question).push().set({
       id : id,
-      answer : this.state.answer
+      answer : this.state.answer,
+      answerTime : current_time
     })
 
     console.log(this.state.name);
     console.log(this.state.teamName);
     console.log(this.props);
 
-
-    this.setState({
-      open :false
-    });
+    this.props.handleClose();
+    // this.setState({
+    //   open :false
+    // });
   };
 
   handleChange = (e) => {

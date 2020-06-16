@@ -5,6 +5,7 @@ import * as firebase from "firebase/app";
 import "firebase/database";
 import firebaseConfig from "../../firebaseConfig";
 import '../../mainscreen.css';
+import '../../login.css';
 import moment from "moment";
 import update from 'react-addons-update';
 
@@ -83,6 +84,7 @@ class Event extends Component {
         const style = {
             height : "300px",
             overflowY : "scroll",
+            width : "1000px"
         }
 
         const quesitionStyle = {
@@ -91,8 +93,8 @@ class Event extends Component {
 
         const returnVal = (
             <Fragment>
-                <div className="new_signin">
-                    <div className="title">Event</div>
+                 <div className = "new_signin" >
+                    <div className = "title2" >Event</div>
                 </div>
                 <div>
                     {this.state.flag ? 

@@ -172,6 +172,18 @@ body {
     width: 150px;
     height: 50px;
     font-family: "Arial Black", Gadget, sans-serif;
+    display: flex;
+}
+.title2 {
+    padding: 10px;
+    font-size: 40px;
+    text-align: center;
+    width: 150px;
+    height: 50px;
+    font-family: "Arial Black", Gadget, sans-serif;
+    display: flex;
+    margin-top: 55px;
+    margin-bottom: 15px;
 }
 
 .profile {
