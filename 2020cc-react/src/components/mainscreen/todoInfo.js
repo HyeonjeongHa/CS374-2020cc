@@ -261,14 +261,15 @@ class TodoInfo extends Component {
                 }}
                 name="duetime"
                 size="medium"
+                disabled = {(this.props.isCoworker)? "disabled" : ""}
             />
       </div>
     );
 
     const progressInput = (
         <div className="progressBtn">
-            <FiChevronsLeft className="forArrow" size="32" onClick={this.decrementFull}/>  
-            <FiChevronLeft className="forArrow" size="30" onClick={this.decrement}/>  
+            <FiChevronsLeft className="forArrow" size="32" onClick={this.decrementFull} style = {this.props.isCoworker ? {opacity : "0.4"} : {}}/>  
+            <FiChevronLeft className="forArrow" size="30" onClick={this.decrement} style = {this.props.isCoworker ? {opacity : "0.4"} : {}}/>  
             {this.state.toggle2 ? 
                 (<input 
                     autoFocus 
@@ -288,8 +289,8 @@ class TodoInfo extends Component {
                     onClick={this.handleToggleChange2}>
                         {this.props.data.progress + "%"
                     }</span>)}
-            <FiChevronRight className="forArrow" size="30" onClick={this.increment}/>  
-            <FiChevronsRight className="forArrow" size="32" onClick={this.incrementFull}/>  
+            <FiChevronRight className="forArrow" size="30" onClick={this.increment} style = {this.props.isCoworker ? {opacity : "0.4"} : {}}/>  
+            <FiChevronsRight className="forArrow" size="32" onClick={this.incrementFull} style = {this.props.isCoworker ? {opacity : "0.4"} : {}}/>  
         </div>
     );
 
