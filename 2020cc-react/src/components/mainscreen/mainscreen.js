@@ -39,14 +39,9 @@ class Mainscreen extends Component {
 			noti_change : 0	,
 			selected : "",
 			open : false,
-<<<<<<< HEAD
-			question : "What did you eat?",
-			questionList : []
-=======
 			question : "How old are you?",
 			questionList : [],
 			flag : false
->>>>>>> e102fe3fca4ed430c97df9bb9b2553cad6af4d44
 		}
 		this.notiChange = this.notiChange.bind(this)
 		this.handleChange = this.handleChange.bind(this)
@@ -111,23 +106,10 @@ class Mainscreen extends Component {
 	}
 	_getQuestionList(){
 		const teamName = this.state.data.teamName;
-<<<<<<< HEAD
 		var tempThis = this;
-=======
-		// var questionListBeforeRender = [];
-		const tempThis = this;
-		// let questionList = this.state.questionList;
->>>>>>> e102fe3fca4ed430c97df9bb9b2553cad6af4d44
 		database.ref('Event/'+ teamName + '/').once('value').then((snapshot) => {
 			snapshot.forEach(function(child) {
 				let childKey = child.key;
-<<<<<<< HEAD
-				var tempThis2 = tempThis;
-				database.ref('Event/'+ teamName + '/'+ childKey + '/QuestionMaker').once('value').then((snapshot) => {
-					snapshot.forEach(function(child) {
-						let res = child.val();
-						tempThis2.setState({
-=======
 				// let id = "";
 				database.ref('Event/'+ teamName + '/'+ childKey + '/QuestionMaker').once("value").then((snapshots) => { 
 					// let res = .val();
@@ -135,9 +117,8 @@ class Mainscreen extends Component {
 					snapshots.forEach(function(child2) {
 						let res2 = child2.val();
 						tempThis.setState({
->>>>>>> e102fe3fca4ed430c97df9bb9b2553cad6af4d44
 							questionList : update(
-								tempThis2.state.questionList, {
+								tempThis.state.questionList, {
 									$push : [{
 										question: childKey,
 										id : res2.id
@@ -258,12 +239,7 @@ class Mainscreen extends Component {
 	  };
 	
 	render() {
-<<<<<<< HEAD
-		console.log("[mainscreen.js]", console.log(this.state.questionList));
-		console.log("mainscreen.js, currentTab", this.state.currentTab);
-=======
 		
->>>>>>> e102fe3fca4ed430c97df9bb9b2553cad6af4d44
 		if(this.props.data !== this.state.data){
 			this.setState({
     			data: this.props.data
