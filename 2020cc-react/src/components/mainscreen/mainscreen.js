@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Coworker, Record, Event, EventInputForm, NotificationManager } from '..';
+import { Coworker, Record, Event, EventInputForm, NotificationManager, EventWrite } from '..';
 import '../../mainscreen.css';
 import { Todo } from '../../routes';
 import Switch from 'react-switch';
@@ -94,9 +94,9 @@ class Mainscreen extends Component {
 		})
 	}
 
-	handleEventInput = () => {
+	handleEventWrite = () => {
 		this.setState({
-			currentTab : "EventInput"
+			currentTab : "EventWrite"
 		})
 	}
 
@@ -163,9 +163,9 @@ class Mainscreen extends Component {
             </div>
 		);
 
-		let eventInput = (
+		let eventWrite = (
 			<div>
-				<EventInputForm currentTab="EventInput" onhandleEvent = {this.handleEvent}/>
+				<EventWrite currentTab="EventWrite" data={this.state.data}/>
 			</div>
 		);
 
@@ -198,6 +198,7 @@ class Mainscreen extends Component {
 	     		<div className="logo" onClick={this.handleProfile}></div>
 	     		<div className={this.state.currentTab === "Todo" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Todo</div>
 	     		<div className={this.state.currentTab === "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
+	     		<div className={this.state.currentTab === "EventWrite" ? 'clickedButton':'idleButton'}  onClick={this.handleEventWrite}>EventWrite</div>
 				<div className = "profileDiv" onClick={this.handleProfile}>{ShowProfile}</div>
 	     		{/* <div className={this.state.currentTab === "Record" ? 'clickedButton':'idleButton'}  onClick={this.handleRecord}>Record</div> */}
 	     		{/* <div className={this.state.currentTab === "EventInput" ? 'clickedButton':'idleButton'}  onClick={this.handleEventInput}>EventInput</div> */}
@@ -227,8 +228,8 @@ class Mainscreen extends Component {
 	        </div> 
 	     	<div className="content">
 				{this.state.currentTab === "Record" ? recordScheduler : 
-				(this.state.currentTab === "Event" ? eventScheduler : dailyScheduler)}
-				{/* (this.state.currentTab === "EventInput" ? eventInput : dailyScheduler))} */}
+				(this.state.currentTab === "Event" ? eventScheduler : 
+				(this.state.currentTab === "EventWrite" ? eventWrite : dailyScheduler))}
 				<NotificationManager data={this.state.data}/>
 	        </div>
 			<div id = "container1">
