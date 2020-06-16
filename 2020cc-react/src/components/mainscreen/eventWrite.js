@@ -36,6 +36,7 @@ class EventWrite extends Component {
     database.ref('Event/' + teamName + '/' + this.state.question).child("QuestionMaker").push().set({
       id : id,
     })
+    // onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index});
 
     this.setState({
         question : ""
