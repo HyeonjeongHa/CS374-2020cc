@@ -218,6 +218,22 @@ class Mainscreen extends Component {
 		
 	};
 
+	handleUpdate = (question, id) => {
+        // console.log(index);
+		// console.log(data);
+		console.log(question);
+		console.log('handle update');
+		const questionList = this.state.questionList;
+		this.setState({
+			questionList: questionList.concat({
+				question : question,
+				id : id
+			}),
+			flag : true
+		});
+	}
+		
+
 	handleClose = () => {
 		this.setState({
 		  open :false
@@ -250,7 +266,7 @@ class Mainscreen extends Component {
 
 		let eventWrite = (
 			<div>
-				<EventWrite currentTab="EventWrite" data={this.state.data} questionList = {this.state.questionList}/>
+				<EventWrite currentTab="EventWrite" data={this.state.data} questionList = {this.state.questionList} update = {this.handleUpdate}/>
 			</div>
 		);
 

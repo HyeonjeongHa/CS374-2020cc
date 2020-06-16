@@ -38,7 +38,8 @@ class EventWrite extends Component {
     database.ref('Event/' + teamName + '/' + this.state.question).child("QuestionMaker").push().set({
       id : id,
     })
-    // onUpdate(data.index, { task: task, duetime : duetime, progress : progress, index : index});
+
+    this.props.update(this.state.question, id);
 
     this.setState({
         question : ""
@@ -86,7 +87,7 @@ class EventWrite extends Component {
               </Segment>
               <br/>
               <Segment>
-                {this.state.questionList.map(data => (
+                {this.props.questionList.map(data => (
                     <div className = "eventBox">{data.question} <span className="answerID"> by {data.id}</span></div>
                     ))}
             </Segment>
