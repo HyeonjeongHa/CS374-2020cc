@@ -104,7 +104,7 @@ class EventInputForm extends Component {
     var current_time = moment().format("YYYY/MM/DD HH:mm")
 
 
-    database.ref('Event/' + teamName + '/' + today).child(this.state.question).push().set({
+    database.ref('Event/' + teamName + '/' + this.state.question).child("QuestionAnswer").push().set({
       id : id,
       answer : this.state.answer,
       answerTime : current_time
