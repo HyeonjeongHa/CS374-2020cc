@@ -26,7 +26,7 @@ class Event extends Component {
 	}
 
 	componentDidMount() {
-        this._getDailyList();
+        this._getQuestionList();
     }
 
  	_getDailyList(){
@@ -47,7 +47,7 @@ class Event extends Component {
         //     answer : "fffffffff"
         // });
         
-        database.ref('Event/'+ teamName + '/' + today).once('value').then((snapshot) => {
+        database.ref('Event/'+ teamName).once('value').then((snapshot) => {
             // console.log("this outside of foreach", this);
             var tempThis = this;
             // var maxIndex = 0;
@@ -58,28 +58,68 @@ class Event extends Component {
             snapshot.forEach(function(child) {
                 let res = child.val();
                 let childKey = child.key;
-                // console.log("in foreach, res", res);
-                // console.log("in foreach, childKey", childKey);
-
-                // console.log("in foreach, snapshot", snapshot);
-                tempThis.setState({
-                    EventList : update(
-                        tempThis.state.EventList, {
-                            $push : [{
-                                question: childKey,
-                                answer: res
-                            }]
-                        }),
-                    flag: true
-                });
+                let childQAnswer = res.QuestionAnswer;
+                console.log("in foreach, res", res);
+                console.log("in foreach, childKey", childKey);
+                database.ref('Event/' + teamName + '/' + childKey).once('value').then((snapshot) => {
+                    let res2 = child.val();
+                    console.log("in foreach2, snapshot", snapshot);
+                    tempThis.setState({
+                        EventList : update(
+                            tempThis.state.EventList, {
+                                $push : [{
+                                    question: childKey,
+                                    // q_maker: res.QuestionMaker.id,
+                                    answer: res.QuestionAnswer
+                                }]
+                            }),
+                        flag: true
+                    });
+                })
             })  
             
         })
-
         // console.log("[event.js] database check, this.state.EventList", this.state.EventList);
-
-
     }
+
+    _getQuestionList() {
+		const teamName = this.state.data.teamName;
+		
+		database.ref('Event/'+ teamName + '/').once('value').then((snapshot) => {
+			// console.log("this outside of foreach", this);
+			var tempThis = this;
+			snapshot.forEach(function(child) {
+				let res = child.val();
+				let childKey = child.key;
+                // console.log("in foreach, res", res.QuestionMaker.id);
+                console.log("childKey@@@@@@@@@@@@@@2", childKey);
+				var id = "";
+				database.ref('Event/'+ teamName + '/'+ childKey + '/QuestionAnswer').once('value').then((snapshot) => {
+                    var tempThis2 = tempThis;
+					snapshot.forEach(function(child) {
+						let res = child.val();
+						console.log(res);
+						id = res.id;
+						let tempanswer = res.answer;
+						console.log("getquestionList",res.id);
+                        console.log(res.answer);
+                        console.log("tempThis2", tempThis2);
+						tempThis2.setState({
+							EventList : update(
+								tempThis2.state.EventList, {
+									$push : [{
+										question: childKey,
+                                        id : res.id,
+                                        answer : res.answer
+									}]
+								}),
+						});
+					})
+				})
+			})  
+        })
+    }
+    
 	render() {
         const style = {
             height : "300px",
@@ -120,6 +160,7 @@ class Event extends Component {
         </Fragment>
         )
         console.log(this.state.EventList[0]);
+        console.log(this.state.EventList[1]);
         
     return (
     <div>
