@@ -269,7 +269,7 @@ class Mainscreen extends Component {
 		);
 
 		let ShowProfile = (
-			<div className="ShowProfileAlign">
+			<Button className="ShowProfileAlign" style={{textTransform:'None'}}>
 				<div className="ShowProfilePhoto">
 					<div className="ShoeProfileTextMe">
 						Me
@@ -282,7 +282,7 @@ class Mainscreen extends Component {
 					<br/>
 					developer
 				</div>
-			</div>
+			</Button>
 		) 
 		
 	    const style = {
@@ -295,10 +295,10 @@ class Mainscreen extends Component {
     		<div>
 	     	<div className="sidebar">
 	     		<div className="logo" onClick={this.handleProfile}></div>
+				<div className = "profileDiv" onClick={this.handleProfile}>{ShowProfile}</div>
 	     		<div className={this.state.currentTab === "Todo" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Todo</div>
 	     		<div className={this.state.currentTab === "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
 	     		<div className={this.state.currentTab === "EventWrite" ? 'clickedButton':'idleButton'}  onClick={this.handleEventWrite}>EventWrite</div>
-				<div className = "profileDiv" onClick={this.handleProfile}>{ShowProfile}</div>
 				<div className = "for_test">For easy prototype testing, <br></br> we only allow interval to '6s'</div>
 	     		<div className="alarm">
 					<div className="alarm_icon2"></div>

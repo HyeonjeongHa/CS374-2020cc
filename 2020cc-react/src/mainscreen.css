@@ -98,6 +98,8 @@ body {
     background-size: 180px 180px;
     width: 180px;
     height: 180px;
+    position: absolute;
+    bottom: 15px;
 }
 
 .alarm_icon {
@@ -359,7 +361,7 @@ body {
     align-items: center;
     position: absolute;
     /* bottom: 110px; */
-    margin-top: 5px;
+    margin-top: -5px;
     left: 10px;
     background-size: 40px 40px;
     width: 40px;
@@ -367,17 +369,24 @@ body {
 }
 
 .ShowProfileAlign {
-    display: inline-flex;
-    position: absolute;
-    margin-left: 5px;
-    bottom: 20px;
-    left: 10px;
+    /* display: inline-flex; */
+    /* position: absolute; */
+    margin-left: 30px;
+    /* padding-bottom: 500px;  */
+    /* bottom: 20px; */
+    /* top: 0px; */
+    margin-top: 20px;
+    /* left: 10px; */
     /* border-radius: 20px; */
     /* border: 2px solid; */
     background: #E7F6F8;
     /* box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px, rgba(0, 0, 0, 0.2) 0px 2px 24px; */
     width: 170px;
-    height: 70px;
+    height: 80px;
+
+}
+.profileDiv {
+    padding-bottom: 20px;
 }
 
 .myProfile {
