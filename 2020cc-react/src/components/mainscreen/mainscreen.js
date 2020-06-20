@@ -22,7 +22,9 @@ const database = firebase.database();
 var timerId;
 
 const options = [
-	{ value: '0.1', label: '6s' },
+	{ value: '0.1', label: '6s'},
+	{ value: '1', label: '1h', isDisabled : true},
+	{ value: '2', label: '2h', isDisabled : true},
   ];
 
 class Mainscreen extends Component {
@@ -287,7 +289,7 @@ class Mainscreen extends Component {
 		
 	    const style = {
 			fontFamily : "Arial Black, Gadget, sans-serif",
-			color : "lightgray"
+			color : "black"
 		}
 
     return (
@@ -295,11 +297,11 @@ class Mainscreen extends Component {
     		<div>
 	     	<div className="sidebar">
 	     		<div className="logo" onClick={this.handleProfile}></div>
-	     		<div className={this.state.currentTab === "Todo" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Todo</div>
-	     		<div className={this.state.currentTab === "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
-	     		<div className={this.state.currentTab === "EventWrite" ? 'clickedButton':'idleButton'}  onClick={this.handleEventWrite}>EventWrite</div>
-				<div className = "profileDiv" onClick={this.handleProfile}>{ShowProfile}</div>
-				<div className = "for_test">For easy prototype testing, <br></br> we only allow interval to '6s'</div>
+	     		<div id = "tabName" className={this.state.currentTab === "Todo" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Todo</div>
+	     		<div id = "tabName" className={this.state.currentTab === "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Community</div>
+	     		<div id = "tabName"className={this.state.currentTab === "EventWrite" ? 'clickedButton':'idleButton'}  onClick={this.handleEventWrite}>Add Question</div>
+				<div id = "tabName" className = "profileDiv" onClick={this.handleProfile}>{ShowProfile}</div>
+				{/* <div className = "for_test">For easy prototype testing, <br></br> we only allow interval to '6s'</div> */}
 	     		<div className="alarm">
 					<div className="alarm_icon2"></div>
 					<div style = {{width:'90px', marginLeft:'5px', marginRight:'10px', color:'black'}} > 
@@ -310,7 +312,7 @@ class Mainscreen extends Component {
                     <Switch
 						checked={this.state.alarm_flag}
 						onChange={this.handleChange}
-					uncheckedIcon = {false}
+						uncheckedIcon = {false}
 						checkedIcon = {false}
 						offColor = '#888'
 						onColor = '#F67E7D'
@@ -318,7 +320,7 @@ class Mainscreen extends Component {
 						width = {40}
 					/>
                 </div>
-				 <div className = "EventBtn"> <Button style = {style} onClick = {this.handleOpen}>Open the Pop Up window</Button></div>
+				 <div className = "EventBtn"> <Button style = {style} onClick = {this.handleOpen}>Open the Pop-Up Question</Button></div>
 				 <div>{this.state.open ? <EventInputForm open = {true} question = {this.state.question} handleClose = {this.handleClose}/> : null} </div>
 	        </div>
 	        </div> 

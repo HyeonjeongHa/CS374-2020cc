@@ -24,7 +24,7 @@ class Person extends Component {
     
 	render() {
         const personWithProgress = (
-            <div  className="fitContent">
+            <div  className="fitContent" style = {{cursor : "pointer"}}>
                 <div className="profile">
                     <div className="center">
                         <div className="human_icon"></div>
@@ -43,7 +43,7 @@ class Person extends Component {
             </div>
         )
         const personWithProgressMe = (
-            <div  className="fitContent">
+            <div  className="fitContent" style = {{cursor : "pointer"}}>
                 <div className="profile">
                     <div className="center">
                         <div className="human_icon_Me"></div>
