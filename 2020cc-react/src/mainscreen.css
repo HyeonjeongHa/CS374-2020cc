@@ -199,6 +199,16 @@ body {
     align-items: center;
 }
 
+.title4 {
+    /* padding: 10px; */
+    font-size: 20px;
+    text-align: left;
+    width: 500px;
+    height: 10px;
+    font-family: "Arial Black", Gadget, sans-serif;
+    color: #34495e;
+}
+
 
 .question{
     width: fit-content;
@@ -211,11 +221,15 @@ body {
 }
 
 .segmentBox{
-    width: 700px;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* width: 700px; */
+    /* display: flex;
+    justify-content: center; */
+    /* align-items: center; */
+    width: fit-content;
+    margin-left : auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    padding-right: 100px;
 }
 
 .submitButton{
@@ -416,7 +430,7 @@ body {
     color: #34495e;
     font-size: 15px;
     /* margin-left: 3px; */
-    margin-top: 20px;
+    margin: 5px;
 }
 
 #question {
