@@ -299,7 +299,7 @@ class Mainscreen extends Component {
 	     		<div className={this.state.currentTab === "Todo" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Todo</div>
 	     		<div className={this.state.currentTab === "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
 	     		<div className={this.state.currentTab === "EventWrite" ? 'clickedButton':'idleButton'}  onClick={this.handleEventWrite}>EventWrite</div>
-				<div className = "for_test">For easy prototype testing, <br></br> we only allow interval to '6s'</div>
+				{/* <div className = "for_test">For easy prototype testing, <br></br> we only allow interval to '6s'</div> */}
 	     		<div className="alarm">
 					<div className="alarm_icon2"></div>
 					<div style = {{width:'90px', marginLeft:'5px', marginRight:'10px', color:'black'}} > 
