@@ -299,11 +299,12 @@ class Mainscreen extends Component {
 			// backgroundColor: "rgba(0, 0, 0, 0)",
 			color: "#666666",
 			padding: "10px",
-			fontSize: "20px",
+			fontSize: "16px",
 			marginTop: "7px",
 			fontWeight: "200",
 			fontFamily: "Arial Black, Gadget, sans-serif",
-			textTransform:'None'
+			textTransform:'None',
+			textAlign : 'left'
 		}
 		
 		const clickedButton = {
@@ -313,11 +314,12 @@ class Mainscreen extends Component {
 			// backgroundColor: "rgba(0, 0, 0, 0)",
 			color: "#32445b",
 			padding: "10px",
-			fontSize: "24px",
+			fontSize: "18px",
 			fontWeight: "bold",
 			marginTop: "7px",
 			fontFamily: "Arial Black, Gadget, sans-serif",
-			textTransform:'None'
+			textTransform:'None',
+			textAlign : 'left'
 		}
 
 
@@ -327,9 +329,9 @@ class Mainscreen extends Component {
 	     	<div className="sidebar">
 	     		<div className="logo" onClick={this.handleProfile}></div>
 				<div className = "profileDiv" onClick={this.handleProfile}>{ShowProfile}</div>
-	     		<Button style={this.state.currentTab === "Todo" ? clickedButton : idleButton }  onClick={this.handleDaily}>Todo</Button>
-	     		<Button style={this.state.currentTab === "Event" ? clickedButton : idleButton}  onClick={this.handleEvent}>Event</Button>
-	     		<Button style={this.state.currentTab === "EventWrite" ? clickedButton : idleButton}  onClick={this.handleEventWrite}>EventWrite</Button>
+	     		<Button id = "tabName" style={this.state.currentTab === "Todo" ? clickedButton : idleButton }  onClick={this.handleDaily}>Todo</Button>
+	     		<Button id = "tabName" style={this.state.currentTab === "Event" ? clickedButton : idleButton}  onClick={this.handleEvent}>Community</Button>
+	     		<Button id = "tabName" style={this.state.currentTab === "EventWrite" ? clickedButton : idleButton}  onClick={this.handleEventWrite}>Add Question</Button>
 				{this.state.alarm_flag ? 
 					<div className = "for_test">Notification will come <br></br>every 5 secs.<br></br> If not, check your <br></br>'Do not disturb' mode off</div>
 					: null}
