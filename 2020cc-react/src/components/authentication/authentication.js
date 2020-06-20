@@ -24,6 +24,9 @@ class Authentication extends Component {
       btn2 : true
     }
 
+    componentDidMount() {
+        this.handleLeft();
+    }
     handleRight = () => {
         $("#left").removeClass("left_hover");
         $(".login-s2class").css({ color: "#53adcb" });
