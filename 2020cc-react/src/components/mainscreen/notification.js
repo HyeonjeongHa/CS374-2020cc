@@ -8,18 +8,20 @@ class Notification extends Component {
         super(props);
         this.state = {
             noti_title: this.props.noti_title,
-            noti_page : "http://localhost:3000/CS374-2020cc/Odot/"
+            noti_page : "https://project-2020cc.herokuapp.com/Odot"
         }
     }
     
     handleNoti = () => {
         
-        window.open("http://localhost:3000/CS374-2020cc/Odot", '_self', "", false);
+        // window.open("https://project-2020cc.herokuapp.com/Odot", '_self', "", true);
+        // window.open("?", "_top");//, "", false);
+        window.focus();
     }
     render(){
         const options = {
             body: "",
-            tag : "http://localhost:3000/CS374-2020cc/Odot",   
+            tag : "https://project-2020cc.herokuapp.com/Odot",   
             badge : ""
         }
         localStorage.setItem('name', this.props.loginName);
