@@ -27,7 +27,7 @@ class Event extends Component {
 	}
 
 	componentDidMount() {
-        // this._getEventList();
+        this._getEventList();
     }
 
 
@@ -49,27 +49,31 @@ class Event extends Component {
                         tempAnswer.answer = res2.answer;
                         tempAnswer.id = res2.id;
                         allAnswer.push(tempAnswer);
-					})
+                    })
+                    tempThis.setState({
+                        EventList : update(
+                            tempThis.state.EventList, {
+                                $push : [{
+                                    question: childKey,
+                                    answer : allAnswer
+                                }]
+                            }),
+                        flag: true
+                    });
                 });
-                tempThis.setState({
-                    EventList : update(
-                        tempThis.state.EventList, {
-                            $push : [{
-                                question: childKey,
-                                answer : allAnswer
-                            }]
-                        }),
-                    flag: true
-                });
-			})
+                
+            })
+            
+
         })
     }
     
 	render() {
-        if (!this.state.callFlag) {
-            this.state.callFlag = true;
-            this._getEventList();
-        }
+        // console.log("render!!!!", this.state.EventList)
+        // if (!this.state.callFlag) {
+        //     this.state.callFlag = true;
+        //     this._getEventList();
+        // }
 
         const style = {
             height : "300px",
@@ -109,7 +113,7 @@ class Event extends Component {
         
         </Fragment>
         )
-        console.log("this.state.EventList", this.state.EventList);
+        // console.log("this.state.EventList", this.state.EventList);
         // console.log("this.state.EventList[0]", this.state.EventList[0]);
         // console.log("this.state.EventList[0].answer", this.state.EventList[0].question);
         // console.log("this.state.EventList[0].answer", this.state.EventList[0].answer);

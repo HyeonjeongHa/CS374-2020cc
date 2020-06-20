@@ -27,7 +27,7 @@ class TodoList extends Component {
         //     else {
         //     }
         // }
-        console.log("this.props.data", this.props.data);
+        // console.log("this.props.data", this.props.data);
         var myNullFlag = true;
         if (data.length > 0) {
             myNullFlag = false;
@@ -47,7 +47,7 @@ class TodoList extends Component {
             </div>
         )
 
-        console.log("myNullFlag", myNullFlag);
+        // console.log("myNullFlag", myNullFlag);
 
         return (
             <div>
