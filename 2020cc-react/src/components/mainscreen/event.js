@@ -6,6 +6,7 @@ import "firebase/database";
 import firebaseConfig from "../../firebaseConfig";
 import '../../mainscreen.css';
 import '../../login.css';
+import { RiQuestionnaireLine } from "react-icons/ri"; 
 import moment from "moment";
 import update from 'react-addons-update';
 
@@ -78,11 +79,13 @@ class Event extends Component {
         const style = {
             height : "300px",
             overflowY : "scroll",
-            width : "1000px"
+            overflow: "auto"
+            // width : "1000px"
         }
 
         const quesitionStyle = {
-            position : "relative"
+            position : "relative",
+            fontFamily: "Arial Black, serif"
         }
 
         const returnVal = (
@@ -90,12 +93,12 @@ class Event extends Component {
                  <div className = "new_signin" >
                     <div className = "title2" >Event</div>
                 </div>
-                <div>
+                <div className="segmentBox3">
                     {this.state.flag ? 
                         this.state.EventList.map(data => (
                             <Segment style = {style} >
                                 <div id = "question" style = {quesitionStyle}>
-                                    [ Question ]  &nbsp; {data.question}
+                                <RiQuestionnaireLine style = {{color: '#8971d0', marginBottom: "-10px"}} size={32}/>  &nbsp; {data.question}
                                 </div>
                                 <br/>
                                 <div>

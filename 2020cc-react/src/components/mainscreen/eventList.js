@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../mainscreen.css';
 // import update from 'react-addons-update';
 // import '../../mainscreen.css';
+import { RiQuestionAnswerLine } from "react-icons/ri"; 
 
 class EventList extends Component {
 
@@ -42,9 +43,10 @@ class EventList extends Component {
     // }
       const returnVal = (
         <div>
+          
           <ul>
           {this.props.answer.map(data  => (
-              <div className = "eventBox">{data.answer} <span className="answerID"> by {data.id}</span></div>
+              <div className = "eventBox2"> <RiQuestionAnswerLine size={16} style={{marginBottom:"-5px", marginRight:"10px"}}/> {data.answer} <span className="answerID"> by {data.id}</span></div>
           ))}
           </ul>
         </div>
