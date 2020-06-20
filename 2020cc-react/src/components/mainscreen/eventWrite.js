@@ -88,7 +88,7 @@ class EventWrite extends Component {
 
         <div>
           <div className = "title3" >Event Write</div>
-          <div  className="segmentBox">
+          <div  className="segmentBox2">
           <Segment>
             {CreateQuestion}
           </Segment>

@@ -183,15 +183,15 @@ body {
     font-size: 40px;
     text-align: center;
     width: 150px;
-    height: 50px;
+    height: 100px;
     font-family: "Arial Black", Gadget, sans-serif;
     display: flex;
-    margin-top: 55px;
+    margin-top: 60px;
     margin-bottom: 15px;
 }
 
 .title3 {
-    padding: 10px;
+    /* padding: 10px;
     font-size: 40px;
     text-align: center;
     width: 300px;
@@ -200,7 +200,16 @@ body {
 
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
+    padding: 10px;
+    font-size: 40px;
+    text-align: center;
+    width: 300px;
+    height: 100px;
+    font-family: "Arial Black", Gadget, sans-serif;
+    display: flex;
+    margin-top: 60px;
+    margin-bottom: 15px;
 }
 
 .title4 {
@@ -234,6 +243,20 @@ body {
     margin-right: auto;
     margin-bottom: 10px;
     padding-right: 100px;
+    /* margin-top: -20 */
+}
+
+.segmentBox2{
+    /* width: 700px; */
+    /* display: flex;
+    justify-content: center; */
+    /* align-items: center; */
+    width: fit-content;
+    margin-left : auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    padding-right: 100px;
+    margin-top: -40px;
 }
 
 .submitButton{
