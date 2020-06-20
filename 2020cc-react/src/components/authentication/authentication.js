@@ -94,6 +94,14 @@ class Authentication extends Component {
                 mode : false
             });
         });
+
+        database.ref('teamName/' + teamName + '/' + id).push().set({
+            duetime: "00:00",
+            task: "",
+            progress: "0",
+            index: 0,
+            likey: { "null": "1" }
+        });
     }
   
     handleLogin = () => {

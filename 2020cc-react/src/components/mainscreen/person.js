@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
 import '../../mainscreen.css';
 import { CircularProgressbar, CircularProgressbarWithChildren, buildStyles} from 'react-circular-progressbar';
 import { CircularProgress } from '@material-ui/core';
@@ -23,6 +24,25 @@ class Person extends Component {
     }
     
 	render() {
+
+        const circularProgress = {
+            margin: "10px",
+            position: "relative",
+            top: "-125px",
+            left: "-20px",
+            width: "150px",
+            color: "#95e8d7",
+        }
+
+        const circularProgress2 = {
+            margin: "10px",
+            position: "relative",
+            top: "-128px",
+            left: "-20px",
+            width: "150px",
+            color:"lightgray",
+        }
+
         const personWithProgress = (
             <div  className="fitContent">
                 <div className="profile">
@@ -31,7 +51,7 @@ class Person extends Component {
                         <div className="text2">{this.props.name}</div>
                     </div>
                 </div>
-                <div className="circularProgress">
+                <Button style={circularProgress} >
                     <CircularProgress 
                         variant="static" 
                         value={Number(this.props.progress)} 
@@ -39,9 +59,11 @@ class Person extends Component {
                         size={135}
                         color="inherit"
                     />
-                </div>
+                </Button>
             </div>
         )
+
+        
         const personWithProgressMine = (
             <div  className="fitContent">
                 <div className="profile">
@@ -50,7 +72,7 @@ class Person extends Component {
                         <div className="text2">{this.props.name}</div>
                     </div>
                 </div>
-                <div className="circularProgress2">
+                <Button style={circularProgress2} >
                     <CircularProgress 
                         variant="static" 
                         value={Number(100)} 
@@ -58,7 +80,7 @@ class Person extends Component {
                         size={135}
                         color="inherit"
                     />
-                </div>
+                </Button>
             </div>
         )
 
