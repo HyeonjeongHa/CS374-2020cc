@@ -98,7 +98,8 @@ class Event extends Component {
                         this.state.EventList.map(data => (
                             <Segment style = {style} >
                                 <div id = "question" style = {quesitionStyle}>
-                                <RiQuestionnaireLine style = {{color: '#8971d0', marginBottom: "-10px"}} size={32}/>  &nbsp; {data.question}
+                                {/* <RiQuestionnaireLine style = {{color: '#8971d0', marginBottom: "-10px"}} size={32}/>   */}
+                                Q.  {data.question}
                                 </div>
                                 <br/>
                                 <div>

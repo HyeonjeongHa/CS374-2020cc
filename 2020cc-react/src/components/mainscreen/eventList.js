@@ -46,7 +46,7 @@ class EventList extends Component {
           
           <ul>
           {this.props.answer.map(data  => (
-              <div className = "eventBox2"> <RiQuestionAnswerLine size={16} style={{marginBottom:"-5px", marginRight:"10px"}}/> {data.answer} <span className="answerID"> by {data.id}</span></div>
+              <div className = "eventBox2"> <RiQuestionAnswerLine size={16} style={{marginBottom:"-5px", marginRight:"10px", color:"gray"}}/> {data.answer} <span className="answerID"> by {data.id}</span></div>
           ))}
           </ul>
         </div>
