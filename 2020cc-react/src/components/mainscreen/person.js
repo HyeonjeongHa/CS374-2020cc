@@ -42,6 +42,26 @@ class Person extends Component {
                 </div>
             </div>
         )
+        const personWithProgressMine = (
+            <div  className="fitContent">
+                <div className="profile">
+                    <div className="center">
+                        <div className="human_icon"></div>
+                        <div className="text2">{this.props.name}</div>
+                    </div>
+                </div>
+                <div className="circularProgress2">
+                    <CircularProgress 
+                        variant="static" 
+                        value={Number(100)} 
+                        thickness={2}
+                        size={135}
+                        color="inherit"
+                    />
+                </div>
+            </div>
+        )
+
         const personWithProgressMe = (
             <div  className="fitContent">
                 <div className="profile">
@@ -63,7 +83,10 @@ class Person extends Component {
         )
 
 	    return (
-	    	<div onClick={this.handleClicked}>{this.state.isMe? personWithProgressMe : personWithProgress}</div>
+            <div onClick={this.handleClicked}>
+                {this.state.isMe ? personWithProgressMe : 
+                     (this.props.name === "ME" ? personWithProgressMine :
+                personWithProgress ) }</div>
 	    );
   	}
 }

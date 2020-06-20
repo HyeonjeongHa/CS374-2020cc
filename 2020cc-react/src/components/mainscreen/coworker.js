@@ -33,7 +33,26 @@ class Coworker extends Component {
                 database.ref('authentication/' + child.key).once('value').then((snapshot2) => {
                     const res = snapshot2.val();
 
-                    if(tempThis.props.data.id !== res.id){
+                    // if(tempThis.props.data.id !== res.id){
+                    if(tempThis.props.data.id === res.id) {
+                        res.name = "ME";
+                        tempThis.setState({
+                            coworkerList : update(
+                                tempThis.state.coworkerList, {
+                                    $unshift : [{
+                                        id: res.id,
+                                        name: res.name,
+                                        teamName: res.teamName,
+                                        progress: res.totalProgress
+                                    }]
+                                }
+                            ),
+                            flag: true
+                        }); 
+
+                    }
+                    else {
+
                         tempThis.setState({
                             coworkerList : update(
                                 tempThis.state.coworkerList, {
@@ -48,6 +67,7 @@ class Coworker extends Component {
                             flag: true
                         }); 
                     }
+                    // }
                 })
             })
         })

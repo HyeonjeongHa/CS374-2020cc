@@ -299,14 +299,17 @@ class Mainscreen extends Component {
 	     		<div className={this.state.currentTab === "Todo" ? 'clickedButton':'idleButton'}  onClick={this.handleDaily}>Todo</div>
 	     		<div className={this.state.currentTab === "Event" ? 'clickedButton':'idleButton'}  onClick={this.handleEvent}>Event</div>
 	     		<div className={this.state.currentTab === "EventWrite" ? 'clickedButton':'idleButton'}  onClick={this.handleEventWrite}>EventWrite</div>
-				{/* <div className = "for_test">For easy prototype testing, <br></br> we only allow interval to '6s'</div> */}
+				{this.state.alarm_flag ? 
+					<div className = "for_test">Notification will come <br></br>every 5 secs.<br></br> If not, check your <br></br>'Do not disturb' mode off</div>
+					: null}
 	     		<div className="alarm">
 					<div className="alarm_icon2"></div>
-					<div style = {{width:'90px', marginLeft:'5px', marginRight:'10px', color:'black'}} > 
+					{/* <div style = {{width:'90px', marginLeft:'5px', marginRight:'10px', color:'black'}} > 
 					<div className="select-up">
 					<Select  id = "container_2" placeholder = "Time" value={this.state.selected} isDisabled={!this.state.alarm_flag} onChange={this.notiChange} options={options} /> 	
 					</div>
-					</div>
+					</div> */}
+					<div className="PushAlarm"> Push Alarm </div>
                     <Switch
 						checked={this.state.alarm_flag}
 						onChange={this.handleChange}
