@@ -268,8 +268,8 @@ class TodoInfo extends Component {
 
     const progressInput = (
         <div className="progressBtn">
-            <FiChevronsLeft className="forArrow" size="32" onClick={this.decrementFull} style = {this.props.isCoworker ? {opacity : "0.4"} : {}}/>  
-            <FiChevronLeft className="forArrow" size="30" onClick={this.decrement} style = {this.props.isCoworker ? {opacity : "0.4"} : {}}/>  
+            <FiChevronsLeft className="forArrow" size="32" onClick={this.decrementFull} style = {this.props.isCoworker ? {opacity : "0.4", cursor : 'pointer'} : {cursor : 'pointer'}}/>  
+            <FiChevronLeft className="forArrow" size="30" onClick={this.decrement} style = {this.props.isCoworker ? {opacity : "0.4", cursor : 'pointer'} : {cursor : 'pointer'}}/>  
             {this.state.toggle2 ? 
                 (<input 
                     autoFocus 
@@ -289,8 +289,8 @@ class TodoInfo extends Component {
                     onClick={this.handleToggleChange2}>
                         {this.props.data.progress + "%"
                     }</span>)}
-            <FiChevronRight className="forArrow" size="30" onClick={this.increment} style = {this.props.isCoworker ? {opacity : "0.4"} : {}}/>  
-            <FiChevronsRight className="forArrow" size="32" onClick={this.incrementFull} style = {this.props.isCoworker ? {opacity : "0.4"} : {}}/>  
+            <FiChevronRight className="forArrow" size="30" onClick={this.increment} style = {this.props.isCoworker ? {opacity : "0.4", cursor : 'pointer'} : {cursor : 'pointer'}}/>  
+            <FiChevronsRight className="forArrow" size="32" onClick={this.incrementFull} style = {this.props.isCoworker ? {opacity : "0.4", cursor : 'pointer'} : {cursor : 'pointer'}}/>  
         </div>
     );
 
@@ -326,17 +326,17 @@ class TodoInfo extends Component {
                         {this.props.isCoworker 
                             ? (<div>
                                 {this.state.heartFlag ? (
-                                    <div style={{color: 'red'}}>
+                                    <div style={{color: 'red', cursor : 'pointer'}}>
                                         <AiFillHeart size={32} onClick={this.handleLikey}/>
                                     </div>
                                     
-                                ): <div><AiOutlineHeart size="32" onClick={this.handleLikey}/></div>}
+                                ): <div style = {{cursor : 'pointer'}}><AiOutlineHeart size="32" onClick={this.handleLikey}/></div>}
                                 </div>) 
-                            : (<div>
+                            : (<div style = {{cursor : 'pointer'}}>
                                 <RiDeleteBin6Line size="32" onClick={this.handleRemove}/>
                                 {this.state.heartFlag ? (
-                                    <div style={{color: 'red'}}><AiFillHeart size="32" onClick={this.handleLikey}/></div>
-                                ): <div><AiOutlineHeart size="32" onClick={this.handleLikey}/></div>}
+                                    <div style={{color: 'red', cursor : 'pointer'}}><AiFillHeart size="32" onClick={this.handleLikey}/></div>
+                                ): <div style = {{cursor : 'pointer'}}><AiOutlineHeart size="32" onClick={this.handleLikey}/></div>}
                                 </div>)
                         }
                         <div className="heartNum">{this.state.heartNum}&nbsp;{this.state.heartNum>1 ? "likes" : "like"}</div>

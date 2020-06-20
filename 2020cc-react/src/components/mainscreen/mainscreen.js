@@ -22,7 +22,9 @@ const database = firebase.database();
 var timerId;
 
 const options = [
-	{ value: '0.1', label: '6s' },
+	{ value: '0.1', label: '6s'},
+	{ value: '1', label: '1h', isDisabled : true},
+	{ value: '2', label: '2h', isDisabled : true},
   ];
 
 class Mainscreen extends Component {
@@ -287,7 +289,7 @@ class Mainscreen extends Component {
 		
 	    const style = {
 			fontFamily : "Arial Black, Gadget, sans-serif",
-			color : "lightgray"
+			color : "black"
 		}
 
 		const idleButton = {
@@ -342,7 +344,7 @@ class Mainscreen extends Component {
                     <Switch
 						checked={this.state.alarm_flag}
 						onChange={this.handleChange}
-					uncheckedIcon = {false}
+						uncheckedIcon = {false}
 						checkedIcon = {false}
 						offColor = '#888'
 						onColor = '#F67E7D'
@@ -350,7 +352,7 @@ class Mainscreen extends Component {
 						width = {40}
 					/>
                 </div>
-				 <div className = "EventBtn"> <Button style = {style} onClick = {this.handleOpen}>Open the Pop Up window</Button></div>
+				 <div className = "EventBtn"> <Button style = {style} onClick = {this.handleOpen}>Open the Pop-Up Question</Button></div>
 				 <div>{this.state.open ? <EventInputForm open = {true} question = {this.state.question} handleClose = {this.handleClose}/> : null} </div>
 	        </div>
 	        </div> 

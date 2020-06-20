@@ -25,6 +25,17 @@ body {
     left: 0px;
 }
 
+#tabName {
+    cursor : pointer;
+    /* width: -webkit-fit-content;
+    height: -webkit-fit-content; */
+    width: -moz-fit-content;
+    height: -moz-fit-content;
+    display: inline-block;
+    margin-top : 8px;
+    /* margin-bottom : 5px; */
+}
+
 #container1 {
     border-radius: 20px;
     overflow: hidden;
@@ -64,7 +75,7 @@ body {
     background-color: rgba(0, 0, 0, 0);
     color: #666666;
     padding: 10px;
-    font-size: 20px;
+    font-size: 17px;
     margin-top: 7px;
     font-weight: 200;
     font-family: "Arial Black", Gadget, sans-serif;
@@ -77,7 +88,7 @@ body {
     background-color: rgba(0, 0, 0, 0);
     color: #32445b;
     padding: 10px;
-    font-size: 24px;
+    font-size: 19px;
     font-weight: bold;
     margin-top: 7px;
     font-family: "Arial Black", Gadget, sans-serif;
