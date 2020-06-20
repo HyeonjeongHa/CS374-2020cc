@@ -120,7 +120,7 @@ body {
     display: flex;
     align-items: center;
     position: absolute;
-    bottom: 270px;
+    bottom: 250px;
     left: 10px;
 }
 
@@ -128,7 +128,7 @@ body {
     display: flex;
     align-items: center;
     position: absolute;
-    bottom: 200px;
+    bottom: 190px;
     left: 10px;
 }
 
@@ -144,8 +144,12 @@ body {
     display: flex;
     position: absolute;
     align-items: center;
-    bottom: 320px;
-    color: black;
+    bottom: 300px;
+    color: lightgray;
+    font-family: "Arial Black", Gadget, sans-serif;
+    text-align: center;
+    font-size: 12px;
+
 }
 
 .human_icon {

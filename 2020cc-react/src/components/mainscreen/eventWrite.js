@@ -78,6 +78,12 @@ class EventWrite extends Component {
         }
         console.log(this.state.questionList);
 
+        const style2 = {
+          overflowY : "scroll",
+          overflowX : "hidden",
+          maxHeight: "400px"
+      }
+
     return (
 
         <div>
@@ -90,7 +96,7 @@ class EventWrite extends Component {
           <br/>
           <div  className="segmentBox">
           <div className = "title4">Current Questions</div>
-          <Segment>
+          <Segment style={style2}>
             {this.props.questionList.map(data => (
                 <div className = "eventBox">{data.question} <span className="answerID"> by {data.id}</span></div>
                 ))}
