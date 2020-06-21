@@ -67,7 +67,7 @@ class EventWrite extends Component {
                   type='text'
                   >
               </input>
-              <FiSend className="submitButton" size="36" onClick={this.handleSubmit}/>  
+              <Button><FiSend className="submitButton" size="36" onClick={this.handleSubmit}/></Button>
           </div>
         );
 
