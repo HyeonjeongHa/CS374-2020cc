@@ -268,8 +268,8 @@ class TodoInfo extends Component {
 
     const progressInput = (
         <div className="progressBtn">
-            <FiChevronsLeft className="forArrow" size="32" onClick={this.decrementFull} style = {this.props.isCoworker ? {opacity : "0.4", cursor : 'pointer'} : {cursor : 'pointer'}}/>  
-            <FiChevronLeft className="forArrow" size="30" onClick={this.decrement} style = {this.props.isCoworker ? {opacity : "0.4", cursor : 'pointer'} : {cursor : 'pointer'}}/>  
+            <FiChevronsLeft className="forArrow" size="32" onClick={this.decrementFull} style = {this.props.isCoworker ? {opacity : "0.4"} : {cursor : 'pointer'}}/>  
+            <FiChevronLeft className="forArrow" size="30" onClick={this.decrement} style = {this.props.isCoworker ? {opacity : "0.4"} : {cursor : 'pointer'}}/>  
             {this.state.toggle2 ? 
                 (<input 
                     autoFocus 
@@ -289,8 +289,8 @@ class TodoInfo extends Component {
                     onClick={this.handleToggleChange2}>
                         {this.props.data.progress + "%"
                     }</span>)}
-            <FiChevronRight className="forArrow" size="30" onClick={this.increment} style = {this.props.isCoworker ? {opacity : "0.4", cursor : 'pointer'} : {cursor : 'pointer'}}/>  
-            <FiChevronsRight className="forArrow" size="32" onClick={this.incrementFull} style = {this.props.isCoworker ? {opacity : "0.4", cursor : 'pointer'} : {cursor : 'pointer'}}/>  
+            <FiChevronRight className="forArrow" size="30" onClick={this.increment} style = {this.props.isCoworker ? {opacity : "0.4"} : {cursor : 'pointer'}}/>  
+            <FiChevronsRight className="forArrow" size="32" onClick={this.incrementFull} style = {this.props.isCoworker ? {opacity : "0.4"} : {cursor : 'pointer'}}/>  
         </div>
     );
 
@@ -305,7 +305,7 @@ class TodoInfo extends Component {
                             id="taskInput" 
                             value={this.state.task} 
                             name="task" 
-                            placeholder="Task" 
+                            placeholder="Todo" 
                             onChange={this.handleTaskChange} 
                             type='text' 
                             onKeyPress={this.handleKeyPress}
@@ -316,7 +316,7 @@ class TodoInfo extends Component {
                     ) : <span 
                             className="todo-task-text" 
                             onClick={this.handleToggleChange}>
-                                {this.props.data.task === "" ? "Task" : this.props.data.task}
+                                {this.props.data.task === "" ? "Todo" : this.props.data.task}
                         </span>}
                     <div className = "rightBox">
                         {TimeInput}
